@@ -225,6 +225,47 @@ footer .ft { font-family: var(--font-display); font-size: 18px; color: var(--fg)
 }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; }
+
+/* home tiles */
+.view { display: none; }
+.view.on { display: block; }
+body.in-view .hero-band, body.in-view #home, body.in-view .note { display: none; }
+.topbar { display: none; position: sticky; top: 0; z-index: 5; align-items: center; gap: 12px; background: var(--bg); border-bottom: 1px solid var(--line);
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); }
+body.in-view .topbar { display: flex; }
+.back { text-decoration: none; font-weight: 600; font-size: 15px; color: var(--accent); border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
+.topbar .tt { font-family: var(--font-display); font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 16px; }
+.strip div { text-align: center; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 2px; min-width: 0; }
+.strip b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 17px; line-height: 1.3; }
+.strip span { display: block; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.strip .next { background: var(--hl); border-color: var(--gold); }
+
+.grp { margin-top: 24px; }
+.grp h2 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
+.grp h2::before { content: ""; width: 5px; height: 22px; border-radius: 3px; background: var(--c, var(--accent)); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; margin-top: 12px; }
+.tile { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; text-decoration: none; color: var(--fg);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 6px 12px; font-weight: 500; font-size: 14.5px; line-height: 1.35; min-width: 0; overflow-wrap: anywhere; }
+.tile:hover { border-color: var(--accent); }
+.tile .ib { width: 48px; height: 48px; border-radius: 50%; background: var(--hl); color: var(--accent); display: grid; place-items: center; }
+.ti { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tile.soon { background: transparent; border-style: dashed; }
+.tile.soon .ib { color: var(--muted); }
+.tile .bd { position: absolute; top: 6px; right: 6px; font-style: normal; font-size: 10.5px; line-height: 1.6; background: var(--hl); color: var(--muted); border-radius: 999px; padding: 0 7px; }
+
+/* tasbih */
+.tas { text-align: center; display: grid; gap: 14px; justify-items: center; }
+.tcount { font-size: 72px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; color: var(--accent); }
+.ttarget { color: var(--muted); }
+.tbtn { width: 168px; height: 168px; border-radius: 50%; border: 6px solid var(--hl); background: var(--accent); color: var(--bg); font: inherit; font-size: 22px; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.tbtn:active { filter: brightness(1.15); }
+.tchips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.chip { font: inherit; font-size: 15px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 4px 16px; }
+.chip.on { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+@media (min-width: 760px) { .tiles { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); } }
 </style>
 </head>
 <body>
@@ -233,8 +274,45 @@ body { margin: 0; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+    <symbol id="t-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="t-mosque" viewBox="0 0 24 24"><path d="M4 21V12h16v9"/><path d="M7 12c0-6 10-6 10 0"/><path d="M12 3v3"/><path d="M10 21v-4a2 2 0 0 1 4 0v4"/></symbol>
+  <symbol id="t-eid" viewBox="0 0 24 24"><path d="M19 14.5A8 8 0 1 1 9.5 5a6.5 6.5 0 0 0 9.5 9.5z"/><path d="M17 3v4M15 5h4"/></symbol>
+  <symbol id="t-lantern" viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M8 6h8l1.5 11h-11z"/><path d="M9 21h6"/><path d="M10 10h4"/></symbol>
+  <symbol id="t-beads" viewBox="0 0 24 24"><circle cx="19" cy="12" r="1.6"/><circle cx="16.9" cy="16.9" r="1.6"/><circle cx="12" cy="19" r="1.6"/><circle cx="7.1" cy="16.9" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="7.1" cy="7.1" r="1.6"/><circle cx="12" cy="5" r="1.6"/><circle cx="16.9" cy="7.1" r="1.6"/><path d="M12 20.6V23"/></symbol>
+  <symbol id="t-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+  <symbol id="t-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+  <symbol id="t-imam" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></symbol>
+  <symbol id="t-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 0 5 2 5 5"/></symbol>
+  <symbol id="t-history" viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></symbol>
+  <symbol id="t-image" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+  <symbol id="t-school" viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></symbol>
+  <symbol id="t-arch" viewBox="0 0 24 24"><path d="M6 21V10c0-4 2.5-6 6-8 3.5 2 6 4 6 8v11z"/><path d="M9 21v-6c0-2 1.5-3 3-3s3 1 3 3v6"/></symbol>
+  <symbol id="t-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="t-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></symbol>
+  <symbol id="t-quran" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></symbol>
+  <symbol id="t-hadith" viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6z"/><path d="M15 4v3h3"/><path d="M9 12h6M9 16h6"/></symbol>
+  <symbol id="t-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="t-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" stroke-width="2.4"/></symbol>
+  <symbol id="t-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="t-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol>
+  <symbol id="t-speaker" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="t-pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/></symbol>
+  <symbol id="t-redo" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></symbol>
+  <symbol id="t-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="t-kaaba" viewBox="0 0 24 24"><path d="M4 8l8-3 8 3v11l-8 2-8-2z"/><path d="M4 12l8-2 8 2"/></symbol>
+  <symbol id="t-seal" viewBox="0 0 24 24"><path d="M12 3l2.4 3.6 4.3-.6-.6 4.3L21 12l-3.6 2.4.6 4.3-4.3-.6L12 21l-2.4-3.6-4.3.6.6-4.3L3 12l3.6-2.4-.6-4.3 4.3.6z"/></symbol>
+  <symbol id="t-phones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></symbol>
+  <symbol id="t-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="t-fb" viewBox="0 0 24 24"><path d="M14 8h2V4h-2.5A3.5 3.5 0 0 0 10 7.5V10H8v4h2v7h4v-7h2.5l.5-4H14z"/></symbol>
+  <symbol id="t-wallet" viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h12v4"/><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M16 14.5h2"/></symbol>
+  <symbol id="t-gift" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M3 7h18v3H3z"/><path d="M12 7v13"/><path d="M12 7c-2-4-6-3-5 0M12 7c2-4 6-3 5 0"/></symbol>
+  <symbol id="t-flag" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 5h11l-2 4 2 4H6"/></symbol>
+  <symbol id="t-candle" viewBox="0 0 24 24"><rect x="8" y="10" width="8" height="11" rx="1"/><path d="M12 10V8"/><path d="M12 3c2 2 2 4 0 5-2-1-2-3 0-5z"/></symbol>
+  <symbol id="t-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-14 14z"/><path d="M5 19l8-8"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-1 .4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.7H7.6v3.3h2.8V22z"/></symbol>
 </svg>
+
+<div class="topbar"><a class="back" href="#home">← সব অংশ</a><span class="tt" id="tbTitle"></span></div>
 
 <div class="hero-band">
   <header class="hero">
@@ -280,21 +358,66 @@ body { margin: 0; }
 </div>
 
 <div class="wrap">
-  <p class="note">ফোন নম্বর এবং ইমাম, মুয়াজ্জিন ও কমিটির ছবি এখন নমুনা। আসল তথ্য ও ছবি পেলে বসিয়ে দেওয়া হবে।</p>
+  <p class="note">ফোন নম্বর এবং ইমাম, মুয়াজ্জিন ও কমিটির ছবি এখন নমুনা। "শীঘ্রই" চিহ্নিত অংশে লেখা ধাপে ধাপে যোগ হবে।</p>
 
-  <nav class="nav" aria-label="পেজের অংশ">
-    <a href="#times">নামাজের সময়</a>
-    <a href="#jumuah">জুমুআ</a>
-    <a href="#notices">ঘোষণা</a>
-    <a href="#imam">ইমাম ও মুয়াজ্জিন</a>
-    <a href="#committee">কমিটি</a>
-    <a href="#about">পরিচিতি</a>
-    <a href="#learn">শিক্ষা</a>
-    <a href="#donate">দান</a>
-    <a href="#contact">যোগাযোগ</a>
-  </nav>
+  <main id="home">
+  <div class="strip" id="strip" aria-label="আজকের আযানের সময়">
+    <div data-id="fajr"><b>ফজর</b><span>ভোর ৪:৪৯</span></div>
+    <div data-id="zuhr"><b>যোহর</b><span>১১:৪২</span></div>
+    <div data-id="asr"><b>আসর</b><span>২:৫৩</span></div>
+    <div data-id="maghrib"><b>মাগরিব</b><span>৫:১৭</span></div>
+    <div data-id="isha"><b>এশা</b><span>৬:৩৪</span></div>
+  </div>
+  <div class="grp" style="--c: var(--accent)"><h2>নামাজ</h2><div class="tiles">
+    <a class="tile" href="#times"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-clock"/></svg></span><span>নামাজের সময়</span></a>
+    <a class="tile" href="#jumuah"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-mosque"/></svg></span><span>জুমুআ</span></a>
+    <a class="tile" href="#eid"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-eid"/></svg></span><span>ঈদের জামাত</span></a>
+    <a class="tile" href="#tasbih"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-beads"/></svg></span><span>তাসবিহ</span></a>
+    <a class="tile soon" href="#qibla"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-compass"/></svg></span><span>কিবলার দিক</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#roza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-lantern"/></svg></span><span>রোজা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#calendar"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-cal"/></svg></span><span>ক্যালেন্ডার</span><em class="bd">শীঘ্রই</em></a>
+  </div></div>
+  <div class="grp" style="--c: var(--gold)"><h2>শিক্ষা</h2><div class="tiles">
+    <a class="tile" href="#learn"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-school"/></svg></span><span>মক্তব</span></a>
+    <a class="tile soon" href="#kalema"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-flag"/></svg></span><span>কালেমা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#pobitrota"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-drop"/></svg></span><span>পবিত্রতা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#azan"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-speaker"/></svg></span><span>আযান ও ইকামত</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#niyat"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-pen"/></svg></span><span>নামাজের নিয়ত</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#namaz"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-arch"/></svg></span><span>নামাজ শিক্ষা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#kaza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-redo"/></svg></span><span>কাযা নামাজ</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#nafl"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-moon"/></svg></span><span>নফল নামাজ</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#dua"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-chat"/></svg></span><span>দোয়া</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#masala"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-help"/></svg></span><span>মাসআলা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#quran"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-quran"/></svg></span><span>কুরআন</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#audio"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-phones"/></svg></span><span>অডিও কুরআন</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#hadith"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-hadith"/></svg></span><span>হাদিস</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#names"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-seal"/></svg></span><span>আল্লাহর ৯৯ নাম</span><em class="bd">শীঘ্রই</em></a>
+  </div></div>
+  <div class="grp" style="--c: var(--accent)"><h2>বিশেষ বিষয়</h2><div class="tiles">
+    <a class="tile soon" href="#qurbani"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-gift"/></svg></span><span>কুরবানী ও আকীকা</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#hajj"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-kaaba"/></svg></span><span>হজ্জ ও ওমরাহ</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#kafon"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-leaf"/></svg></span><span>মৃত্যু ও কাফন-দাফন</span><em class="bd">শীঘ্রই</em></a>
+  </div></div>
+  <div class="grp" style="--c: var(--gold)"><h2>মসজিদ</h2><div class="tiles">
+    <a class="tile" href="#notices"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-bell"/></svg></span><span>ঘোষণা</span></a>
+    <a class="tile" href="#janaza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-candle"/></svg></span><span>জানাজার খবর</span></a>
+    <a class="tile" href="#imam"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-imam"/></svg></span><span>ইমাম ও মুয়াজ্জিন</span></a>
+    <a class="tile" href="#committee"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-people"/></svg></span><span>কমিটি</span></a>
+    <a class="tile" href="#about"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-history"/></svg></span><span>ইতিহাস</span></a>
+    <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
+  </div></div>
+  <div class="grp" style="--c: var(--accent)"><h2>সেবা</h2><div class="tiles">
+    <a class="tile" href="#donate"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><span>মসজিদে দান</span></a>
+    <a class="tile soon" href="#salary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><span>বেতন ও মাসিক খরচ</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile soon" href="#zakat"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-calc"/></svg></span><span>যাকাত হিসাব</span><em class="bd">শীঘ্রই</em></a>
+  </div></div>
+  <div class="grp" style="--c: var(--gold)"><h2>যোগাযোগ</h2><div class="tiles">
+    <a class="tile" href="#contact"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-pin"/></svg></span><span>লোকেশন ও যোগাযোগ</span></a>
+    <a class="tile" href="https://www.facebook.com/share/19aQEEBdi9/" target="_blank" rel="noopener"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-fb"/></svg></span><span>ফেসবুক পেজ</span></a>
+  </div></div>
+</main>
 
-  <section id="times">
+  <section class="view" id="times">
     <div class="sec-head"><h2>নামাজের সময়সূচি</h2><span class="label">Prayer Times</span></div>
     <div class="card tbl">
       <table>
@@ -312,7 +435,7 @@ body { margin: 0; }
     <p class="small">আযানের সময় ঋতু অনুযায়ী বদলায়। এখানে নভেম্বর মাসের সময় দেওয়া আছে।</p>
   </section>
 
-  <section id="jumuah">
+  <section class="view" id="jumuah">
     <div class="sec-head"><h2>এ সপ্তাহের জুমুআ</h2><span class="label">Jumuah</span></div>
     <div class="card jum">
       <div class="jum-top">
@@ -337,7 +460,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="notices">
+  <section class="view" id="notices">
     <div class="sec-head"><h2>ঘোষণা</h2><span class="label">Notices</span></div>
     <div class="card empty">
       <h3>এখন কোনো নতুন ঘোষণা নেই</h3>
@@ -345,7 +468,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="imam">
+  <section class="view" id="imam">
     <div class="sec-head"><h2>ইমাম ও মুয়াজ্জিন</h2><span class="label">Imam &amp; Muazzin</span></div>
     <div class="people lead">
       <div class="person">
@@ -359,7 +482,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="committee">
+  <section class="view" id="committee">
     <div class="sec-head"><h2>মসজিদ কমিটি</h2><span class="label">Committee</span></div>
     <div class="people">
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">প্রধান উপদেষ্টা</div><div class="nm">ঈদ্রিস আলী মেম্বার</div><div class="tel">০১৭××-××××××</div></div></div>
@@ -372,7 +495,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="about">
+  <section class="view" id="about">
     <div class="sec-head"><h2>মসজিদ পরিচিতি</h2><span class="label">About</span></div>
     <figure class="fig">
       <img src="mosque.jpg" alt="মসজিদের সামনের দৃশ্য">
@@ -395,7 +518,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="learn">
+  <section class="view" id="learn">
     <div class="sec-head"><h2>শিক্ষা</h2><span class="label">Education</span></div>
     <div class="grid two">
       <div class="card">
@@ -413,7 +536,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="donate">
+  <section class="view" id="donate">
     <div class="sec-head"><h2>মসজিদে দান</h2><span class="label">Donate</span></div>
     <div class="card">
       <p>মসজিদের বিদ্যুৎ বিল, মেরামত, ইমাম ও মুয়াজ্জিনের সম্মানী এবং মক্তবের খরচ মুসল্লিদের দানে চলে।</p>
@@ -431,7 +554,7 @@ body { margin: 0; }
     </div>
   </section>
 
-  <section id="contact">
+  <section class="view" id="contact">
     <div class="sec-head"><h2>ঠিকানা ও যোগাযোগ</h2><span class="label">Location &amp; Contact</span></div>
     <div class="grid two">
       <div class="card">
@@ -451,6 +574,51 @@ body { margin: 0; }
           <dt>ক্যাশিয়ার</dt><dd>০১৭××-××××××</dd>
         </dl>
       </div>
+    </div>
+  </section>
+
+  <section class="view" id="eid">
+    <div class="sec-head"><h2>ঈদের জামাত</h2><span class="label">Eid</span></div>
+    <div class="card">
+      <p>ঈদের জামাত কেন্দ্রীয় ঈদগাহে অনুষ্ঠিত হয়।</p>
+      <p>দেশে অস্বাভাবিক অবস্থা থাকলে ঈদের জামাত মসজিদে হয়।</p>
+      </div>
+    <div class="facts" style="margin-top:14px">
+      <div class="fact"><div class="k">ঈদুল ফিতর</div><div class="v">সময় ঘোষণা হবে</div></div>
+      <div class="fact"><div class="k">ঈদুল আযহা</div><div class="v">সময় ঘোষণা হবে</div></div>
+    </div>
+    <p class="small">ঈদের সঠিক সময় ও স্থান ঈদের আগে ঘোষণা অংশে জানানো হবে।</p>
+  </section>
+
+  <section class="view" id="janaza">
+    <div class="sec-head"><h2>জানাজার খবর</h2><span class="label">Janaza</span></div>
+    <div class="card empty">
+      <h3>এখন কোনো জানাজার খবর নেই</h3>
+      <p>জানাজার নামাজের সময় ও স্থান এখানে এবং মসজিদের মাইকে জানানো হবে।</p>
+    </div>
+  </section>
+
+  <section class="view" id="tasbih">
+    <div class="sec-head"><h2>তাসবিহ</h2><span class="label">Tasbih</span></div>
+    <div class="card tas">
+      <div class="tcount" id="tCount" aria-live="polite">০</div>
+      <div class="ttarget" id="tTarget">লক্ষ্য ৩৩</div>
+      <button class="tbtn" id="tTap" type="button">চাপুন</button>
+      <div class="tchips" role="group" aria-label="লক্ষ্য">
+        <button class="chip on" type="button" data-t="33">৩৩</button>
+        <button class="chip" type="button" data-t="99">৯৯</button>
+        <button class="chip" type="button" data-t="100">১০০</button>
+        <button class="chip" type="button" data-t="0">সীমাহীন</button>
+      </div>
+      <button class="btn line" id="tReset" type="button">আবার শুরু করুন</button>
+    </div>
+  </section>
+
+  <section class="view" id="soon">
+    <div class="sec-head"><h2 id="soonTitle">শীঘ্রই আসছে</h2></div>
+    <div class="card empty">
+      <h3>এই অংশ শীঘ্রই আসছে</h3>
+      <p>লেখা ও তথ্য ধাপে ধাপে যোগ করা হচ্ছে। কিছুদিন পর আবার দেখুন।</p>
     </div>
   </section>
 
@@ -499,6 +667,7 @@ body { margin: 0; }
     document.getElementById('nextName').textContent = P[next.id].n;
     document.getElementById('nextAt').textContent = P[next.id].t;
     document.getElementById('count').textContent = bn(h + ':' + pad(m) + ':' + pad(s));
+    markStrip(next.id);
     var rows = document.querySelectorAll('#rows tr');
     for (var r = 0; r < rows.length; r++) {
       rows[r].className = rows[r].getAttribute('data-id') === next.id ? 'next' : '';
@@ -547,6 +716,56 @@ body { margin: 0; }
         .catch(function () {});
     } catch (e) {}
   }
+
+  var SOON = { gallery: 'ছবির গ্যালারি', qibla: 'কিবলার দিক', roza: 'রোজা', calendar: 'ক্যালেন্ডার', kalema: 'কালেমা', pobitrota: 'পবিত্রতা', azan: 'আযান ও ইকামত', niyat: 'নামাজের নিয়ত', namaz: 'নামাজ শিক্ষা', kaza: 'কাযা নামাজ', nafl: 'নফল নামাজ', dua: 'দোয়া', masala: 'মাসআলা', quran: 'কুরআন', audio: 'অডিও কুরআন', hadith: 'হাদিস', names: 'আল্লাহর ৯৯ নাম', qurbani: 'কুরবানী ও আকীকা', hajj: 'হজ্জ ও ওমরাহ', kafon: 'মৃত্যু ও কাফন-দাফন', salary: 'বেতন ও মাসিক খরচ', zakat: 'যাকাত হিসাব' };
+  function route() {
+    var h = (location.hash || '').replace('#', '');
+    try { h = decodeURIComponent(h); } catch (e) {}
+    var views = document.querySelectorAll('.view'), show = null, title = '', i;
+    for (i = 0; i < views.length; i++) views[i].classList.remove('on');
+    var el = h ? document.getElementById(h) : null;
+    if (el && el.classList.contains('view')) {
+      show = el;
+      var h2 = el.querySelector('h2');
+      title = h2 ? h2.textContent : '';
+    } else if (h && SOON[h]) {
+      show = document.getElementById('soon'); title = SOON[h];
+      document.getElementById('soonTitle').textContent = SOON[h];
+    }
+    if (show) show.classList.add('on');
+    document.body.classList.toggle('in-view', !!show);
+    document.getElementById('tbTitle').textContent = title;
+    window.scrollTo(0, 0);
+  }
+  function markStrip(id) {
+    if (id === 'jumuah') id = 'zuhr';
+    var items = document.querySelectorAll('#strip [data-id]');
+    for (var i = 0; i < items.length; i++) items[i].className = items[i].getAttribute('data-id') === id ? 'next' : '';
+  }
+
+  // tasbih counter
+  var tc = 0, tt = 33;
+  function tShow() {
+    document.getElementById('tCount').textContent = bn(tc);
+    document.getElementById('tTarget').textContent = tt ? (tc >= tt ? 'লক্ষ্য পূর্ণ হয়েছে (' + bn(tt) + ')' : 'লক্ষ্য ' + bn(tt)) : 'গণনা চলছে';
+  }
+  document.getElementById('tTap').addEventListener('click', function () {
+    if (tt && tc >= tt) tc = 0;
+    tc++;
+    try { if (navigator.vibrate) navigator.vibrate(15); } catch (e) {}
+    tShow();
+  });
+  document.getElementById('tReset').addEventListener('click', function () { tc = 0; tShow(); });
+  Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (c) {
+    c.addEventListener('click', function () {
+      tt = +c.getAttribute('data-t'); tc = 0;
+      Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (o) { o.className = o === c ? 'chip on' : 'chip'; });
+      tShow();
+    });
+  });
+
+  window.addEventListener('hashchange', route);
+  route();
 
   tick();
   setInterval(tick, 1000);
