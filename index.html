@@ -307,6 +307,29 @@ details.paybox .pay { margin-top: 12px; }
 .rcv { display: grid; gap: 10px; margin-top: 8px; }
 .rcanvas { width: 100%; max-width: 440px; height: auto; border: 1px solid var(--line); border-radius: 10px; justify-self: center; background: #fff; }
 .rbtns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.tiles.quad { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
+.payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.pcard { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-decoration: none; padding: 16px 14px; border-radius: 14px; color: var(--bg); background: var(--accent); min-width: 0; }
+.pcard.alt { background: var(--gold); }
+.pcard:hover { filter: brightness(1.07); }
+.pcard .ib { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.16); display: grid; place-items: center; margin-bottom: 4px; }
+.pcard b { font-family: var(--font-display); font-weight: 400; font-size: 20px; line-height: 1.3; }
+.pcard .s { font-size: 13.5px; line-height: 1.45; opacity: .92; }
+@media (max-width: 330px) { .payrow { grid-template-columns: 1fr; } }
+.yearhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.yr { font-family: var(--font-display); font-size: 58px; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.lt th { text-align: right; padding: 0 8px 8px; }
+.lt th:first-child, .lt td:first-child { text-align: left; }
+.lt td { text-align: right; padding: 10px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.lt td.mn { font-family: var(--font-display); font-size: 17px; }
+.lt tfoot td { font-weight: 700; border-top: 2px solid var(--line); background: var(--hl); }
+.lt .dim { color: var(--muted); }
+.lt .pos { color: var(--accent); font-weight: 600; }
+.lt .neg { color: #b3261e; font-weight: 600; }
+:root[data-theme="dark"] .lt .neg { color: #ff8a80; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lt .neg { color: #ff8a80; } }
 </style>
 </head>
 <body>
@@ -350,6 +373,8 @@ details.paybox .pay { margin-top: 12px; }
   <symbol id="t-flag" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 5h11l-2 4 2 4H6"/></symbol>
   <symbol id="t-candle" viewBox="0 0 24 24"><rect x="8" y="10" width="8" height="11" rx="1"/><path d="M12 10V8"/><path d="M12 3c2 2 2 4 0 5-2-1-2-3 0-5z"/></symbol>
   <symbol id="t-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-14 14z"/><path d="M5 19l8-8"/></symbol>
+  <symbol id="t-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="t-vault" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M12 8.5V7M12 17v-1.5M8.5 12H7M17 12h-1.5"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-1 .4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.7H7.6v3.3h2.8V22z"/></symbol>
 </svg>
 
@@ -409,17 +434,16 @@ details.paybox .pay { margin-top: 12px; }
     <div data-id="maghrib"><b>মাগরিব</b><span>৫:১৭</span></div>
     <div data-id="isha"><b>এশা</b><span>৬:৩৪</span></div>
   </div>
-  <div class="hcard" id="salaryCard">
-    <div class="hc-head"><h2>এ মাসের বেতন</h2><span class="label" id="hMonth">নভেম্বর ২০২৬</span></div>
-    <div class="stats">
-      <div><span class="k">বেতন এসেছে</span><b id="hSal">—</b></div>
-      <div><span class="k">অনুদান এসেছে</span><b id="hDon">—</b></div>
-    </div>
-    <div class="hc-actions">
-      <a class="btn" href="#salary">এ মাসের বেতন পরিশোধ করুন</a>
-      <a class="btn line" href="#salary-donate">মসজিদে অনুদান দিন</a>
-    </div>
+  <div class="payrow">
+    <a class="pcard" href="#paysalary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><b>বেতন পরিশোধ করুন</b><span class="s">ইমাম, মুয়াজ্জিন ও শিক্ষকদের বেতন</span></a>
+    <a class="pcard alt" href="#paydonate"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><b>অনুদান দিন</b><span class="s">মসজিদ ও মাদ্রাসার জন্য</span></a>
   </div>
+  <div class="grp" style="--c: var(--gold)"><h2>হিসাব-নিকাশ</h2><div class="tiles quad">
+    <a class="tile" href="#salary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><span>বেতন</span></a>
+    <a class="tile" href="#donations"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><span>অনুদান</span></a>
+    <a class="tile" href="#ledger"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-chart"/></svg></span><span>আয়-ব্যয়</span></a>
+    <a class="tile" href="#funds"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-vault"/></svg></span><span>মোট সংগ্রহ</span></a>
+  </div></div>
   <div class="grp" style="--c: var(--accent)"><h2>নামাজ</h2><div class="tiles">
     <a class="tile" href="#times"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-clock"/></svg></span><span>নামাজের সময়</span></a>
     <a class="tile" href="#jumuah"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-mosque"/></svg></span><span>জুমুআ</span></a>
@@ -459,8 +483,6 @@ details.paybox .pay { margin-top: 12px; }
     <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
   <div class="grp" style="--c: var(--accent)"><h2>সেবা</h2><div class="tiles">
-    <a class="tile" href="#donate"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><span>মসজিদে দান</span></a>
-    <a class="tile" href="#salary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><span>বেতন ও মাসিক খরচ</span></a>
     <a class="tile soon" href="#zakat"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-calc"/></svg></span><span>যাকাত হিসাব</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
   <div class="grp" style="--c: var(--gold)"><h2>যোগাযোগ</h2><div class="tiles">
@@ -588,14 +610,6 @@ details.paybox .pay { margin-top: 12px; }
     </div>
   </section>
 
-  <section class="view" id="donate">
-    <div class="sec-head"><h2>মসজিদে দান</h2><span class="label">Donate</span></div>
-    <div class="card">
-      <p>মসজিদের বিদ্যুৎ বিল, মেরামত, ইমাম ও মুয়াজ্জিনের সম্মানী এবং মক্তবের খরচ মুসল্লিদের দানে চলে।</p>
-      <div class="payflow" data-kind="donation"></div>
-    </div>
-  </section>
-
   <section class="view" id="contact">
     <div class="sec-head"><h2>ঠিকানা ও যোগাযোগ</h2><span class="label">Location &amp; Contact</span></div>
     <div class="grid two">
@@ -619,44 +633,67 @@ details.paybox .pay { margin-top: 12px; }
     </div>
   </section>
 
+  <section class="view" id="paysalary">
+    <div class="sec-head"><h2>বেতন পরিশোধ করুন</h2></div>
+    <div class="card"><div class="payflow" data-kind="salary"></div></div>
+  </section>
+
+  <section class="view" id="paydonate">
+    <div class="sec-head"><h2>অনুদান দিন</h2></div>
+    <div class="card"><div class="payflow" data-kind="donation"></div></div>
+  </section>
+
   <section class="view" id="salary">
-    <div class="sec-head"><h2>বেতন ও মাসিক খরচ</h2><span class="label">Salary &amp; Expenses</span></div>
-    <p class="snote" id="sNote">এখানকার সংখ্যা ও ব্যাংকের তথ্য এখন নমুনা। আসল তথ্য পেলে বসানো হবে।</p>
-
-    <div class="grid two">
-      <div class="card" id="sSalary">
-        <h3>এ মাসের বেতন</h3>
-        <div class="label" id="sMonth">নভেম্বর ২০২৬</div>
-        <div class="money" id="sSal">—</div>
-        <div class="k2">এ পর্যন্ত বেতনের জন্য এসেছে</div>
-        <details class="paybox"><summary class="btn">এ মাসের বেতন পরিশোধ করুন</summary><div class="payflow" data-kind="salary"></div></details>
-      </div>
-      <div class="card" id="sDonate">
-        <h3>মসজিদে অনুদান</h3>
-        <div class="label">এ মাসে</div>
-        <div class="money" id="sDon">—</div>
-        <div class="k2">এ পর্যন্ত মোট অনুদান এসেছে</div>
-        <details class="paybox"><summary class="btn">মসজিদে অনুদান দিন</summary><div class="payflow" data-kind="donation"></div></details>
-      </div>
+    <div class="sec-head"><h2>বেতন</h2><span class="label">Salary</span></div>
+    <p class="snote">এখানকার সংখ্যা এখন নমুনা। আসল হিসাব পেলে বসানো হবে।</p>
+    <div class="card">
+      <div class="label" id="sMonth">নভেম্বর ২০২৬</div>
+      <div class="money" id="sSal">—</div>
+      <div class="k2" style="margin-bottom:0">এ মাসে মোট বেতন এসেছে</div>
     </div>
+    <div class="card" style="margin-top:14px">
+      <h3>আগের দুই মাসের বেতন</h3>
+      <ul class="rows" id="sHist"></ul>
+    </div>
+  </section>
 
-    <div class="grid two" style="margin-top:18px">
-      <div class="card">
-        <h3>বিগত মাসের খরচ</h3>
-        <div class="label" id="sPrev">অক্টোবর ২০২৬</div>
-        <ul class="rows" id="sExp"></ul>
-        <div class="total"><span>মোট খরচ</span><b id="sExpTotal">—</b></div>
-      </div>
-      <div class="card">
-        <h3>মসজিদের সংগ্রহে আছে</h3>
-        <ul class="rows">
-          <li><span>ব্যাংক</span><b id="fBank">—</b></li>
-          <li><span>মোবাইল ওয়ালেট</span><b id="fWallet">—</b></li>
-          <li><span>ব্যক্তিগত (কোষাধ্যক্ষের কাছে)</span><b id="fPers">—</b></li>
-        </ul>
-        <div class="total"><span>মোট</span><b id="fTotal">—</b></div>
-        <p class="small">সর্বশেষ হালনাগাদ: <span id="sUpd">—</span></p>
-      </div>
+  <section class="view" id="donations">
+    <div class="sec-head"><h2>অনুদান</h2><span class="label">Donations</span></div>
+    <p class="snote">এখানকার সংখ্যা এখন নমুনা। আসল হিসাব পেলে বসানো হবে।</p>
+    <div class="card">
+      <div class="label" id="dMonth">নভেম্বর ২০২৬</div>
+      <div class="money" id="dSum">—</div>
+      <div class="k2" style="margin-bottom:0">এ মাসে মোট অনুদান এসেছে</div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>খাতওয়ারি অনুদান</h3>
+      <ul class="rows" id="dList"></ul>
+      <div class="total"><span>মোট</span><b id="dTotal">—</b></div>
+    </div>
+  </section>
+
+  <section class="view" id="ledger">
+    <div class="sec-head"><h2>আয়-ব্যয়</h2><span class="label">Income &amp; Expense</span></div>
+    <p class="snote">এখানকার সংখ্যা এখন নমুনা। আসল হিসাব পেলে বসানো হবে।</p>
+    <div class="yearhead"><div class="yr" id="lYear">২০২৬</div><div class="tchips" id="lYears"></div></div>
+    <div class="card tbl">
+      <table class="lt">
+        <thead><tr><th>মাস</th><th>আয়</th><th>ব্যয়</th><th>ব্যালেন্স</th></tr></thead>
+        <tbody id="lBody"></tbody>
+        <tfoot id="lFoot"></tfoot>
+      </table>
+    </div>
+    <p class="small">সব অংক টাকায়।</p>
+  </section>
+
+  <section class="view" id="funds">
+    <div class="sec-head"><h2>মোট সংগ্রহ</h2><span class="label">Funds</span></div>
+    <p class="snote">এখানকার সংখ্যা এখন নমুনা। আসল হিসাব পেলে বসানো হবে।</p>
+    <div class="card">
+      <h3>কত টাকা কার কাছে আছে</h3>
+      <ul class="rows" id="fList"></ul>
+      <div class="total"><span>মোট</span><b id="fTotal">—</b></div>
+      <p class="small">সর্বশেষ হালনাগাদ: <span id="sUpd">—</span></p>
     </div>
   </section>
 
@@ -805,7 +842,8 @@ details.paybox .pay { margin-top: 12px; }
     var anchor = null;
     var h = (location.hash || '').replace('#', '');
     try { h = decodeURIComponent(h); } catch (e) {}
-    if (h === 'salary-donate') { h = 'salary'; anchor = 'sDonate'; }
+    var AL = { donate: 'paydonate', 'salary-donate': 'paydonate', 'pay-salary': 'paysalary' };
+    if (AL[h]) h = AL[h];
     var views = document.querySelectorAll('.view'), show = null, title = '', i;
     for (i = 0; i < views.length; i++) views[i].classList.remove('on');
     var el = h ? document.getElementById(h) : null;
@@ -820,9 +858,7 @@ details.paybox .pay { margin-top: 12px; }
     if (show) show.classList.add('on');
     document.body.classList.toggle('in-view', !!show);
     document.getElementById('tbTitle').textContent = title;
-    var an = anchor ? document.getElementById(anchor) : null;
-    if (an && show) { var dt = an.querySelector('details'); if (dt) dt.open = true; an.scrollIntoView(); }
-    else window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
   function markStrip(id) {
     if (id === 'jumuah') id = 'zuhr';
@@ -852,34 +888,78 @@ details.paybox .pay { margin-top: 12px; }
   });
 
   // salary and expenses numbers come from hisab.json; the values below are the fallback
-  var HD = { month: 'নভেম্বর ২০২৬', salary: 20000, donation: 15000, prevMonth: 'অক্টোবর ২০২৬',
-    expenses: [['ইমাম ও মুয়াজ্জিনের সম্মানী', 13000], ['মাদ্রাসা শিক্ষকদের বেতন', 12000], ['বিদ্যুৎ বিল', 2500], ['মেরামত ও পরিষ্কার', 1500]],
-    funds: { bank: 50000, wallet: 12000, personal: 5000 }, updated: '৭ নভেম্বর ২০২৬', sample: true,
+  var HD = { month: 'নভেম্বর ২০২৬', salary: 20000,
+    salaryHistory: [['অক্টোবর ২০২৬', 20000], ['সেপ্টেম্বর ২০২৬', 18500]],
+    donationOnline: 6000,
+    donations: [['জুম্মার কালেকশন', 8000], ['উন্নয়নে দান', 5000], ['সাধারণ দান', 2000]],
+    ledger: { '2026': [[42000, 39000], [38500, 36000], [45000, 41000], [40000, 38500], [52000, 44000], [47000, 43000], [44000, 45500], [49000, 42000], [46500, 44000], [51000, 47500], null, null] },
+    holders: [['ব্যাংক', 50000], ['বিকাশ ও নগদ', 12000], ['কোষাধ্যক্ষ (মোখলেছুর রহমান)', 5000]],
+    updated: '৮ নভেম্বর ২০২৬', sample: true,
     bkash: '01639-608279', nagad: '01639-608279', bank: { name: 'ব্যাংকের নাম', branch: 'শাখার নাম', accountName: 'হিসাবের নাম', number: '0000000000000' }, script: '' };
-  function money(n) { n = Number(n); if (!isFinite(n)) return '—'; return bn(n.toLocaleString('en-IN')) + ' টাকা'; }
+  var CUR = HD, ONLINE = null, lYear = null;
+  var MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+  function num(n) { n = Number(n); return isFinite(n) ? bn(n.toLocaleString('en-IN')) : '—'; }
+  function money(n) { n = Number(n); if (!isFinite(n)) return '—'; return num(n) + ' টাকা'; }
   function sTxt(id, v) { var el = document.getElementById(id); if (el && v !== undefined && v !== null) el.textContent = v; }
-  function showHisab(d) {
-    sTxt('hMonth', d.month); sTxt('sMonth', d.month);
-    sTxt('hSal', money(d.salary)); sTxt('sSal', money(d.salary));
-    sTxt('hDon', money(d.donation)); sTxt('sDon', money(d.donation));
-    sTxt('sPrev', d.prevMonth);
-    var list = document.getElementById('sExp'), tot = 0;
-    list.textContent = '';
-    (d.expenses || []).forEach(function (r) {
+  function addCell(tr, text, cls) { var td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+  function listRows(id, rows) {
+    var ul = document.getElementById(id);
+    if (!ul) return;
+    ul.textContent = '';
+    (rows || []).forEach(function (r) {
       var li = document.createElement('li'), a = document.createElement('span'), b = document.createElement('b');
       a.textContent = r[0]; b.textContent = money(r[1]);
-      li.appendChild(a); li.appendChild(b); list.appendChild(li);
-      tot += Number(r[1]) || 0;
+      li.appendChild(a); li.appendChild(b); ul.appendChild(li);
     });
-    sTxt('sExpTotal', money(tot));
-    var f = d.funds || {};
-    sTxt('fBank', money(f.bank)); sTxt('fWallet', money(f.wallet)); sTxt('fPers', money(f.personal));
-    sTxt('fTotal', money((Number(f.bank) || 0) + (Number(f.wallet) || 0) + (Number(f.personal) || 0)));
-    sTxt('sUpd', d.updated);
-    document.getElementById('sNote').hidden = (d.sample === false);
+  }
+  function signed(v) { return (v < 0 ? '−' : '') + num(Math.abs(v)); }
+  function renderLedger() {
+    var led = CUR.ledger || {}, years = Object.keys(led).sort();
+    if (!years.length) return;
+    if (!lYear || years.indexOf(lYear) < 0) lYear = years[years.length - 1];
+    sTxt('lYear', bn(lYear));
+    var box = document.getElementById('lYears');
+    box.textContent = '';
+    if (years.length > 1) years.forEach(function (y) {
+      var c = document.createElement('button');
+      c.type = 'button'; c.className = y === lYear ? 'chip on' : 'chip'; c.textContent = bn(y);
+      c.addEventListener('click', function () { lYear = y; renderLedger(); });
+      box.appendChild(c);
+    });
+    var body = document.getElementById('lBody'), foot = document.getElementById('lFoot'), arr = led[lYear] || [], ti = 0, te = 0, m, tr;
+    body.textContent = ''; foot.textContent = '';
+    for (m = 0; m < 12; m++) {
+      var r = arr[m]; tr = document.createElement('tr');
+      addCell(tr, MONTHS[m], 'mn');
+      if (r && (r[0] !== null || r[1] !== null)) {
+        var inc = Number(r[0]) || 0, exp = Number(r[1]) || 0, bal = inc - exp;
+        ti += inc; te += exp;
+        addCell(tr, num(inc)); addCell(tr, num(exp)); addCell(tr, signed(bal), bal < 0 ? 'neg' : 'pos');
+      } else { addCell(tr, '—', 'dim'); addCell(tr, '—', 'dim'); addCell(tr, '—', 'dim'); }
+      body.appendChild(tr);
+    }
+    tr = document.createElement('tr');
+    addCell(tr, 'বাৎসরিক মোট'); addCell(tr, num(ti)); addCell(tr, num(te)); addCell(tr, signed(ti - te), ti - te < 0 ? 'neg' : 'pos');
+    foot.appendChild(tr);
+  }
+  function renderHisab() {
+    var d = CUR, sal = ONLINE ? ONLINE.salary : d.salary, onl = ONLINE ? ONLINE.donation : d.donationOnline;
+    sTxt('sMonth', d.month); sTxt('dMonth', d.month);
+    sTxt('sSal', money(sal));
+    listRows('sHist', (d.salaryHistory || []).slice(0, 2));
+    var rows = (d.donations || []).slice(), tot = 0;
+    rows.forEach(function (r) { tot += Number(r[1]) || 0; });
+    if (onl !== undefined && onl !== null) { rows.push(['অনলাইনে (বিকাশ, নগদ, ব্যাংক)', onl]); tot += Number(onl) || 0; }
+    listRows('dList', rows); sTxt('dTotal', money(tot)); sTxt('dSum', money(tot));
+    var hs = d.holders || [], ft = 0;
+    hs.forEach(function (r) { ft += Number(r[1]) || 0; });
+    listRows('fList', hs); sTxt('fTotal', money(ft)); sTxt('sUpd', d.updated);
+    renderLedger();
+    qsa('.snote').forEach(function (el) { el.hidden = (d.sample === false); });
     applyPay(d);
     SCRIPT = d.script || '';
   }
+  function showHisab(d) { CUR = d; renderHisab(); }
   function loadHisab() {
     try {
       fetch('hisab.json?v=' + Date.now(), { cache: 'no-store' })
@@ -986,9 +1066,7 @@ details.paybox .pay { margin-top: 12px; }
   function renderPay(el, n) {
     var kind = el.getAttribute('data-kind'), isSal = kind === 'salary', p = 'pf' + n + '_';
     var word = isSal ? 'বেতনের' : 'অনুদানের', btn = isSal ? 'বেতনের রিসিপ্ট নিন' : 'দানের রিসিপ্ট নিন';
-    var hd = HADITH[2];
     el.innerHTML =
-      '<blockquote class="hd">“' + hd.t + '”<cite>— ' + hd.s + '</cite></blockquote>' +
       '<h4 class="step">১. টাকা পাঠান</h4>' +
       '<div class="pay">' +
         '<div class="pay-row"><div><b>বিকাশ</b><div class="num" id="' + p + 'bk" data-bk="bkash">01639-608279</div></div><button class="btn" type="button" data-bkcopy="bkash" data-copy="01639608279" data-for="' + p + 'bk">কপি করুন</button></div>' +
@@ -1070,10 +1148,9 @@ details.paybox .pay { margin-top: 12px; }
         .then(function (r) { return r.json(); })
         .then(function (j) {
           if (!j || !j.ok) return;
-          var m = monthLabel();
-          if (m) { sTxt('hMonth', m); sTxt('sMonth', m); }
-          sTxt('hSal', money(j.salary)); sTxt('sSal', money(j.salary));
-          sTxt('hDon', money(j.donation)); sTxt('sDon', money(j.donation));
+          ONLINE = { salary: j.salary, donation: j.donation };
+          var m = monthLabel(); if (m) CUR.month = m;
+          renderHisab();
         })
         .catch(function () {});
     } catch (e) {}
