@@ -6,7 +6,7 @@
 <title>ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
 <style>
 /* Layout: centred deep-green hero (logo left, mosque photo right, name, address, map button, next-jamaat arch) ending in a mosque skyline; below it light sections for times, Jumuah, notices, people, about, learning, donation and contact. */
 :root {
@@ -22,7 +22,7 @@
   --hero-gold: #e2c370;
   --hl: #e4f1ea;
   --font-display: "Tiro Bangla", "Noto Serif Bengali", serif;
-  --font-body: "Noto Sans Bengali", "Hind Siliguri", system-ui, sans-serif;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -308,8 +308,6 @@ details.paybox .pay { margin-top: 12px; }
 .rcanvas { width: 100%; max-width: 440px; height: auto; border: 1px solid var(--line); border-radius: 10px; justify-self: center; background: #fff; }
 .rbtns { display: flex; gap: 10px; flex-wrap: wrap; }
 
-.hero .est { font-size: 17px; font-weight: 600; padding: 4px 20px; letter-spacing: .02em; }
-.hero .addr { font-size: 17px; }
 .tiles.quad { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
 .payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
@@ -393,8 +391,9 @@ details.paybox .pay { margin-top: 12px; }
       <p class="bismillah">বিসমিল্লাহির রাহমানির রাহীম</p>
       <p class="place">বাওরাইদ উত্তর পাড়া</p>
       <h1>ফাদিলমুন্সী বাড়ি জামে মসজিদ</h1>
+      <p class="en">Bawraid Uttar Para Fadilmunsi Bari Jame Masjid</p>
+      <span class="est">প্রতিষ্ঠা ১৯১৫</span>
       <p class="addr"><svg class="ico"><use href="#i-pin"/></svg><span>বাওরাইদ (উত্তরপাড়া), ঘাগটিয়া, কাপাসিয়া, গাজীপুর - ১৭৩০</span></p>
-      <span class="est">প্রতিষ্ঠা: ১৯১৫</span>
       <div class="hero-actions">
         <a class="btn ghost" href="https://maps.app.goo.gl/CBUuyVrJ9DmPsWQY7" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>গুগল ম্যাপে লোকেশন</a>
       </div>
@@ -1013,14 +1012,14 @@ details.paybox .pay { margin-top: 12px; }
     var W = 900, H = 1340, ctx = canvas.getContext('2d');
     canvas.width = W; canvas.height = H;
     var fonts = Promise.race([
-      Promise.all([document.fonts.load("500 30px 'Noto Sans Bengali'"), document.fonts.load("600 30px 'Noto Sans Bengali'"), document.fonts.load("700 30px 'Noto Sans Bengali'"), document.fonts.load("400 30px 'Tiro Bangla'")]),
+      Promise.all([document.fonts.load("600 30px 'Hind Siliguri'"), document.fonts.load("400 30px 'Tiro Bangla'")]),
       new Promise(function (r) { setTimeout(r, 1500); })
     ]).catch(function () {});
     var logo = new Promise(function (res) {
       var im = new Image(); im.onload = function () { res(im); }; im.onerror = function () { res(null); }; im.src = 'logo.jpg';
     });
     return Promise.all([fonts, logo]).then(function (r) {
-      var im = r[1], BODY = "'Noto Sans Bengali', 'Hind Siliguri', sans-serif", DISP = "'Tiro Bangla', 'Noto Serif Bengali', serif";
+      var im = r[1], BODY = "'Hind Siliguri', 'Noto Sans Bengali', sans-serif", DISP = "'Tiro Bangla', 'Noto Serif Bengali', serif";
       ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = '#0f4a38'; ctx.fillRect(0, 0, W, 190);
       if (im) ctx.drawImage(im, 30, 30, 195, 130);
