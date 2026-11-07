@@ -143,18 +143,13 @@ tr.next td:last-child { border-radius: 0 8px 8px 0; }
 td.j { font-weight: 600; min-width: 130px; }
 
 /* people */
-.avatar {
-  flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
-  background: var(--hl); color: var(--accent); border: 2px solid var(--line);
-  display: grid; place-items: center;
-}
-.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.avatar svg { width: 46px; height: 46px; fill: currentColor; margin-top: 8px; }
+.avatar { flex: 0 0 76px; width: 76px; height: 76px; border-radius: 50%; padding: 3px; background: var(--surface); border: 2px solid var(--gold); color: var(--accent); box-sizing: border-box; overflow: hidden; display: block; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; border-radius: 50%; }
+.avatar svg { width: 100%; height: 100%; display: block; padding: 14px 12px 0; box-sizing: border-box; fill: currentColor; background: var(--hl); border-radius: 50%; }
 .people { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
 .people.lead { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
 .person { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; min-width: 0; }
-.people.lead .avatar { flex-basis: 88px; width: 88px; height: 88px; }
-.people.lead .avatar svg { width: 56px; height: 56px; }
+.people.lead .avatar, .avatar.big { flex-basis: 92px; width: 92px; height: 92px; }
 .person > div:last-child { min-width: 0; }
 .role { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: .04em; }
 .nm { font-family: var(--font-display); font-size: 20px; line-height: 1.35; overflow-wrap: anywhere; }
@@ -308,6 +303,7 @@ details.paybox .pay { margin-top: 12px; }
 .rcanvas { width: 100%; max-width: 440px; height: auto; border: 1px solid var(--line); border-radius: 10px; justify-self: center; background: #fff; }
 .rbtns { display: flex; gap: 10px; flex-wrap: wrap; }
 
+.tel a { color: inherit; text-decoration: none; }
 .tiles.quad { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
 .payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
@@ -517,7 +513,7 @@ details.paybox .pay { margin-top: 12px; }
       </div>
       <div class="jum-body">
         <div class="khatib">
-          <div class="avatar" style="width:88px;height:88px;flex-basis:88px"><svg aria-hidden="true" style="width:56px;height:56px"><use href="#i-person"/></svg></div>
+          <div class="avatar big"><svg aria-hidden="true"><use href="#i-person"/></svg></div>
           <div>
             <div class="role">ইমাম ও খতিব</div>
             <div class="nm" id="jKhatib">মোল্লা মোঃ শাহজাহান হুজুর</div>
@@ -559,12 +555,21 @@ details.paybox .pay { margin-top: 12px; }
     <div class="sec-head"><h2>মসজিদ কমিটি</h2><span class="label">Committee</span></div>
     <div class="people">
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">প্রধান উপদেষ্টা</div><div class="nm">ঈদ্রিস আলী মেম্বার</div><div class="tel">০১৭××-××××××</div></div></div>
-      <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সভাপতি</div><div class="nm">হাফেজ মাওলানা মোঃ মোবারক হোসাইন</div><div class="tel">০১৭××-××××××</div></div></div>
+      <div class="person"><div class="avatar"><img src="president.jpg" alt="সভাপতি হাফেজ মাওলানা মিজানুর রহমান" width="480" height="480"></div><div><div class="role">সভাপতি</div><div class="nm">হাফেজ মাওলানা মিজানুর রহমান</div><div class="tel"><a href="tel:01725259283">০১৭২৫-২৫৯২৮৩</a></div></div></div>
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সহ-সভাপতি</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সাধারণ সম্পাদক</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সহ-সাধারণ সম্পাদক</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">কোষাধ্যক্ষ / ক্যাশিয়ার</div><div class="nm">মোখলেছুর রহমান</div><div class="tel">০১৭××-××××××</div></div></div>
       <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">দপ্তর সম্পাদক</div><div class="nm">মাওলানা বদরুজ্জামান মৃধা</div><div class="tel">০১৭××-××××××</div></div></div>
+    </div>
+    <div class="sec-head" style="margin-top:26px"><h2>সার্বিক সহযোগীতা</h2><span class="label">Support</span></div>
+    <div class="people">
+      <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সার্বিক সহযোগী</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
+      <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">সার্বিক সহযোগী</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
+    </div>
+    <div class="sec-head" style="margin-top:26px"><h2>আইটি সহযোগীতা</h2><span class="label">IT Support</span></div>
+    <div class="people">
+      <div class="person"><div class="avatar"><svg aria-hidden="true"><use href="#i-person"/></svg></div><div><div class="role">আইটি সহযোগী</div><div class="nm pending">নাম যুক্ত হবে</div><div class="tel">০১৭××-××××××</div></div></div>
     </div>
   </section>
 
@@ -625,7 +630,7 @@ details.paybox .pay { margin-top: 12px; }
         <dl class="kv">
           <dt>ইমাম</dt><dd>০১৭××-××××××</dd>
           <dt>মুয়াজ্জিন</dt><dd>০১৭××-××××××</dd>
-          <dt>সভাপতি</dt><dd>০১৭××-××××××</dd>
+          <dt>সভাপতি</dt><dd><a href="tel:01725259283">০১৭২৫-২৫৯২৮৩</a></dd>
           <dt>ক্যাশিয়ার</dt><dd>০১৭××-××××××</dd>
         </dl>
       </div>
