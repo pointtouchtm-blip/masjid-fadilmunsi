@@ -290,6 +290,23 @@ details.paybox .pay { margin-top: 12px; }
 .rows span { min-width: 0; }
 .total { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; padding-top: 10px; border-top: 2px solid var(--line); font-size: 18px; }
 .total b { color: var(--accent); font-variant-numeric: tabular-nums; }
+.hd { margin: 0 0 14px; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 8px; background: var(--hl); font-family: var(--font-display); font-size: 17px; line-height: 1.7; }
+.hd cite { display: block; margin-top: 4px; font-family: var(--font-body); font-style: normal; font-size: 13.5px; color: var(--gold); font-weight: 600; }
+.step { font-family: var(--font-display); font-weight: 400; font-size: 18px; margin: 18px 0 8px; }
+.pay-row .t { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.pform { display: grid; gap: 6px; }
+.pform label { font-size: 14.5px; color: var(--muted); font-weight: 600; margin-top: 6px; }
+.pform input, .pform select { font: inherit; font-size: 16px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%; min-width: 0; }
+.pform input:focus, .pform select:focus { outline: 3px solid var(--gold); outline-offset: 1px; }
+.pform .btn { margin-top: 12px; justify-content: center; }
+.pform .btn[disabled] { opacity: .6; cursor: wait; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.perr { margin: 6px 0 0; color: #b3261e; font-weight: 600; font-size: 15px; }
+:root[data-theme="dark"] .perr { color: #ff8a80; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .perr { color: #ff8a80; } }
+.rcv { display: grid; gap: 10px; margin-top: 8px; }
+.rcanvas { width: 100%; max-width: 440px; height: auto; border: 1px solid var(--line); border-radius: 10px; justify-self: center; background: #fff; }
+.rbtns { display: flex; gap: 10px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -575,17 +592,7 @@ details.paybox .pay { margin-top: 12px; }
     <div class="sec-head"><h2>মসজিদে দান</h2><span class="label">Donate</span></div>
     <div class="card">
       <p>মসজিদের বিদ্যুৎ বিল, মেরামত, ইমাম ও মুয়াজ্জিনের সম্মানী এবং মক্তবের খরচ মুসল্লিদের দানে চলে।</p>
-      <div class="pay">
-        <div class="pay-row">
-          <div><b>বিকাশ</b><div class="num" id="bkash">01639-608279</div></div>
-          <button class="btn" type="button" data-copy="01639608279" data-for="bkash" id="cp-bkash">কপি করুন</button>
-        </div>
-        <div class="pay-row">
-          <div><b>নগদ</b><div class="num" id="nagad">01639-608279</div></div>
-          <button class="btn" type="button" data-copy="01639608279" data-for="nagad" id="cp-nagad">কপি করুন</button>
-        </div>
-      </div>
-      <p class="small">টাকা পাঠানোর আগে নম্বরটি মসজিদ কমিটির কাউকে ফোন করে মিলিয়ে নিন।</p>
+      <div class="payflow" data-kind="donation"></div>
     </div>
   </section>
 
@@ -614,7 +621,7 @@ details.paybox .pay { margin-top: 12px; }
 
   <section class="view" id="salary">
     <div class="sec-head"><h2>বেতন ও মাসিক খরচ</h2><span class="label">Salary &amp; Expenses</span></div>
-    <p class="snote" id="sNote">এখানকার সংখ্যাগুলো এখন নমুনা। আসল হিসাব পেলে বসানো হবে।</p>
+    <p class="snote" id="sNote">এখানকার সংখ্যা ও ব্যাংকের তথ্য এখন নমুনা। আসল তথ্য পেলে বসানো হবে।</p>
 
     <div class="grid two">
       <div class="card" id="sSalary">
@@ -622,26 +629,14 @@ details.paybox .pay { margin-top: 12px; }
         <div class="label" id="sMonth">নভেম্বর ২০২৬</div>
         <div class="money" id="sSal">—</div>
         <div class="k2">এ পর্যন্ত বেতনের জন্য এসেছে</div>
-        <details class="paybox"><summary class="btn">এ মাসের বেতন পরিশোধ করুন</summary>
-        <div class="pay">
-          <div class="pay-row"><div><b>বিকাশ</b><div class="num" id="p1b">01639-608279</div></div><button class="btn" type="button" data-copy="01639608279" data-for="p1b">কপি করুন</button></div>
-          <div class="pay-row"><div><b>নগদ</b><div class="num" id="p1n">01639-608279</div></div><button class="btn" type="button" data-copy="01639608279" data-for="p1n">কপি করুন</button></div>
-        </div>
-        <p class="small">টাকা পাঠানোর পর কোষাধ্যক্ষ মোখলেছুর রহমানকে জানিয়ে দিন যে এটা বেতনের জন্য।</p>
-      </details>
+        <details class="paybox"><summary class="btn">এ মাসের বেতন পরিশোধ করুন</summary><div class="payflow" data-kind="salary"></div></details>
       </div>
       <div class="card" id="sDonate">
         <h3>মসজিদে অনুদান</h3>
         <div class="label">এ মাসে</div>
         <div class="money" id="sDon">—</div>
         <div class="k2">এ পর্যন্ত মোট অনুদান এসেছে</div>
-        <details class="paybox"><summary class="btn">মসজিদে অনুদান দিন</summary>
-        <div class="pay">
-          <div class="pay-row"><div><b>বিকাশ</b><div class="num" id="p2b">01639-608279</div></div><button class="btn" type="button" data-copy="01639608279" data-for="p2b">কপি করুন</button></div>
-          <div class="pay-row"><div><b>নগদ</b><div class="num" id="p2n">01639-608279</div></div><button class="btn" type="button" data-copy="01639608279" data-for="p2n">কপি করুন</button></div>
-        </div>
-        <p class="small">টাকা পাঠানোর পর কোষাধ্যক্ষ মোখলেছুর রহমানকে জানিয়ে দিন যে এটা অনুদানের জন্য।</p>
-      </details>
+        <details class="paybox"><summary class="btn">মসজিদে অনুদান দিন</summary><div class="payflow" data-kind="donation"></div></details>
       </div>
     </div>
 
@@ -859,7 +854,8 @@ details.paybox .pay { margin-top: 12px; }
   // salary and expenses numbers come from hisab.json; the values below are the fallback
   var HD = { month: 'নভেম্বর ২০২৬', salary: 20000, donation: 15000, prevMonth: 'অক্টোবর ২০২৬',
     expenses: [['ইমাম ও মুয়াজ্জিনের সম্মানী', 13000], ['মাদ্রাসা শিক্ষকদের বেতন', 12000], ['বিদ্যুৎ বিল', 2500], ['মেরামত ও পরিষ্কার', 1500]],
-    funds: { bank: 50000, wallet: 12000, personal: 5000 }, updated: '৭ নভেম্বর ২০২৬', sample: true };
+    funds: { bank: 50000, wallet: 12000, personal: 5000 }, updated: '৭ নভেম্বর ২০২৬', sample: true,
+    bkash: '01639-608279', nagad: '01639-608279', bank: { name: 'ব্যাংকের নাম', branch: 'শাখার নাম', accountName: 'হিসাবের নাম', number: '0000000000000' }, script: '' };
   function money(n) { n = Number(n); if (!isFinite(n)) return '—'; return bn(n.toLocaleString('en-IN')) + ' টাকা'; }
   function sTxt(id, v) { var el = document.getElementById(id); if (el && v !== undefined && v !== null) el.textContent = v; }
   function showHisab(d) {
@@ -881,6 +877,8 @@ details.paybox .pay { margin-top: 12px; }
     sTxt('fTotal', money((Number(f.bank) || 0) + (Number(f.wallet) || 0) + (Number(f.personal) || 0)));
     sTxt('sUpd', d.updated);
     document.getElementById('sNote').hidden = (d.sample === false);
+    applyPay(d);
+    SCRIPT = d.script || '';
   }
   function loadHisab() {
     try {
@@ -891,10 +889,196 @@ details.paybox .pay { margin-top: 12px; }
           for (k in HD) d[k] = HD[k];
           for (k in j) d[k] = j[k];
           showHisab(d);
+          loadTotals();
         })
         .catch(function () {});
     } catch (e) {}
   }
+  // ---------- payment flow: form, receipt, bank details, saving to Google Sheet ----------
+  var SCRIPT = '';
+  var HADITH = [
+    { t: 'মানুষ মারা গেলে তার আমল বন্ধ হয়ে যায়, তবে তিনটি আমল বন্ধ হয় না: সদকায়ে জারিয়া, উপকারী ইলম এবং এমন নেক সন্তান যে তার জন্য দোয়া করে।', s: 'সহীহ মুসলিম, ১৬৩১' },
+    { t: 'যে ব্যক্তি আল্লাহর সন্তুষ্টির জন্য মসজিদ নির্মাণ করে, আল্লাহ তার জন্য জান্নাতে একটি ঘর নির্মাণ করেন।', s: 'সহীহ বুখারী ৪৫০, সহীহ মুসলিম ৫৩৩' },
+    { t: 'সদকা করলে সম্পদ কমে না।', s: 'সহীহ মুসলিম, ২৫৮৮' }
+  ];
+  function toLatin(s) { return String(s).replace(/[০-৯]/g, function (d) { return '০১২৩৪৫৬৭৮৯'.indexOf(d); }); }
+  function qsa(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  function applyPay(d) {
+    var b = d.bank || {};
+    var v = { name: b.name, branch: b.branch, accountName: b.accountName, number: b.number, bkash: d.bkash, nagad: d.nagad };
+    qsa('[data-bk]').forEach(function (el) { var k = el.getAttribute('data-bk'); if (v[k] !== undefined && v[k] !== null) el.textContent = v[k]; });
+    qsa('[data-bkcopy]').forEach(function (el) { var k = el.getAttribute('data-bkcopy'); if (v[k] !== undefined && v[k] !== null) el.setAttribute('data-copy', toLatin(v[k]).replace(/\D/g, '')); });
+    qsa('.bank').forEach(function (el) { el.hidden = !String(b.number || '').trim(); });
+  }
+
+  function wrapLines(ctx, text, maxW) {
+    var words = String(text).split(' '), lines = [], cur = '';
+    words.forEach(function (w) {
+      var t = cur ? cur + ' ' + w : w;
+      if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t;
+    });
+    if (cur) lines.push(cur);
+    return lines;
+  }
+  function fit(ctx, text, maxW) {
+    text = String(text);
+    if (ctx.measureText(text).width <= maxW) return text;
+    while (text.length > 1 && ctx.measureText(text + '…').width > maxW) text = text.slice(0, -1);
+    return text + '…';
+  }
+
+  function drawReceipt(canvas, rec, saved) {
+    var W = 900, H = 1340, ctx = canvas.getContext('2d');
+    canvas.width = W; canvas.height = H;
+    var fonts = Promise.race([
+      Promise.all([document.fonts.load("600 30px 'Hind Siliguri'"), document.fonts.load("400 30px 'Tiro Bangla'")]),
+      new Promise(function (r) { setTimeout(r, 1500); })
+    ]).catch(function () {});
+    var logo = new Promise(function (res) {
+      var im = new Image(); im.onload = function () { res(im); }; im.onerror = function () { res(null); }; im.src = 'logo.jpg';
+    });
+    return Promise.all([fonts, logo]).then(function (r) {
+      var im = r[1], BODY = "'Hind Siliguri', 'Noto Sans Bengali', sans-serif", DISP = "'Tiro Bangla', 'Noto Serif Bengali', serif";
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#0f4a38'; ctx.fillRect(0, 0, W, 190);
+      if (im) ctx.drawImage(im, 30, 30, 195, 130);
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#e2c370'; ctx.font = '400 28px ' + DISP; ctx.fillText('বাওরাইদ উত্তর পাড়া', 250, 75);
+      ctx.fillStyle = '#ffffff'; ctx.font = '400 38px ' + DISP; ctx.fillText(fit(ctx, 'ফাদিলমুন্সী বাড়ি জামে মসজিদ', 620), 250, 124);
+      ctx.fillStyle = '#cfe3d8'; ctx.font = '500 22px ' + BODY; ctx.fillText('বাওরাইদ, ঘাগটিয়া, কাপাসিয়া, গাজীপুর - ১৭৩০', 250, 162);
+
+      ctx.textAlign = 'center'; ctx.fillStyle = '#0f4a38'; ctx.font = '400 40px ' + DISP;
+      ctx.fillText(rec.kind === 'salary' ? 'বেতন প্রদানের প্রাপ্তিস্বীকার' : 'দানের প্রাপ্তিস্বীকার', W / 2, 262);
+
+      var rows = [['রিসিপ্ট নং', rec.no], ['তারিখ ও সময়', rec.when], ['নাম', rec.name], ['মোবাইল', rec.phone], ['মাধ্যম', rec.method]];
+      if (rec.trx) rows.push(['ট্রানজ্যাকশন আইডি', rec.trx]);
+      rows.push(['খাত', rec.kind === 'salary' ? 'বেতন' : 'অনুদান']);
+      var y = 330;
+      rows.forEach(function (row) {
+        ctx.textAlign = 'left'; ctx.fillStyle = '#55695f'; ctx.font = '500 26px ' + BODY; ctx.fillText(row[0], 60, y);
+        ctx.textAlign = 'right'; ctx.fillStyle = '#14281f'; ctx.font = '600 28px ' + BODY; ctx.fillText(fit(ctx, row[1], 520), 840, y);
+        ctx.strokeStyle = '#d6e1d9'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(60, y + 22); ctx.lineTo(840, y + 22); ctx.stroke();
+        y += 64;
+      });
+
+      y += 10;
+      ctx.fillStyle = '#e4f1ea'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(60, y, 780, 130, 18) : ctx.rect(60, y, 780, 130); ctx.fill();
+      ctx.textAlign = 'center'; ctx.fillStyle = '#55695f'; ctx.font = '500 26px ' + BODY; ctx.fillText('প্রদত্ত টাকা', W / 2, y + 44);
+      ctx.fillStyle = '#16694e'; ctx.font = '700 58px ' + BODY; ctx.fillText(rec.money, W / 2, y + 104);
+      y += 130 + 44;
+
+      var h = rec.kind === 'salary' ? HADITH[0] : HADITH[1];
+      ctx.font = '400 27px ' + DISP;
+      var lines = wrapLines(ctx, '“' + h.t + '”', 720), boxH = lines.length * 42 + 78;
+      ctx.strokeStyle = '#c9a24a'; ctx.lineWidth = 2; ctx.strokeRect(60, y, 780, boxH);
+      ctx.fillStyle = '#14281f'; ctx.textAlign = 'center';
+      lines.forEach(function (ln, i) { ctx.fillText(ln, W / 2, y + 50 + i * 42); });
+      ctx.fillStyle = '#8f6a14'; ctx.font = '500 22px ' + BODY; ctx.fillText('— ' + h.s, W / 2, y + boxH - 22);
+      y += boxH + 52;
+
+      ctx.fillStyle = '#0f4a38'; ctx.font = '600 28px ' + BODY; ctx.fillText('জাযাকাল্লাহু খাইরান। আল্লাহ আপনার দান কবুল করুন।', W / 2, y);
+      ctx.fillStyle = '#55695f'; ctx.font = '400 21px ' + BODY;
+      wrapLines(ctx, saved ? 'আপনার তথ্য মসজিদ কমিটির হিসাবে জমা হয়েছে।' : 'এই রিসিপ্ট ডাউনলোড করে কোষাধ্যক্ষকে পাঠিয়ে দিন।', 760).forEach(function (ln, i) { ctx.fillText(ln, W / 2, y + 44 + i * 30); });
+    });
+  }
+
+  function renderPay(el, n) {
+    var kind = el.getAttribute('data-kind'), isSal = kind === 'salary', p = 'pf' + n + '_';
+    var word = isSal ? 'বেতনের' : 'অনুদানের', btn = isSal ? 'বেতনের রিসিপ্ট নিন' : 'দানের রিসিপ্ট নিন';
+    var hd = HADITH[2];
+    el.innerHTML =
+      '<blockquote class="hd">“' + hd.t + '”<cite>— ' + hd.s + '</cite></blockquote>' +
+      '<h4 class="step">১. টাকা পাঠান</h4>' +
+      '<div class="pay">' +
+        '<div class="pay-row"><div><b>বিকাশ</b><div class="num" id="' + p + 'bk" data-bk="bkash">01639-608279</div></div><button class="btn" type="button" data-bkcopy="bkash" data-copy="01639608279" data-for="' + p + 'bk">কপি করুন</button></div>' +
+        '<div class="pay-row"><div><b>নগদ</b><div class="num" id="' + p + 'ng" data-bk="nagad">01639-608279</div></div><button class="btn" type="button" data-bkcopy="nagad" data-copy="01639608279" data-for="' + p + 'ng">কপি করুন</button></div>' +
+        '<div class="pay-row bank"><div><b>ব্যাংক</b>' +
+          '<div class="t"><span data-bk="name">ব্যাংকের নাম</span>, <span data-bk="branch">শাখার নাম</span></div>' +
+          '<div class="t">হিসাবের নাম: <span data-bk="accountName">হিসাবের নাম</span></div>' +
+          '<div class="num" id="' + p + 'bn" data-bk="number">0000000000000</div></div>' +
+          '<button class="btn" type="button" data-bkcopy="number" data-copy="0000000000000" data-for="' + p + 'bn">কপি করুন</button></div>' +
+      '</div>' +
+      '<h4 class="step">২. তথ্য দিয়ে রিসিপ্ট নিন</h4>' +
+      '<form class="pform" id="' + p + 'form" novalidate>' +
+        '<label for="' + p + 'name">আপনার নাম</label><input id="' + p + 'name" type="text" maxlength="80" autocomplete="name" required>' +
+        '<label for="' + p + 'phone">মোবাইল নম্বর</label><input id="' + p + 'phone" type="tel" inputmode="numeric" maxlength="14" autocomplete="tel" placeholder="01XXXXXXXXX" required>' +
+        '<label for="' + p + 'amount">টাকার পরিমাণ</label><input id="' + p + 'amount" type="text" inputmode="numeric" maxlength="9" placeholder="যেমন ১০০০" required>' +
+        '<label for="' + p + 'method">কোন মাধ্যমে পাঠিয়েছেন</label><select id="' + p + 'method"><option>বিকাশ</option><option>নগদ</option><option>ব্যাংক</option><option>সরাসরি হাতে</option></select>' +
+        '<input id="' + p + 'web" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<p class="perr" id="' + p + 'err" role="alert" hidden></p>' +
+        '<button class="btn" id="' + p + 'go" type="submit">' + btn + '</button>' +
+        '<p class="small">আপনার নাম ও মোবাইল শুধু মসজিদ কমিটি দেখবে।</p>' +
+      '</form>' +
+      '<div class="rcv" id="' + p + 'rcv" hidden>' +
+        '<canvas id="' + p + 'cv" class="rcanvas" aria-label="রিসিপ্ট"></canvas>' +
+        '<p class="small" id="' + p + 'st"></p>' +
+        '<div class="rbtns"><button class="btn" type="button" id="' + p + 'dl">রিসিপ্ট ডাউনলোড করুন</button><button class="btn line" type="button" id="' + p + 'again">নতুন করে দিন</button></div>' +
+        '<p class="small">ডাউনলোড না হলে রিসিপ্টের ছবি চেপে ধরে সেভ করুন।</p>' +
+      '</div>';
+
+    var $ = function (s) { return document.getElementById(p + s); }, last = null;
+    $('form').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var err = $('err'); err.hidden = true;
+      if ($('web').value) return;
+      var name = $('name').value.trim(), phone = toLatin($('phone').value).replace(/[\s-]/g, ''), amt = parseInt(toLatin($('amount').value).replace(/[,\s]/g, ''), 10);
+      function bad(m) { err.textContent = m; err.hidden = false; }
+      if (!name) return bad('আপনার নাম লিখুন।');
+      if (!/^01[3-9]\d{8}$/.test(phone)) return bad('মোবাইল নম্বর ১১ সংখ্যার হতে হবে, যেমন 01712345678।');
+      if (!(amt >= 1 && amt <= 500000)) return bad('টাকার পরিমাণ ১ থেকে ৫,০০,০০০ এর মধ্যে লিখুন।');
+      var now = new Date(), pad = function (x) { return (x < 10 ? '0' : '') + x; };
+      var no = 'FM-' + String(now.getFullYear()).slice(2) + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000);
+      var when = '';
+      try { when = new Intl.DateTimeFormat('bn-BD', { timeZone: 'Asia/Dhaka', dateStyle: 'long', timeStyle: 'short' }).format(now); } catch (e) { when = now.toLocaleString(); }
+      var rec = { kind: kind, name: name, phone: phone, amount: amt, method: $('method').value, trx: '', receipt: no };
+      var go = $('go'); go.disabled = true; go.textContent = 'জমা হচ্ছে…';
+      var send = SCRIPT ? fetch(SCRIPT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(rec) })
+        .then(function (r) { return r.json(); }).then(function (j) { return j && j.ok; }).catch(function () { return false; }) : Promise.resolve(false);
+      send.then(function (ok) {
+        last = { kind: kind, no: no, when: when, name: name, phone: bn(phone), method: rec.method, trx: rec.trx, money: money(amt) };
+        return drawReceipt($('cv'), last, ok).then(function () {
+          $('form').hidden = true; $('rcv').hidden = false;
+          $('st').textContent = ok ? 'আপনার তথ্য মসজিদ কমিটির হিসাবে জমা হয়েছে। জাযাকাল্লাহু খাইরান।' : 'তথ্য অনলাইনে জমা হয়নি। রিসিপ্ট ডাউনলোড করে কোষাধ্যক্ষকে পাঠিয়ে দিন।';
+          if (ok) loadTotals();
+          go.disabled = false; go.textContent = btn;
+        });
+      });
+    });
+    $('dl').addEventListener('click', function () {
+      $('cv').toBlob(function (b) {
+        if (!b || !last) return;
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(b); a.download = 'receipt-' + last.no + '.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+      }, 'image/png');
+    });
+    $('again').addEventListener('click', function () {
+      $('form').reset(); $('rcv').hidden = true; $('form').hidden = false;
+    });
+  }
+  qsa('.payflow').forEach(function (el, i) { renderPay(el, i); });
+
+  function monthLabel() {
+    try { return new Intl.DateTimeFormat('bn-BD', { timeZone: 'Asia/Dhaka', month: 'long', year: 'numeric' }).format(new Date()); } catch (e) { return null; }
+  }
+  function loadTotals() {
+    if (!SCRIPT) return;
+    try {
+      fetch(SCRIPT + (SCRIPT.indexOf('?') < 0 ? '?' : '&') + 'v=' + Date.now(), { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j || !j.ok) return;
+          var m = monthLabel();
+          if (m) { sTxt('hMonth', m); sTxt('sMonth', m); }
+          sTxt('hSal', money(j.salary)); sTxt('sSal', money(j.salary));
+          sTxt('hDon', money(j.donation)); sTxt('sDon', money(j.donation));
+        })
+        .catch(function () {});
+    } catch (e) {}
+  }
+
   showHisab(HD);
   loadHisab();
 

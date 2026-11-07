@@ -27,5 +27,14 @@
     "personal": 5000
   },
   "updated": "৭ নভেম্বর ২০২৬",
-  "sample": true
+  "sample": true,
+  "bkash": "01639-608279",
+  "nagad": "01639-608279",
+  "bank": {
+    "name": "ব্যাংকের নাম",
+    "branch": "শাখার নাম",
+    "accountName": "হিসাবের নাম",
+    "number": "0000000000000"
+  },
+  "script": ""
 }
