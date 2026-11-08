@@ -309,6 +309,26 @@ details.paybox .pay { margin-top: 12px; }
 .rbtns { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .tel a { color: inherit; text-decoration: none; }
+/* install app: popup + install page */
+.ifab { position: fixed; z-index: 50; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: var(--bg); border: 2px solid var(--gold); border-radius: 999px; padding: 9px 16px 9px 12px; font: inherit; font-weight: 700; font-size: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.3); cursor: pointer; text-decoration: none; }
+.ifab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.ifab[hidden] { display: none; }
+.ifab.pulse { animation: ifp 1.6s ease-out 3; }
+@keyframes ifp { 0% { box-shadow: 0 6px 18px rgba(0,0,0,.3), 0 0 0 0 rgba(220,184,92,.75); } 100% { box-shadow: 0 6px 18px rgba(0,0,0,.3), 0 0 0 16px rgba(220,184,92,0); } }
+@media (prefers-reduced-motion: reduce) { .ifab.pulse { animation: none; } }
+body.has-fab { padding-bottom: 76px; }
+.inst { display: grid; gap: 14px; }
+.inst .qrbox { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.inst .qr { width: 220px; height: 220px; border: 6px solid #fff; border-radius: 12px; box-shadow: 0 0 0 2px var(--gold); background: #fff; }
+.inst .lnk { font-size: 14px; word-break: break-all; color: var(--accent); font-weight: 600; }
+.inst .row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.inst ol { margin: 6px 0 0; padding-left: 22px; }
+.inst li { margin-bottom: 6px; }
+.inst h3 { font-size: 19px; }
+@media (min-width: 760px) { .ifab { right: 22px; bottom: 22px; } }
+
 .tiles.quad { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
 .payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
@@ -358,6 +378,7 @@ details.paybox .pay { margin-top: 12px; }
   <symbol id="t-hadith" viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6z"/><path d="M15 4v3h3"/><path d="M9 12h6M9 16h6"/></symbol>
   <symbol id="t-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
   <symbol id="t-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" stroke-width="2.4"/></symbol>
+  <symbol id="t-install" viewBox="0 0 24 24"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></symbol>
   <symbol id="t-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
   <symbol id="t-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol>
   <symbol id="t-speaker" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
@@ -483,6 +504,7 @@ details.paybox .pay { margin-top: 12px; }
     <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
   <div class="grp" style="--c: var(--accent)"><h2>সেবা</h2><div class="tiles">
+    <a class="tile" href="#install"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-install"/></svg></span><span>অ্যাপ ইনস্টল</span></a>
     <a class="tile soon" href="#zakat"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-calc"/></svg></span><span>যাকাত হিসাব</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
   <div class="grp" style="--c: var(--gold)"><h2>যোগাযোগ</h2><div class="tiles">
@@ -742,6 +764,43 @@ details.paybox .pay { margin-top: 12px; }
     </div>
   </section>
 
+  <section class="view" id="install">
+    <div class="sec-head"><h2>অ্যাপ ইনস্টল করুন</h2><span class="label">Install</span></div>
+    <div class="inst">
+      <div class="card qrbox">
+        <h3>ক্যামেরা দিয়ে স্ক্যান করুন</h3>
+        <p style="color:var(--muted)">ফোনের ক্যামেরা QR কোডের দিকে ধরুন, লিংক খুললে নিচের ধাপ অনুসরণ করুন।</p>
+        <svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="অ্যাপ ইনস্টলের QR কোড"><rect width="100%" height="100%" fill="#fff"/><path fill="#0b2a20" d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM18 4h1v1h-1zM22 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM18 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM23 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM24 9h1v1h-1zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM13 12h1v1h-1zM14 12h1v1h-1zM17 12h1v1h-1zM18 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM5 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM19 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM27 13h1v1h-1zM28 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM13 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM24 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM4 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM14 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM22 15h1v1h-1zM29 15h1v1h-1zM4 16h1v1h-1zM5 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM32 16h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM22 18h1v1h-1zM24 18h1v1h-1zM26 18h1v1h-1zM28 18h1v1h-1zM29 18h1v1h-1zM30 18h1v1h-1zM7 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM22 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM32 19h1v1h-1zM5 20h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM23 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM4 21h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM15 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM30 21h1v1h-1zM31 21h1v1h-1zM32 21h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM23 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM29 22h1v1h-1zM32 22h1v1h-1zM4 23h1v1h-1zM6 23h1v1h-1zM7 23h1v1h-1zM8 23h1v1h-1zM12 23h1v1h-1zM15 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM25 23h1v1h-1zM28 23h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM21 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM30 24h1v1h-1zM31 24h1v1h-1zM32 24h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM29 25h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM31 27h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM19 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM31 28h1v1h-1zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM7 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM14 29h1v1h-1zM15 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM22 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM25 29h1v1h-1zM29 29h1v1h-1zM30 29h1v1h-1zM31 29h1v1h-1zM32 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM18 30h1v1h-1zM19 30h1v1h-1zM21 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM15 31h1v1h-1zM16 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM25 31h1v1h-1zM29 31h1v1h-1zM30 31h1v1h-1zM32 31h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM7 32h1v1h-1zM8 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM17 32h1v1h-1zM18 32h1v1h-1zM19 32h1v1h-1zM20 32h1v1h-1zM21 32h1v1h-1zM23 32h1v1h-1zM25 32h1v1h-1zM26 32h1v1h-1zM27 32h1v1h-1zM28 32h1v1h-1zM30 32h1v1h-1z"/></svg>
+        <div class="lnk" id="instLink">fadilmunsimasjid.pointtouchtm.workers.dev</div>
+        <div class="row">
+          <button class="btn" id="instBtn" type="button" hidden>এখনই ইনস্টল করুন</button>
+          <button class="btn line" id="copyLnk" type="button">লিংক কপি করুন</button>
+          <button class="btn line" id="shareLnk" type="button" hidden>শেয়ার করুন</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>অ্যান্ড্রয়েড ফোনে (Chrome)</h3>
+        <ol>
+          <li>Chrome-এ সাইটটি খুলুন।</li>
+          <li>উপরে ডানদিকের তিন ডট (⋮) চাপুন।</li>
+          <li><b>"Install app"</b> বা <b>"Add to Home screen"</b> চাপুন।</li>
+          <li><b>Install</b> চাপলে হোম স্ক্রিনে আইকন চলে আসবে।</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>আইফোনে (Safari)</h3>
+        <ol>
+          <li>Safari-তে সাইটটি খুলুন।</li>
+          <li>নিচের <b>Share</b> বোতাম (বর্গের ভেতর তীর) চাপুন।</li>
+          <li><b>"Add to Home Screen"</b> চাপুন, তারপর <b>Add</b>।</li>
+        </ol>
+      </div>
+      <div class="card">
+        <p>এটি বিনামূল্যে, ফোনে খুব কম জায়গা নেয় এবং এক ট্যাপে মসজিদের নামাজের সময়, জুম্মা ও হিসাব-নিকাশ দেখা যায়।</p>
+      </div>
+    </div>
+  </section>
+
   <section class="view" id="soon">
     <div class="sec-head"><h2 id="soonTitle">শীঘ্রই আসছে</h2></div>
     <div class="card empty">
@@ -756,6 +815,8 @@ details.paybox .pay { margin-top: 12px; }
     <div>আল্লাহ আমাদের সবার নেক আমল কবুল করুন। আমীন।</div>
   </footer>
 </div>
+
+<button class="ifab pulse" id="ifab" type="button" aria-label="মসজিদের অ্যাপ ইনস্টল করুন"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#t-install"/></svg><span>অ্যাপ ইনস্টল</span></button>
 
 <script>
 (function () {
@@ -1193,5 +1254,37 @@ details.paybox .pay { margin-top: 12px; }
 </script>
 
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+<script>
+(function () {
+  var fab = document.getElementById('ifab'), dp = null;
+  var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  var url = location.origin + '/';
+  function sync() {
+    var off = standalone || (location.hash || '') === '#install';
+    fab.hidden = off; document.body.classList.toggle('has-fab', !off);
+  }
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault(); dp = e;
+    var b = document.getElementById('instBtn'); if (b) b.hidden = false;
+  });
+  window.addEventListener('appinstalled', function () { standalone = true; dp = null; sync(); var b = document.getElementById('instBtn'); if (b) b.hidden = true; });
+  function doInstall() {
+    if (dp) { dp.prompt(); dp.userChoice.then(function () { dp = null; var b = document.getElementById('instBtn'); if (b) b.hidden = true; }); }
+    else { location.hash = '#install'; }
+  }
+  fab.addEventListener('click', doInstall);
+  var ib = document.getElementById('instBtn'); if (ib) ib.addEventListener('click', doInstall);
+  var cp = document.getElementById('copyLnk');
+  if (cp) cp.addEventListener('click', function () {
+    function ok() { cp.textContent = 'কপি হয়েছে ✓'; setTimeout(function () { cp.textContent = 'লিংক কপি করুন'; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok, function () {});
+    else { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} document.body.removeChild(t); }
+  });
+  var sh = document.getElementById('shareLnk');
+  if (sh && navigator.share) { sh.hidden = false; sh.addEventListener('click', function () { navigator.share({ title: document.title, text: 'ফাদিলমুন্সী বাড়ি জামে মসজিদের অ্যাপ', url: url }).catch(function () {}); }); }
+  var lk = document.getElementById('instLink'); if (lk && location.host) lk.textContent = location.host + '/';
+  window.addEventListener('hashchange', sync); sync();
+})();
+</script>
 </body>
 </html>
