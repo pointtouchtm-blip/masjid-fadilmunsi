@@ -944,8 +944,11 @@ body.has-fab { padding-bottom: 76px; }
   }
 
   var SOON = { gallery: 'ছবির গ্যালারি', qibla: 'কিবলার দিক', roza: 'রোজা', calendar: 'ক্যালেন্ডার', kalema: 'কালেমা', pobitrota: 'পবিত্রতা', azan: 'আযান ও ইকামত', niyat: 'নামাজের নিয়ত', namaz: 'নামাজ শিক্ষা', kaza: 'কাযা নামাজ', nafl: 'নফল নামাজ', dua: 'দোয়া', masala: 'মাসআলা', quran: 'কুরআন', audio: 'অডিও কুরআন', hadith: 'হাদিস', names: 'আল্লাহর ৯৯ নাম', qurbani: 'কুরবানী ও আকীকা', hajj: 'হজ্জ ও ওমরাহ', kafon: 'মৃত্যু ও কাফন-দাফন', salary: 'বেতন ও মাসিক খরচ', zakat: 'যাকাত হিসাব' };
+  var homeY = 0;
   function route() {
     var anchor = null;
+    var wasView = document.body.classList.contains('in-view');
+    if (!wasView) homeY = window.pageYOffset || 0;
     var h = (location.hash || '').replace('#', '');
     try { h = decodeURIComponent(h); } catch (e) {}
     var AL = { donate: 'paydonate', 'salary-donate': 'paydonate', 'pay-salary': 'paysalary' };
@@ -964,7 +967,8 @@ body.has-fab { padding-bottom: 76px; }
     if (show) show.classList.add('on');
     document.body.classList.toggle('in-view', !!show);
     document.getElementById('tbTitle').textContent = title;
-    window.scrollTo(0, 0);
+    if (show) window.scrollTo(0, 0);
+    else if (wasView) window.scrollTo(0, homeY); // সেকশন থেকে ফিরলে হোমপেইজে আগের জায়গায়
   }
   function markStrip(id) {
     if (id === 'jumuah') id = 'zuhr';
