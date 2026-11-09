@@ -329,6 +329,23 @@ body.has-fab { padding-bottom: 76px; }
 .inst h3 { font-size: 19px; }
 @media (min-width: 760px) { .ifab { right: 22px; bottom: 22px; } }
 
+/* committee slider */
+.cs { margin-top: 28px; }
+.cs h2 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
+.cs h2::before { content: ""; width: 5px; height: 22px; border-radius: 3px; background: var(--gold); }
+.cs-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 12px -16px 0; padding: 4px 16px 10px; -webkit-overflow-scrolling: touch; }
+.cs-track::-webkit-scrollbar { display: none; }
+.cs-card { flex: 0 0 min(72%, 250px); scroll-snap-align: center; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--gold); border-radius: 14px; padding: 16px 12px 14px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.cs-card .avatar { flex-basis: 104px; width: 104px; height: 104px; margin-bottom: 8px; }
+.cs-card .role { font-size: 13.5px; }
+.cs-card .nm { font-weight: 700; font-size: 17px; line-height: 1.45; }
+.cs-card .tel { font-size: 14px; color: var(--muted); }
+.cs-dots { display: flex; justify-content: center; gap: 7px; margin: 2px 0 12px; }
+.cs-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: all .25s; display: block; }
+.cs-dots i.on { width: 22px; border-radius: 6px; background: var(--gold); }
+.cs-more { display: flex; justify-content: center; }
+@media (min-width: 760px) { .cs-track { margin: 12px 0 0; padding-left: 0; padding-right: 0; } }
+
 .tiles.quad { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
 .payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
@@ -499,7 +516,6 @@ body.has-fab { padding-bottom: 76px; }
     <a class="tile" href="#notices"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-bell"/></svg></span><span>ঘোষণা</span></a>
     <a class="tile" href="#janaza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-candle"/></svg></span><span>জানাজার খবর</span></a>
     <a class="tile" href="#imam"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-imam"/></svg></span><span>ইমাম ও মুয়াজ্জিন</span></a>
-    <a class="tile" href="#committee"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-people"/></svg></span><span>কমিটি</span></a>
     <a class="tile" href="#about"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-history"/></svg></span><span>ইতিহাস</span></a>
     <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
@@ -511,6 +527,12 @@ body.has-fab { padding-bottom: 76px; }
     <a class="tile" href="#contact"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-pin"/></svg></span><span>লোকেশন ও যোগাযোগ</span></a>
     <a class="tile" href="https://www.facebook.com/share/19aQEEBdi9/" target="_blank" rel="noopener"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-fb"/></svg></span><span>ফেসবুক পেজ</span></a>
   </div></div>
+  <section class="cs" id="cslider" hidden aria-label="আমাদের কমিটি">
+    <h2>আমাদের কমিটি</h2>
+    <div class="cs-track" id="csTrack" tabindex="0"></div>
+    <div class="cs-dots" id="csDots" aria-hidden="true"></div>
+    <div class="cs-more"><a class="btn line" href="#committee">সবার তালিকা ও নম্বর দেখুন</a></div>
+  </section>
 </main>
 
   <section class="view" id="times">
@@ -1253,6 +1275,49 @@ body.has-fab { padding-bottom: 76px; }
 })();
 </script>
 
+<script>
+(function () {
+  var box = document.getElementById('cslider'), track = document.getElementById('csTrack'), dots = document.getElementById('csDots');
+  if (!box) return;
+  var src = document.querySelectorAll('#committee .person'), n = 0, i;
+  for (i = 0; i < src.length; i++) {
+    if (!src[i].querySelector('img')) continue;
+    var c = document.createElement('div'); c.className = 'cs-card';
+    var av = src[i].querySelector('.avatar').cloneNode(true);
+    var info = src[i].children[1];
+    c.appendChild(av);
+    var parts = info.children, k;
+    for (k = 0; k < parts.length; k++) c.appendChild(parts[k].cloneNode(true));
+    track.appendChild(c); n++;
+    var d = document.createElement('i'); dots.appendChild(d);
+  }
+  if (n < 2) return;
+  box.hidden = false;
+  var cards = track.children, dl = dots.children, cur = 0, paused = false, resumeT = null, visible = false;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setDot(x) { for (var q = 0; q < dl.length; q++) dl[q].className = q === x ? 'on' : ''; }
+  function near() {
+    var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bd = 1e9, q;
+    for (q = 0; q < cards.length; q++) { var dd = Math.abs(cards[q].offsetLeft + cards[q].offsetWidth / 2 - mid); if (dd < bd) { bd = dd; best = q; } }
+    return best;
+  }
+  function go(x) {
+    var el = cards[x]; if (!el) return;
+    track.scrollTo({ left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+  }
+  track.addEventListener('scroll', function () { cur = near(); setDot(cur); }, { passive: true });
+  function hold() { paused = true; clearTimeout(resumeT); }
+  function release() { clearTimeout(resumeT); resumeT = setTimeout(function () { paused = false; }, 6000); }
+  ['touchstart', 'pointerdown', 'mouseenter', 'focusin', 'wheel'].forEach(function (ev) { track.addEventListener(ev, hold, { passive: true }); });
+  ['touchend', 'pointerup', 'mouseleave', 'focusout'].forEach(function (ev) { track.addEventListener(ev, release, { passive: true }); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .4 }).observe(box); else visible = true;
+  setDot(0);
+  if (!reduce) setInterval(function () {
+    if (paused || !visible || document.hidden) return;
+    go((cur + 1) % cards.length);
+  }, 4500);
+})();
+</script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
 <script>
 (function () {
