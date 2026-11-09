@@ -346,6 +346,18 @@ body.has-fab { padding-bottom: 76px; }
 .cs-more { display: flex; justify-content: center; }
 @media (min-width: 760px) { .cs-track { margin: 12px 0 0; padding-left: 0; padding-right: 0; } }
 
+/* imam & muazzin on home */
+.im { margin-top: 24px; }
+.im h2 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
+.im h2::before { content: ""; width: 5px; height: 22px; border-radius: 3px; background: var(--accent); }
+.im-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.im-card { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 14px; padding: 16px 10px 14px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; }
+.im-card .avatar { flex-basis: 100px; width: 100px; height: 100px; margin-bottom: 8px; }
+.im-card .role { font-size: 13.5px; color: var(--gold); }
+.im-card .nm { font-weight: 700; font-size: 16.5px; line-height: 1.45; }
+.im-card .tel { font-size: 13.5px; color: var(--muted); }
+@media (max-width: 340px) { .im-grid { grid-template-columns: 1fr; } }
+
 .tiles.quad { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 520px) { .tiles.quad { grid-template-columns: repeat(4, 1fr); } }
 .payrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
@@ -476,6 +488,10 @@ body.has-fab { padding-bottom: 76px; }
     <a class="pcard" href="#paysalary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><b>বেতন পরিশোধ করুন</b><span class="s">ইমাম, মুয়াজ্জিন ও শিক্ষকদের বেতন</span></a>
     <a class="pcard alt" href="#paydonate"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><b>অনুদান দিন</b><span class="s">মসজিদ ও মাদ্রাসার জন্য</span></a>
   </div>
+  <section class="im" id="imhome" hidden aria-label="ইমাম ও মুয়াজ্জিন">
+    <h2>ইমাম ও মুয়াজ্জিন</h2>
+    <div class="im-grid" id="imGrid"></div>
+  </section>
   <div class="grp" style="--c: var(--gold)"><h2>হিসাব-নিকাশ</h2><div class="tiles quad">
     <a class="tile" href="#salary"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-wallet"/></svg></span><span>বেতন</span></a>
     <a class="tile" href="#donations"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-heart"/></svg></span><span>অনুদান</span></a>
@@ -515,7 +531,6 @@ body.has-fab { padding-bottom: 76px; }
   <div class="grp" style="--c: var(--gold)"><h2>মসজিদ</h2><div class="tiles">
     <a class="tile" href="#notices"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-bell"/></svg></span><span>ঘোষণা</span></a>
     <a class="tile" href="#janaza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-candle"/></svg></span><span>জানাজার খবর</span></a>
-    <a class="tile" href="#imam"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-imam"/></svg></span><span>ইমাম ও মুয়াজ্জিন</span></a>
     <a class="tile" href="#about"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-history"/></svg></span><span>ইতিহাস</span></a>
     <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
@@ -1277,6 +1292,21 @@ body.has-fab { padding-bottom: 76px; }
 
 <script>
 (function () {
+  var g = document.getElementById('imGrid'), box = document.getElementById('imhome');
+  if (!g) return;
+  var src = document.querySelectorAll('#imam .person'), i, k;
+  for (i = 0; i < src.length; i++) {
+    var c = document.createElement('div'); c.className = 'im-card';
+    c.appendChild(src[i].querySelector('.avatar').cloneNode(true));
+    var parts = src[i].children[1].children;
+    for (k = 0; k < parts.length; k++) c.appendChild(parts[k].cloneNode(true));
+    g.appendChild(c);
+  }
+  if (g.children.length) box.hidden = false;
+})();
+</script>
+<script>
+(function () {
   var box = document.getElementById('cslider'), track = document.getElementById('csTrack'), dots = document.getElementById('csDots');
   if (!box) return;
   var src = document.querySelectorAll('#committee .person'), n = 0, i;
@@ -1315,7 +1345,7 @@ body.has-fab { padding-bottom: 76px; }
   if (!reduce) setInterval(function () {
     if (paused || !visible || document.hidden) return;
     go((cur + 1) % cards.length);
-  }, 4500);
+  }, 2000);
 })();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
