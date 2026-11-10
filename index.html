@@ -331,6 +331,19 @@ body.has-fab { padding-bottom: 76px; }
 .inst h3 { font-size: 19px; }
 @media (min-width: 760px) { .ifab { right: 22px; bottom: 22px; } }
 
+/* gallery slider (home) */
+.gs { margin-top: 28px; }
+.gs h2 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
+.gs h2::before { content: ""; width: 5px; height: 22px; border-radius: 3px; background: var(--gold); }
+.gs-box { position: relative; display: block; margin-top: 12px; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #000; max-width: 560px; }
+.gs-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s; }
+.gs-box img.on { opacity: 1; }
+.gs-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px; color: #fff; font-size: 16px; background: linear-gradient(transparent, rgba(0,0,0,.66)); }
+.gs-dots { position: absolute; right: 12px; bottom: 12px; display: flex; gap: 5px; }
+.gs-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.5); display: block; }
+.gs-dots i.on { background: #fff; }
+.gs-more { display: flex; margin-top: 12px; }
+
 /* committee slider */
 .cs { margin-top: 28px; }
 .cs h2 { font-size: 23px; display: flex; align-items: center; gap: 10px; }
@@ -534,7 +547,7 @@ body.has-fab { padding-bottom: 76px; }
     <a class="tile" href="#notices"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-bell"/></svg></span><span>ঘোষণা</span></a>
     <a class="tile" href="#janaza"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-candle"/></svg></span><span>জানাজার খবর</span></a>
     <a class="tile" href="#about"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-history"/></svg></span><span>ইতিহাস</span></a>
-    <a class="tile soon" href="#gallery"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile" href="gallery.html"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-image"/></svg></span><span>ছবির গ্যালারি</span></a>
   </div></div>
   <div class="grp" style="--c: var(--accent)"><h2>সেবা</h2><div class="tiles">
     <a class="tile" href="#install"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-install"/></svg></span><span>অ্যাপ ইনস্টল</span></a>
@@ -549,6 +562,11 @@ body.has-fab { padding-bottom: 76px; }
     <div class="cs-track" id="csTrack" tabindex="0"></div>
     <div class="cs-dots" id="csDots" aria-hidden="true"></div>
     <div class="cs-more"><a class="btn line" href="#committee">সবার তালিকা ও নম্বর দেখুন</a></div>
+  </section>
+  <section class="gs" id="gslider" aria-label="মসজিদের ছবি">
+    <h2>মসজিদের ছবি</h2>
+    <a class="gs-box" id="gsBox" href="gallery.html" aria-label="ছবির গ্যালারি খুলুন"><div class="gs-cap" id="gsCap"></div><div class="gs-dots" id="gsDots" aria-hidden="true"></div></a>
+    <div class="gs-more"><a class="btn line" href="gallery.html">সব ছবি দেখুন</a></div>
   </section>
 </main>
 
@@ -1310,6 +1328,26 @@ body.has-fab { padding-bottom: 76px; }
     g.appendChild(c);
   }
   if (g.children.length) box.hidden = false;
+})();
+</script>
+<script>
+/* হোমের ছবির স্লাইড (১.৫ সেকেন্ড)। নতুন ছবি দিলে নিচের তালিকায় এক লাইন যোগ করুন। */
+(function () {
+  var P = [['masjid-01', 'মসজিদের সামনের দৃশ্য'], ['masjid-02', 'নামাজের সময়সূচী বোর্ড'], ['masjid-03', 'মসজিদের ভেতরে জামাত'], ['masjid-04', 'মিহরাব ও মুসল্লিগণ']];
+  var box = document.getElementById('gsBox'), cap = document.getElementById('gsCap'), dots = document.getElementById('gsDots');
+  if (!box) return;
+  var imgs = [], dl = [], cur = 0, visible = false, q;
+  for (q = 0; q < P.length; q++) {
+    var im = document.createElement('img'); im.src = 'gallery/' + P[q][0] + '-t.jpg'; im.alt = P[q][1]; im.loading = q ? 'lazy' : 'eager';
+    im.onerror = (function (el) { return function () { el.remove(); }; })(im);
+    box.insertBefore(im, cap); imgs.push(im);
+    var d = document.createElement('i'); dots.appendChild(d); dl.push(d);
+  }
+  function paint() { for (var k = 0; k < imgs.length; k++) { imgs[k].classList.toggle('on', k === cur); dl[k].classList.toggle('on', k === cur); } cap.textContent = P[cur][1]; }
+  paint();
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .4 }).observe(box); else visible = true;
+  if (!reduce) setInterval(function () { if (!visible || document.hidden) return; cur = (cur + 1) % P.length; paint(); }, 1500);
 })();
 </script>
 <script>
