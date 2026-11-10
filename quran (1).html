@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>কুরআন — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&family=Amiri:wght@400;700&display=swap">
+<style>
+:root { --bg:#f3f7f4; --surface:#fff; --fg:#14281f; --muted:#55695f; --line:#d6e1d9; --accent:#16694e; --gold:#8f6a14; --hl:#e4f1ea; --on-accent:#fff;
+  --font-display:"Tiro Bangla","Noto Serif Bengali",serif; --font-body:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif; --font-ar:"Amiri","Scheherazade New","Noto Naskh Arabic",serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0c1713; --surface:#13241d; --fg:#e6efe9; --muted:#9db3a7; --line:#244034; --accent:#55c79b; --gold:#dcb85c; --hl:#1a3329; --on-accent:#0c1713; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.65; padding-bottom:calc(30px + env(safe-area-inset-bottom)); }
+body.playing { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+a { color: var(--accent); }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px max(16px, env(safe-area-inset-left)); }
+.bar a.back { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; text-decoration: none; font-weight: 600; font-size: 15px; background: var(--surface); white-space: nowrap; }
+.bar .tt { font-family: var(--font-display); font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)) 0; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin: 6px 0 4px; }
+.sub { color: var(--muted); font-size: 15px; margin: 0 0 12px; }
+.tabs { display: flex; gap: 6px; background: var(--hl); padding: 4px; border-radius: 12px; margin: 12px 0; }
+.tabs button { flex: 1; border: 0; background: transparent; padding: 9px 8px; border-radius: 9px; font-weight: 600; cursor: pointer; color: var(--muted); }
+.tabs button[aria-selected="true"] { background: var(--surface); color: var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+.search { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 11px 14px; margin-bottom: 10px; }
+.last { display: none; width: 100%; margin-bottom: 10px; border: 1px solid var(--gold); background: transparent; color: var(--gold); border-radius: 12px; padding: 10px; font-weight: 600; cursor: pointer; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.row.now { border-color: var(--accent); background: var(--hl); }
+.row .no { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border: 1.5px solid var(--gold); color: var(--gold); border-radius: 10px; font-weight: 700; font-size: 15px; transform: rotate(0); }
+.row .main { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; }
+.row .bn { font-weight: 700; font-size: 17px; line-height: 1.35; }
+.row .mt { color: var(--muted); font-size: 13.5px; }
+.row .ar { font-family: var(--font-ar); font-size: 24px; color: var(--accent); flex: none; direction: rtl; }
+.pbtn { flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; cursor: pointer; }
+.pbtn svg, .ctl svg { width: 20px; height: 20px; fill: currentColor; }
+.rd { padding-top: 4px; }
+.rd-head { text-align: center; padding: 14px 8px 6px; }
+.rd-head .ar { font-family: var(--font-ar); font-size: 38px; color: var(--accent); line-height: 1.5; }
+.rd-head .bn { font-size: 20px; font-weight: 700; }
+.bism { font-family: var(--font-ar); font-size: 30px; text-align: center; padding: 10px 0 16px; line-height: 1.8; }
+.tools { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 8px 0 14px; }
+.tools button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: 15px; }
+.ay { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; margin-bottom: 10px; }
+.ay .n { display: inline-grid; place-items: center; min-width: 30px; height: 30px; border: 1.5px solid var(--gold); color: var(--gold); border-radius: 50%; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.ay .a { font-family: var(--font-ar); font-size: var(--ar-size, 30px); line-height: 2.1; direction: rtl; text-align: right; }
+.ay .t { margin: 8px 0 0; color: var(--fg); border-top: 1px dashed var(--line); padding-top: 8px; }
+.msg { text-align: center; padding: 30px 12px; color: var(--muted); }
+.msg button { margin-top: 10px; }
+.nav2 { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.btn { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; padding: 8px 18px; font-weight: 600; cursor: pointer; }
+.btn.fill { background: var(--accent); color: var(--on-accent); }
+.foot { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+.player { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--surface); border-top: 3px solid var(--gold); box-shadow: 0 -6px 20px rgba(0,0,0,.2); padding: 10px max(14px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)); display: none; }
+.player.on { display: block; }
+.player .in { max-width: 760px; margin: 0 auto; display: grid; gap: 6px; }
+.player .top { display: flex; align-items: center; gap: 10px; }
+.player .ttl { flex: 1; min-width: 0; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.player select { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 4px 6px; font-size: 14px; max-width: 46%; }
+.player .ctls { display: flex; align-items: center; gap: 10px; }
+.ctl { width: 38px; height: 38px; border: 0; background: transparent; color: var(--fg); display: grid; place-items: center; cursor: pointer; border-radius: 50%; }
+.ctl.big { width: 46px; height: 46px; background: var(--accent); color: var(--on-accent); }
+.player input[type=range] { flex: 1; accent-color: var(--accent); min-width: 0; }
+.player .tm { font-size: 12.5px; color: var(--muted); min-width: 40px; text-align: center; }
+.player .cl { border: 0; background: transparent; font-size: 22px; color: var(--muted); cursor: pointer; width: 34px; height: 34px; }
+.player .err { color: #b3261e; font-size: 13.5px; }
+@media (prefers-reduced-motion: no-preference) { .row, .ay { transition: border-color .2s; } }
+</style>
+</head>
+<body>
+<div class="bar"><a class="back" id="back" href="index.html">← হোম</a><span class="tt" id="barTitle">কুরআন</span></div>
+<main class="wrap" id="app"></main>
+
+<div class="player" id="player" aria-label="অডিও প্লেয়ার">
+  <div class="in">
+    <div class="top"><span class="ttl" id="pTitle">—</span><select id="pRec" aria-label="কারী"></select><button class="cl" id="pClose" aria-label="বন্ধ করুন">×</button></div>
+    <div class="ctls">
+      <button class="ctl" id="pPrev" aria-label="আগের সূরা"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM20 6v12L9.5 12z"/></svg></button>
+      <button class="ctl big" id="pPlay" aria-label="চালান / থামান"><svg viewBox="0 0 24 24" id="pIcon"><path d="M8 5v14l11-7z"/></svg></button>
+      <button class="ctl" id="pNext" aria-label="পরের সূরা"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM4 6l10.5 6L4 18z"/></svg></button>
+      <span class="tm" id="pCur">০:০০</span><input type="range" id="pSeek" min="0" max="1000" value="0" aria-label="সময়"><span class="tm" id="pDur">০:০০</span>
+    </div>
+    <div class="err" id="pErr" hidden>অডিও চলছে না। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।</div>
+  </div>
+</div>
+<audio id="aud" preload="none"></audio>
+
+<script>
+(function () {
+  var NAMES = "আল-ফাতিহা,আল-বাকারা,আলে ইমরান,আন-নিসা,আল-মায়িদা,আল-আনআম,আল-আ'রাফ,আল-আনফাল,আত-তাওবা,ইউনুস,হুদ,ইউসুফ,আর-রা'দ,ইবরাহীম,আল-হিজর,আন-নাহল,বনী ইসরাঈল,আল-কাহফ,মারইয়াম,ত্ব-হা,আল-আম্বিয়া,আল-হজ্জ,আল-মুমিনূন,আন-নূর,আল-ফুরকান,আশ-শুআরা,আন-নামল,আল-কাসাস,আল-আনকাবূত,আর-রূম,লুকমান,আস-সাজদাহ,আল-আহযাব,সাবা,ফাতির,ইয়াসীন,আস-সাফফাত,সোয়াদ,আয-যুমার,গাফির,হা-মীম আস-সাজদাহ,আশ-শূরা,আয-যুখরুফ,আদ-দুখান,আল-জাসিয়া,আল-আহকাফ,মুহাম্মাদ,আল-ফাতহ,আল-হুজুরাত,কাফ,আয-যারিয়াত,আত-তূর,আন-নাজম,আল-কামার,আর-রাহমান,আল-ওয়াকিয়া,আল-হাদীদ,আল-মুজাদালা,আল-হাশর,আল-মুমতাহিনা,আস-সাফ,আল-জুমুআ,আল-মুনাফিকূন,আত-তাগাবুন,আত-তালাক,আত-তাহরীম,আল-মুলক,আল-কালাম,আল-হাক্কাহ,আল-মাআরিজ,নূহ,আল-জিন,আল-মুযযাম্মিল,আল-মুদ্দাসসির,আল-কিয়ামাহ,আদ-দাহর,আল-মুরসালাত,আন-নাবা,আন-নাযিআত,আবাসা,আত-তাকভীর,আল-ইনফিতার,আল-মুতাফফিফীন,আল-ইনশিকাক,আল-বুরূজ,আত-তারিক,আল-আ'লা,আল-গাশিয়া,আল-ফাজর,আল-বালাদ,আশ-শামস,আল-লাইল,আদ-দুহা,আল-ইনশিরাহ,আত-তীন,আল-আলাক,আল-কদর,আল-বাইয়্যিনাহ,আয-যিলযাল,আল-আদিয়াত,আল-কারিআ,আত-তাকাসুর,আল-আসর,আল-হুমাযাহ,আল-ফীল,কুরাইশ,আল-মাউন,আল-কাউসার,আল-কাফিরূন,আন-নাসর,আল-মাসাদ,আল-ইখলাস,আল-ফালাক,আন-নাস".split(",");
+  var AR = "الفاتحة,البقرة,آل عمران,النساء,المائدة,الأنعام,الأعراف,الأنفال,التوبة,يونس,هود,يوسف,الرعد,إبراهيم,الحجر,النحل,الإسراء,الكهف,مريم,طه,الأنبياء,الحج,المؤمنون,النور,الفرقان,الشعراء,النمل,القصص,العنكبوت,الروم,لقمان,السجدة,الأحزاب,سبأ,فاطر,يس,الصافات,ص,الزمر,غافر,فصلت,الشورى,الزخرف,الدخان,الجاثية,الأحقاف,محمد,الفتح,الحجرات,ق,الذاريات,الطور,النجم,القمر,الرحمن,الواقعة,الحديد,المجادلة,الحشر,الممتحنة,الصف,الجمعة,المنافقون,التغابن,الطلاق,التحريم,الملك,القلم,الحاقة,المعارج,نوح,الجن,المزمل,المدثر,القيامة,الإنسان,المرسلات,النبأ,النازعات,عبس,التكوير,الانفطار,المطففين,الانشقاق,البروج,الطارق,الأعلى,الغاشية,الفجر,البلد,الشمس,الليل,الضحى,الشرح,التين,العلق,القدر,البينة,الزلزلة,العاديات,القارعة,التكاثر,العصر,الهمزة,الفيل,قريش,الماعون,الكوثر,الكافرون,النصر,المسد,الإخلاص,الفلق,الناس".split(",");
+  var CNT = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
+  var RECS = [['ar.alafasy','128','মিশারি আলাফাসি'],['ar.sudais','192','আব্দুর রহমান আস-সুদাইস'],['ar.shuraim','128','সউদ আশ-শুরাইম'],['ar.husary','128','মাহমুদ খলীল আল-হুসারী'],['ar.minshawi','128','মুহাম্মাদ সিদ্দিক আল-মিনশাবী'],['ar.abdulbasit','192','আব্দুল বাসিত আব্দুস সামাদ']];
+  var BN = '০১২৩৪৫৬৭৮৯';
+  function bn(n) { return String(n).replace(/\d/g, function (d) { return BN[d]; }); }
+  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), aud = $('aud'), player = $('player'), cur = 0, mode = 'read', trans = '';
+
+  // ---------- audio ----------
+  var recSel = $('pRec');
+  RECS.forEach(function (r, i) { var o = document.createElement('option'); o.value = i; o.textContent = r[2]; recSel.appendChild(o); });
+  recSel.value = ls('qrec') || '0'; if (!RECS[recSel.value]) recSel.value = '0';
+  function src(n) { var r = RECS[recSel.value]; return 'https://cdn.islamic.network/quran/audio-surah/' + r[1] + '/' + r[0] + '/' + n + '.mp3'; }
+  function playSurah(n, keepTime) {
+    if (n < 1 || n > 114) return;
+    var t = keepTime ? aud.currentTime : 0;
+    cur = n; aud.src = src(n); $('pErr').hidden = true;
+    if (keepTime) aud.addEventListener('loadedmetadata', function f() { aud.removeEventListener('loadedmetadata', f); try { aud.currentTime = t; } catch (e) {} });
+    var p = aud.play(); if (p && p.catch) p.catch(function () { $('pErr').hidden = false; });
+    player.classList.add('on'); document.body.classList.add('playing');
+    $('pTitle').textContent = bn(n) + '. সূরা ' + NAMES[n - 1];
+    mark();
+    if ('mediaSession' in navigator) {
+      try { navigator.mediaSession.metadata = new MediaMetadata({ title: 'সূরা ' + NAMES[n - 1], artist: RECS[recSel.value][2], album: 'কুরআন তিলাওয়াত', artwork: [{ src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] });
+        navigator.mediaSession.setActionHandler('previoustrack', function () { playSurah(cur - 1); });
+        navigator.mediaSession.setActionHandler('nexttrack', function () { playSurah(cur + 1); }); } catch (e) {}
+    }
+  }
+  function mark() { var rows = document.querySelectorAll('.row'); for (var i = 0; i < rows.length; i++) rows[i].classList.toggle('now', +rows[i].dataset.n === cur); }
+  recSel.addEventListener('change', function () { ls('qrec', recSel.value); if (cur) playSurah(cur, true); });
+  $('pPlay').addEventListener('click', function () { if (aud.paused) { var p = aud.play(); if (p && p.catch) p.catch(function () { $('pErr').hidden = false; }); } else aud.pause(); });
+  $('pPrev').addEventListener('click', function () { playSurah(cur - 1); });
+  $('pNext').addEventListener('click', function () { playSurah(cur + 1); });
+  $('pClose').addEventListener('click', function () { aud.pause(); player.classList.remove('on'); document.body.classList.remove('playing'); cur = 0; mark(); });
+  aud.addEventListener('play', function () { $('pIcon').innerHTML = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>'; });
+  aud.addEventListener('pause', function () { $('pIcon').innerHTML = '<path d="M8 5v14l11-7z"/>'; });
+  aud.addEventListener('ended', function () { if (cur < 114) playSurah(cur + 1); });
+  aud.addEventListener('error', function () { if (cur) $('pErr').hidden = false; });
+  aud.addEventListener('playing', function () { $('pErr').hidden = true; });
+  function fmt(s) { if (!isFinite(s)) return '০:০০'; s = Math.floor(s); return bn(Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2)); }
+  aud.addEventListener('timeupdate', function () { $('pCur').textContent = fmt(aud.currentTime); if (aud.duration) $('pSeek').value = Math.round(aud.currentTime / aud.duration * 1000); });
+  aud.addEventListener('loadedmetadata', function () { $('pDur').textContent = fmt(aud.duration); });
+  $('pSeek').addEventListener('input', function () { if (aud.duration) aud.currentTime = aud.duration * this.value / 1000; });
+
+  // ---------- list ----------
+  var PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  function renderList() {
+    document.title = (mode === 'audio' ? 'অডিও কুরআন' : 'কুরআন') + ' — ফাদিলমুন্সী বাড়ি জামে মসজিদ';
+    $('barTitle').textContent = mode === 'audio' ? 'অডিও কুরআন' : 'কুরআন';
+    $('back').href = 'index.html'; $('back').textContent = '← হোম';
+    var h = '<h1>' + (mode === 'audio' ? 'অডিও কুরআন' : 'আল-কুরআন') + '</h1><p class="sub">' + (mode === 'audio' ? 'সূরা বেছে নিন, তিলাওয়াত শুনুন। কারী বদলাতে নিচের প্লেয়ারে দেখুন।' : 'সূরা বেছে নিয়ে আরবি ও বাংলা অনুবাদ পড়ুন।') + '</p>' +
+      '<div class="tabs" role="tablist"><button role="tab" data-m="read" aria-selected="' + (mode === 'read') + '">পড়ুন</button><button role="tab" data-m="audio" aria-selected="' + (mode === 'audio') + '">শুনুন</button></div>' +
+      '<button class="last" id="lastBtn" type="button"></button>' +
+      '<input class="search" id="q" type="search" placeholder="সূরার নাম বা নম্বর খুঁজুন" aria-label="সূরা খুঁজুন">' +
+      '<ul class="list" id="list"></ul>' +
+      '<div class="foot">কুরআনের আরবি টেক্সট ও তিলাওয়াত: <a href="https://alquran.cloud" target="_blank" rel="noopener">Islamic Network (alquran.cloud)</a>। অডিও শুনতে ইন্টারনেট লাগবে। কোনো ভুল চোখে পড়লে ইমাম সাহেবকে জানান।</div>';
+    app.innerHTML = h;
+    var ul = $('list'), s = '';
+    for (var i = 1; i <= 114; i++) s += '<li class="row" data-n="' + i + '" data-s="' + (i + ' ' + NAMES[i - 1] + ' ' + AR[i - 1]).toLowerCase() + '"><span class="no">' + bn(i) + '</span><button class="main" type="button" data-open="' + i + '"><div class="bn">' + NAMES[i - 1] + '</div><div class="mt">' + bn(CNT[i - 1]) + ' আয়াত</div></button><span class="ar">' + AR[i - 1] + '</span><button class="pbtn" type="button" data-play="' + i + '" aria-label="সূরা ' + NAMES[i - 1] + ' শুনুন">' + PLAY_SVG + '</button></li>';
+    ul.innerHTML = s; mark();
+    var ln = parseInt(ls('qlast') || '0', 10);
+    if (ln > 0 && mode === 'read') { var lb = $('lastBtn'); lb.style.display = 'block'; lb.textContent = 'শেষ পড়া: সূরা ' + NAMES[ln - 1] + ' থেকে চালিয়ে যান'; lb.onclick = function () { location.hash = '#s' + ln; }; }
+    $('q').addEventListener('input', function () {
+      var t = this.value.trim().toLowerCase().replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }), rows = ul.children;
+      for (var k = 0; k < rows.length; k++) rows[k].style.display = !t || rows[k].dataset.s.indexOf(t) > -1 ? '' : 'none';
+    });
+    app.querySelector('.tabs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) location.hash = b.dataset.m === 'audio' ? '#audio' : '#'; });
+    ul.addEventListener('click', function (e) {
+      var p = e.target.closest('[data-play]'), o = e.target.closest('[data-open]');
+      if (p) playSurah(+p.dataset.play);
+      else if (o) { if (mode === 'audio') playSurah(+o.dataset.open); else location.hash = '#s' + o.dataset.open; }
+    });
+  }
+
+  // ---------- reader ----------
+  function renderReader(n) {
+    mode = 'read'; ls('qlast', n);
+    document.title = 'সূরা ' + NAMES[n - 1] + ' — কুরআন';
+    $('barTitle').textContent = 'সূরা ' + NAMES[n - 1]; $('back').href = '#'; $('back').textContent = '← সূরা তালিকা';
+    app.innerHTML = '<div class="rd"><div class="rd-head"><div class="ar">سورة ' + AR[n - 1] + '</div><div class="bn">সূরা ' + NAMES[n - 1] + ' · ' + bn(CNT[n - 1]) + ' আয়াত</div></div>' +
+      '<div class="tools"><button type="button" id="rdPlay">▶ শুনুন</button><button type="button" id="szM" aria-label="আরবি ছোট">A−</button><button type="button" id="szP" aria-label="আরবি বড়">A+</button></div>' +
+      '<div id="rdBody"><div class="msg">লোড হচ্ছে…</div></div>' +
+      '<div class="nav2">' + (n > 1 ? '<button class="btn" id="prevS" type="button">← আগের সূরা</button>' : '<span></span>') + (n < 114 ? '<button class="btn fill" id="nextS" type="button">পরের সূরা →</button>' : '<span></span>') + '</div>' +
+      '<div class="foot" id="rdFoot">আরবি টেক্সট: Islamic Network (alquran.cloud)।</div></div>';
+    var size = parseInt(ls('qsize') || '30', 10); document.documentElement.style.setProperty('--ar-size', size + 'px');
+    function sz(d) { size = Math.max(22, Math.min(54, size + d)); ls('qsize', size); document.documentElement.style.setProperty('--ar-size', size + 'px'); }
+    $('szP').onclick = function () { sz(4); }; $('szM').onclick = function () { sz(-4); };
+    $('rdPlay').onclick = function () { playSurah(n); };
+    if ($('prevS')) $('prevS').onclick = function () { location.hash = '#s' + (n - 1); window.scrollTo(0, 0); };
+    if ($('nextS')) $('nextS').onclick = function () { location.hash = '#s' + (n + 1); window.scrollTo(0, 0); };
+    function show(d) {
+      var ar = d.data[0].ayahs, bnA = d.data[1] ? d.data[1].ayahs : [], h = '';
+      if (n !== 1 && n !== 9) h += '<div class="bism">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';
+      for (var i = 0; i < ar.length; i++) {
+        var a = ar[i].text;
+        if (i === 0 && n !== 1 && n !== 9) { var w = a.split(' '); if (w.length > 4) a = w.slice(4).join(' '); }
+        h += '<div class="ay"><span class="n">' + bn(ar[i].numberInSurah) + '</span><div class="a" lang="ar">' + esc(a) + '</div>' + (bnA[i] ? '<p class="t">' + esc(bnA[i].text) + '</p>' : '') + '</div>';
+      }
+      $('rdBody').innerHTML = h;
+      var tn = d.data[1] && d.data[1].edition && d.data[1].edition.name; if (tn) $('rdFoot').innerHTML += ' বাংলা অনুবাদ: ' + esc(tn) + '।';
+      $('rdFoot').innerHTML += ' পড়ার সময় কোনো ভুল চোখে পড়লে ইমাম সাহেবকে জানান।';
+    }
+    function esc(t) { return String(t).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+    var key = 'qs_' + n, cached = ls(key);
+    if (cached) { try { show(JSON.parse(cached)); } catch (e) { cached = null; } }
+    if (!cached) fetch('https://api.alquran.cloud/v1/surah/' + n + '/editions/quran-uthmani,bn.bengali')
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (d) { if (!d || !d.data || !d.data[0]) throw 0; if (location.hash !== '#s' + n) return; show(d); try { var j = JSON.stringify(d); if (j.length < 400000) ls(key, j); } catch (e) {} })
+      .catch(function () { if (location.hash !== '#s' + n) return; $('rdBody').innerHTML = '<div class="msg">লোড করা যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন।<br><button class="btn" type="button" id="retry">আবার চেষ্টা করুন</button></div>'; $('retry').onclick = function () { renderReader(n); }; });
+  }
+
+  function route() {
+    var h = location.hash || '', m = /^#s(\d{1,3})$/.exec(h);
+    if (m && +m[1] >= 1 && +m[1] <= 114) { renderReader(+m[1]); window.scrollTo(0, 0); }
+    else { mode = h === '#audio' ? 'audio' : 'read'; renderList(); }
+  }
+  window.addEventListener('hashchange', route); route();
+})();
+</script>
+</body>
+</html>
