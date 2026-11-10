@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>হাদিস — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&family=Amiri:wght@400;700&display=swap">
+<style>
+:root { --bg:#f3f7f4; --surface:#fff; --fg:#14281f; --muted:#55695f; --line:#d6e1d9; --accent:#16694e; --gold:#8f6a14; --hl:#e4f1ea; --on-accent:#fff; --warn:#8a4b00; --warn-bg:#fff3dc;
+  --font-display:"Tiro Bangla","Noto Serif Bengali",serif; --font-body:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif; --font-ar:"Amiri","Scheherazade New","Noto Naskh Arabic",serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0c1713; --surface:#13241d; --fg:#e6efe9; --muted:#9db3a7; --line:#244034; --accent:#55c79b; --gold:#dcb85c; --hl:#1a3329; --on-accent:#0c1713; --warn:#f0c987; --warn-bg:#3a2d10; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.7; padding-bottom:calc(36px + env(safe-area-inset-bottom)); }
+a { color: var(--accent); }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px max(16px, env(safe-area-inset-left)); }
+.bar a.back { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; text-decoration: none; font-weight: 600; font-size: 15px; background: var(--surface); white-space: nowrap; }
+.bar .tt { font-family: var(--font-display); font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)) 0; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin: 6px 0 4px; }
+.sub { color: var(--muted); font-size: 15px; margin: 0 0 12px; }
+.note { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--gold); border-radius: 12px; padding: 10px 14px; font-size: 15px; margin: 10px 0; }
+.note.ok { background: var(--hl); color: var(--fg); border-color: var(--line); }
+.books { display: grid; gap: 10px; margin-top: 12px; }
+.book { display: flex; align-items: center; gap: 14px; text-align: left; width: 100%; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 12px; padding: 12px 14px; cursor: pointer; }
+.book .n { flex: 1; min-width: 0; }
+.book .bn { font-weight: 700; font-size: 18px; line-height: 1.35; }
+.book .mt { color: var(--muted); font-size: 13.5px; }
+.book .ar { font-family: var(--font-ar); font-size: 24px; color: var(--accent); flex: none; direction: rtl; }
+.chip { display: inline-block; font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px; padding: 0 9px; margin-right: 4px; color: var(--muted); }
+.chip.on { border-color: var(--accent); color: var(--accent); }
+.ctl { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+.ctl .grow { flex: 1; min-width: 140px; }
+.ctl input, .ctl select { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; width: 100%; }
+.btn { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
+.btn.fill { background: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .45; cursor: default; }
+.sec { font-family: var(--font-display); font-size: 21px; text-align: center; margin: 14px 0 6px; line-height: 1.5; }
+.hd { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 10px; margin-bottom: 12px; }
+.hd .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.hd .no { font-weight: 700; color: var(--gold); font-size: 14.5px; }
+.hd .ar { font-family: var(--font-ar); font-size: var(--ar-size, 26px); line-height: 2.1; direction: rtl; text-align: right; margin: 4px 0; }
+.hd .t { margin: 8px 0 0; padding-top: 8px; border-top: 1px dashed var(--line); white-space: pre-line; }
+.hd .gr { display: inline-block; font-size: 13.5px; font-weight: 600; border-radius: 999px; padding: 1px 12px; border: 1px solid var(--line); margin: 8px 6px 0 0; }
+.gr.s { color: var(--accent); border-color: var(--accent); }
+.gr.h { color: var(--gold); border-color: var(--gold); }
+.gr.d, .gr.m { color: #b3261e; border-color: #b3261e; }
+.hd .src { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+.hd .act { display: flex; gap: 8px; margin-top: 8px; }
+.hd .act button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 3px 14px; font-size: 14px; cursor: pointer; color: var(--muted); }
+.msg { text-align: center; padding: 28px 12px; color: var(--muted); }
+.foot { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+.tools { display: flex; gap: 8px; justify-content: center; margin: 6px 0 10px; }
+.tools button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="bar"><a class="back" id="back" href="index.html">← হোম</a><span class="tt" id="barTitle">হাদিস</span></div>
+<main class="wrap" id="app"></main>
+
+<script>
+(function () {
+  var BASES = ['https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/', 'https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/'];
+  var BOOKS = [
+    { k: 'bukhari', bn: 'সহীহ বুখারী', ar: 'صحيح البخاري', sahih: true, ext: 'https://sunnah.com/bukhari' },
+    { k: 'muslim', bn: 'সহীহ মুসলিম', ar: 'صحيح مسلم', sahih: true, ext: 'https://sunnah.com/muslim' },
+    { k: 'abudawud', bn: 'সুনানে আবু দাউদ', ar: 'سنن أبي داود', ext: 'https://sunnah.com/abudawud' },
+    { k: 'tirmidhi', bn: 'জামে তিরমিযী', ar: 'جامع الترمذي', ext: 'https://sunnah.com/tirmidhi' },
+    { k: 'nasai', bn: 'সুনানে নাসাঈ', ar: 'سنن النسائي', ext: 'https://sunnah.com/nasai' },
+    { k: 'ibnmajah', bn: 'সুনানে ইবনে মাজাহ', ar: 'سنن ابن ماجه', ext: 'https://sunnah.com/ibnmajah' }
+  ];
+  var BN = '০১২৩৪৫৬৭৮৯';
+  function bn(n) { return String(n).replace(/\d/g, function (d) { return BN[d]; }); }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), editions = null, cache = {};
+
+  function getJSON(path) {            // 404 => null, network failure => throws
+    if (cache[path]) return Promise.resolve(cache[path]);
+    function at(i) {
+      if (i >= BASES.length) return Promise.reject(new Error('net'));
+      return fetch(BASES[i] + path).then(function (r) {
+        if (r.status === 404) { return i === 0 ? at(1).catch(function () { return null; }) : null; }
+        if (!r.ok) return at(i + 1);
+        return r.json();
+      }, function () { return at(i + 1); });
+    }
+    return at(0).then(function (j) { if (j) { try { if (JSON.stringify(j).length < 600000) cache[path] = j; } catch (e) {} } return j; });
+  }
+  function loadEditions() {
+    if (editions) return Promise.resolve(editions);
+    return getJSON('editions.json').then(function (j) {
+      var ids = {};
+      try {
+        var walk = function (o) { if (!o) return; if (Array.isArray(o)) { o.forEach(walk); return; } if (typeof o === 'object') { if (typeof o.name === 'string' && o.collection) { o.collection.forEach(function (c) { if (c && c.name) ids[c.name] = 1; }); } for (var k in o) { if (typeof o[k] === 'object') walk(o[k]); else if (k === 'name' && typeof o[k] === 'string') ids[o[k]] = 1; } } };
+        // editions.json: { bukhari: { name, collection:[{name:'ara-bukhari',...}] }, ... }
+        walk(j);
+        // also accept key strings that look like edition ids
+        (function f(o) { if (o && typeof o === 'object') for (var k in o) { if (/^[a-z]{3}-[a-z]+$/.test(k)) ids[k] = 1; f(o[k]); } })(j);
+      } catch (e) {}
+      editions = Object.keys(ids).length ? ids : null; return editions;
+    }, function () { return null; });
+  }
+  function has(id) { return !editions || editions[id]; }
+
+  var GMAP = [[/maudu|fabricat/i, 'জাল (মাওযূ)', 'm'], [/da.?if|weak|munkar/i, 'যয়ীফ (দুর্বল)', 'd'], [/hasan.*sahih|sahih.*hasan/i, 'হাসান সহীহ', 's'], [/sahih/i, 'সহীহ', 's'], [/hasan/i, 'হাসান', 'h']];
+  function gradeChips(gs, book) {
+    if (!gs || !gs.length) return book.sahih ? '' : '<span class="gr">মান: যাচাই সাপেক্ষ</span>';
+    var out = '';
+    gs.forEach(function (g) {
+      var raw = (g && g.grade) ? String(g.grade) : '', who = (g && g.name) ? String(g.name) : '', lab = raw, cls = '';
+      for (var i = 0; i < GMAP.length; i++) if (GMAP[i][0].test(raw)) { lab = GMAP[i][1]; cls = GMAP[i][2]; break; }
+      out += '<span class="gr ' + cls + '">' + esc(lab) + (who ? ' (' + esc(who) + ')' : '') + '</span>';
+    });
+    return out;
+  }
+
+  function bookNote(b) {
+    return b.sahih ? '<div class="note ok">এই গ্রন্থের হাদিসগুলো সংকলকের শর্ত অনুযায়ী সহীহ হিসেবে পরিচিত।</div>'
+      : '<div class="note">এই গ্রন্থে সহীহ, হাসান ও যয়ীফ—সব ধরনের হাদিস আছে। হাদিসের নিচের মান দেখুন। মান না থাকলে আমল করার আগে আলেমের কাছ থেকে জেনে নিন।</div>';
+  }
+
+  /* ---------- বইয়ের তালিকা ---------- */
+  function renderHome() {
+    document.title = 'হাদিস — ফাদিলমুন্সী বাড়ি জামে মসজিদ'; $('barTitle').textContent = 'হাদিস'; $('back').href = 'index.html'; $('back').textContent = '← হোম';
+    app.innerHTML = '<h1>হাদিস</h1><p class="sub">ছয়টি প্রসিদ্ধ হাদিস গ্রন্থ (সিহাহ সিত্তাহ)। গ্রন্থ বেছে অধ্যায় ধরে পড়ুন।</p>' +
+      '<div class="note">হাদিসের কোনো ভুল চোখে পড়লে ইমাম সাহেবকে জানান। এই সাইট কোনো হাদিসের মান নিজে নির্ধারণ করে না।</div>' +
+      '<div class="books">' + BOOKS.map(function (b) {
+        return '<button class="book" type="button" data-b="' + b.k + '"><div class="n"><div class="bn">' + b.bn + '</div><div class="mt" id="lg-' + b.k + '">&nbsp;</div></div><span class="ar">' + b.ar + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="foot">তথ্যসূত্র: <a href="https://github.com/fawazahmed0/hadith-api" target="_blank" rel="noopener">Free Hadith API</a>। ইন্টারনেট ছাড়া পড়া যাবে না।</div>';
+    app.querySelector('.books').addEventListener('click', function (e) { var b = e.target.closest('[data-b]'); if (b) location.hash = '#' + b.dataset.b; });
+    loadEditions().then(function () {
+      BOOKS.forEach(function (b) { var el = $('lg-' + b.k); if (!el) return; var s = ''; if (has('ara-' + b.k)) s += '<span class="chip on">আরবি</span>'; if (has('ben-' + b.k)) s += '<span class="chip on">বাংলা</span>'; el.innerHTML = s || '&nbsp;'; });
+    });
+  }
+
+  /* ---------- অধ্যায় / হাদিস ---------- */
+  function normList(j) {
+    if (!j) return [];
+    if (Array.isArray(j.hadiths)) return j.hadiths;
+    if (j.text || j.hadithnumber) return [j];
+    return [];
+  }
+  var size = parseInt(ls('hsize') || '26', 10);
+  function applySize() { document.documentElement.style.setProperty('--ar-size', size + 'px'); }
+
+  function card(b, ar, bnh, sec) {
+    var no = (ar || bnh).hadithnumber != null ? (ar || bnh).hadithnumber : '';
+    var gs = (bnh && bnh.grades && bnh.grades.length) ? bnh.grades : (ar && ar.grades) || [];
+    var txtAr = ar && ar.text ? ar.text : '', txtBn = bnh && bnh.text ? bnh.text : '';
+    var ref = 'সূত্র: ' + b.bn + ', হাদিস নং ' + bn(no) + (sec ? ', অধ্যায় ' + bn(sec) : '');
+    return '<div class="hd" data-ref="' + esc(ref) + '"><div class="top"><span class="no">হাদিস নং ' + bn(no) + '</span></div>' +
+      (txtAr ? '<div class="ar" lang="ar">' + esc(txtAr) + '</div>' : '') +
+      (txtBn ? '<p class="t">' + esc(txtBn) + '</p>' : '<p class="t" style="color:var(--muted)">বাংলা অনুবাদ এই মুহূর্তে পাওয়া যায়নি।</p>') +
+      '<div>' + gradeChips(gs, b) + '</div><div class="src">' + esc(ref) + '</div>' +
+      '<div class="act"><button type="button" data-copy>কপি</button><button type="button" data-share hidden>শেয়ার</button></div></div>';
+  }
+  function mount(b, listEl, ars, bns, sec) {
+    var map = {}; bns.forEach(function (h) { map[h.hadithnumber] = h; });
+    var base = ars.length ? ars : bns, html = '', i;
+    for (i = 0; i < base.length; i++) {
+      var a = ars.length ? base[i] : null, bh = ars.length ? (map[base[i].hadithnumber] || (ars.length === bns.length ? bns[i] : null)) : base[i];
+      html += card(b, a, bh, sec);
+    }
+    listEl.innerHTML = html || '<div class="msg">কোনো হাদিস পাওয়া যায়নি।</div>';
+    Array.prototype.forEach.call(listEl.querySelectorAll('[data-share]'), function (x) { if (navigator.share) x.hidden = false; });
+  }
+  function textOf(el) { var p = []; var a = el.querySelector('.ar'), t = el.querySelector('.t'); if (a) p.push(a.textContent); if (t) p.push(t.textContent); p.push(el.getAttribute('data-ref')); return p.join('\n\n'); }
+
+  function renderBook(b, sec, single) {
+    document.title = b.bn + ' — হাদিস'; $('barTitle').textContent = b.bn; $('back').href = '#'; $('back').textContent = '← গ্রন্থ তালিকা';
+    applySize();
+    app.innerHTML = '<h1>' + b.bn + '</h1>' + bookNote(b) +
+      '<div class="ctl"><div class="grow"><label class="sub" for="secSel">অধ্যায়</label><select id="secSel"><option>' + bn(sec || 1) + ' নম্বর অধ্যায়</option></select></div>' +
+      '<div class="grow"><label class="sub" for="hn">হাদিস নম্বর দিয়ে খুঁজুন</label><div style="display:flex;gap:6px"><input id="hn" inputmode="numeric" placeholder="যেমন: ১০২"><button class="btn fill" id="hgo" type="button">যান</button></div></div></div>' +
+      '<div class="tools"><button type="button" id="szM" aria-label="আরবি ছোট">A−</button><button type="button" id="szP" aria-label="আরবি বড়">A+</button></div>' +
+      '<div class="sec" id="secTitle"></div><div id="list"><div class="msg">লোড হচ্ছে…</div></div>' +
+      '<div class="ctl" style="justify-content:space-between"><button class="btn" id="prevB" type="button">← আগের অধ্যায়</button><button class="btn fill" id="nextB" type="button">পরের অধ্যায় →</button></div>' +
+      '<div class="foot">তথ্যসূত্র: <a href="https://github.com/fawazahmed0/hadith-api" target="_blank" rel="noopener">Free Hadith API</a>। অনুবাদ বা হাদিসের মান নিয়ে সন্দেহ হলে আলেমের কাছে জানুন। এই গ্রন্থ বাইরে দেখুন: <a href="' + b.ext + '" target="_blank" rel="noopener">sunnah.com</a>।</div>';
+    $('szP').onclick = function () { size = Math.min(48, size + 4); ls('hsize', size); applySize(); };
+    $('szM').onclick = function () { size = Math.max(20, size - 4); ls('hsize', size); applySize(); };
+    var list = $('list');
+    list.addEventListener('click', function (e) {
+      var c = e.target.closest('[data-copy]'), s = e.target.closest('[data-share]'), box = e.target.closest('.hd');
+      if (!box) return;
+      if (c) { var t = textOf(box); try { navigator.clipboard.writeText(t).then(function () { c.textContent = 'কপি হয়েছে ✓'; setTimeout(function () { c.textContent = 'কপি'; }, 1500); }); } catch (x) {} }
+      if (s) { try { navigator.share({ text: textOf(box) }); } catch (x) {} }
+    });
+    $('secSel').onchange = function () { location.hash = '#' + b.k + '/' + this.value; };
+    function go() { var n = parseInt(String($('hn').value).replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }), 10); if (n > 0) location.hash = '#' + b.k + '/h/' + n; }
+    $('hgo').onclick = go; $('hn').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+
+    var araId = 'ara-' + b.k, benId = 'ben-' + b.k;
+    loadEditions().then(function () {
+      var useAra = has(araId), useBen = has(benId);
+      if (!useAra && !useBen) { list.innerHTML = '<div class="msg">এই গ্রন্থ এখন পাওয়া যাচ্ছে না। <a href="' + b.ext + '" target="_blank" rel="noopener">sunnah.com</a>-এ দেখুন।</div>'; return; }
+      function done(note) { if (note) $('secTitle').textContent = note; }
+      if (single) {
+        $('prevB').hidden = $('nextB').hidden = true;
+        return Promise.all([useAra ? getJSON('editions/' + araId + '/' + single + '.json') : null, useBen ? getJSON('editions/' + benId + '/' + single + '.json') : null]).then(function (r) {
+          var a = normList(r[0]), c = normList(r[1]);
+          if (!a.length && !c.length) { list.innerHTML = '<div class="msg">হাদিস নং ' + bn(single) + ' পাওয়া যায়নি।</div>'; return; }
+          $('secTitle').textContent = 'হাদিস নং ' + bn(single); mount(b, list, a, c, null);
+        });
+      }
+      return Promise.all([useAra ? getJSON('editions/' + araId + '/sections/' + sec + '.json') : null, useBen ? getJSON('editions/' + benId + '/sections/' + sec + '.json') : null]).then(function (r) {
+        var a = normList(r[0]), c = normList(r[1]), meta = (r[1] && r[1].metadata) || (r[0] && r[0].metadata) || {};
+        if (!a.length && !c.length) { list.innerHTML = '<div class="msg">এই অধ্যায়ে কিছু পাওয়া যায়নি। এটি গ্রন্থের শেষ অধ্যায় হতে পারে।</div>'; $('nextB').disabled = true; return; }
+        var names = meta.section || {}, keys = Object.keys(names);
+        if (keys.length > 1) {
+          $('secSel').innerHTML = keys.sort(function (x, y) { return x - y; }).map(function (k) { return '<option value="' + esc(k) + '"' + (+k === sec ? ' selected' : '') + '>' + bn(k) + '. ' + esc(names[k] || '') + '</option>'; }).join('');
+        }
+        $('secTitle').textContent = (names[sec] ? bn(sec) + '. ' + names[sec] : 'অধ্যায় ' + bn(sec));
+        mount(b, list, a, c, sec);
+      });
+    }).catch(function () {
+      list.innerHTML = '<div class="msg">লোড করা যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন।<br><button class="btn" id="retry" type="button">আবার চেষ্টা করুন</button></div>';
+      var rt = $('retry'); if (rt) rt.onclick = route;
+    });
+    $('prevB').disabled = !single && sec <= (b.k === 'muslim' ? 0 : 1);
+    $('prevB').onclick = function () { location.hash = '#' + b.k + '/' + Math.max(0, sec - 1); window.scrollTo(0, 0); };
+    $('nextB').onclick = function () { location.hash = '#' + b.k + '/' + (sec + 1); window.scrollTo(0, 0); };
+  }
+
+  function route() {
+    var h = (location.hash || '').replace('#', ''), p = h.split('/'), b = BOOKS.filter(function (x) { return x.k === p[0]; })[0];
+    if (!b) { renderHome(); return; }
+    if (p[1] === 'h') { renderBook(b, 1, parseInt(p[2], 10) || 1); return; }
+    renderBook(b, p[1] !== undefined && /^\d+$/.test(p[1]) ? parseInt(p[1], 10) : 1, null);
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route); route();
+})();
+</script>
+</body>
+</html>
