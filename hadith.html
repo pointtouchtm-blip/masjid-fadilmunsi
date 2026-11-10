@@ -63,6 +63,22 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
 
 <script>
 (function () {
+
+  /* ফিরে যাওয়া: যেখান থেকে এসেছেন সেখানে ফেরা */
+  if (!history.state) { try { history.replaceState({ d: 0 }, ''); } catch (e) {} }
+  function stepD() { return (history.state && history.state.d) || 0; }
+  function nav(h) {
+    if (h === '#' ? !location.hash : h === location.hash) return;
+    try { history.pushState({ d: stepD() + 1 }, '', h === '#' ? location.pathname + location.search : h); } catch (e) { location.hash = h; return; }
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+  function goHome() {
+    var same = false;
+    try { same = !!document.referrer && new URL(document.referrer).origin === location.origin && !/\/(hadith|quran|bishesh)\.html/.test(document.referrer); } catch (e) {}
+    if (same) history.go(-(stepD() + 1)); else location.href = 'index.html';
+  }
+  (function () { var b = document.getElementById('back'); if (!b) return;
+    b.addEventListener('click', function (e) { e.preventDefault(); if (b.getAttribute('href') === '#') nav('#'); else goHome(); }); })();
   var BASES = ['https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/', 'https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/'];
   var BOOKS = [
     { k: 'bukhari', bn: 'সহীহ বুখারী', ar: 'صحيح البخاري', sahih: true, ext: 'https://sunnah.com/bukhari' },
@@ -133,7 +149,7 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
         return '<button class="book" type="button" data-b="' + b.k + '"><div class="n"><div class="bn">' + b.bn + '</div><div class="mt" id="lg-' + b.k + '">&nbsp;</div></div><span class="ar">' + b.ar + '</span></button>';
       }).join('') + '</div>' +
       '<div class="foot">তথ্যসূত্র: <a href="https://github.com/fawazahmed0/hadith-api" target="_blank" rel="noopener">Free Hadith API</a>। ইন্টারনেট ছাড়া পড়া যাবে না।</div>';
-    app.querySelector('.books').addEventListener('click', function (e) { var b = e.target.closest('[data-b]'); if (b) location.hash = '#' + b.dataset.b; });
+    app.querySelector('.books').addEventListener('click', function (e) { var b = e.target.closest('[data-b]'); if (b) nav('#' + b.dataset.b); });
     loadEditions().then(function () {
       BOOKS.forEach(function (b) { var el = $('lg-' + b.k); if (!el) return; var s = ''; if (has('ara-' + b.k)) s += '<span class="chip on">আরবি</span>'; if (has('ben-' + b.k)) s += '<span class="chip on">বাংলা</span>'; el.innerHTML = s || '&nbsp;'; });
     });
@@ -191,8 +207,8 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
       if (c) { var t = textOf(box); try { navigator.clipboard.writeText(t).then(function () { c.textContent = 'কপি হয়েছে ✓'; setTimeout(function () { c.textContent = 'কপি'; }, 1500); }); } catch (x) {} }
       if (s) { try { navigator.share({ text: textOf(box) }); } catch (x) {} }
     });
-    $('secSel').onchange = function () { location.hash = '#' + b.k + '/' + this.value; };
-    function go() { var n = parseInt(String($('hn').value).replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }), 10); if (n > 0) location.hash = '#' + b.k + '/h/' + n; }
+    $('secSel').onchange = function () { nav('#' + b.k + '/' + this.value); };
+    function go() { var n = parseInt(String($('hn').value).replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }), 10); if (n > 0) nav('#' + b.k + '/h/' + n); }
     $('hgo').onclick = go; $('hn').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
 
     var araId = 'ara-' + b.k, benId = 'ben-' + b.k;
@@ -223,8 +239,8 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
       var rt = $('retry'); if (rt) rt.onclick = route;
     });
     $('prevB').disabled = !single && sec <= (b.k === 'muslim' ? 0 : 1);
-    $('prevB').onclick = function () { location.hash = '#' + b.k + '/' + Math.max(0, sec - 1); window.scrollTo(0, 0); };
-    $('nextB').onclick = function () { location.hash = '#' + b.k + '/' + (sec + 1); window.scrollTo(0, 0); };
+    $('prevB').onclick = function () { nav('#' + b.k + '/' + Math.max(0, sec - 1)); window.scrollTo(0, 0); };
+    $('nextB').onclick = function () { nav('#' + b.k + '/' + (sec + 1)); window.scrollTo(0, 0); };
   }
 
   function route() {

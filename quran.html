@@ -91,6 +91,22 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
 
 <script>
 (function () {
+
+  /* ফিরে যাওয়া: যেখান থেকে এসেছেন সেখানে ফেরা */
+  if (!history.state) { try { history.replaceState({ d: 0 }, ''); } catch (e) {} }
+  function stepD() { return (history.state && history.state.d) || 0; }
+  function nav(h) {
+    if (h === '#' ? !location.hash : h === location.hash) return;
+    try { history.pushState({ d: stepD() + 1 }, '', h === '#' ? location.pathname + location.search : h); } catch (e) { location.hash = h; return; }
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+  function goHome() {
+    var same = false;
+    try { same = !!document.referrer && new URL(document.referrer).origin === location.origin && !/\/(hadith|quran|bishesh)\.html/.test(document.referrer); } catch (e) {}
+    if (same) history.go(-(stepD() + 1)); else location.href = 'index.html';
+  }
+  (function () { var b = document.getElementById('back'); if (!b) return;
+    b.addEventListener('click', function (e) { e.preventDefault(); if (b.getAttribute('href') === '#') nav('#'); else goHome(); }); })();
   var NAMES = "আল-ফাতিহা,আল-বাকারা,আলে ইমরান,আন-নিসা,আল-মায়িদা,আল-আনআম,আল-আ'রাফ,আল-আনফাল,আত-তাওবা,ইউনুস,হুদ,ইউসুফ,আর-রা'দ,ইবরাহীম,আল-হিজর,আন-নাহল,বনী ইসরাঈল,আল-কাহফ,মারইয়াম,ত্ব-হা,আল-আম্বিয়া,আল-হজ্জ,আল-মুমিনূন,আন-নূর,আল-ফুরকান,আশ-শুআরা,আন-নামল,আল-কাসাস,আল-আনকাবূত,আর-রূম,লুকমান,আস-সাজদাহ,আল-আহযাব,সাবা,ফাতির,ইয়াসীন,আস-সাফফাত,সোয়াদ,আয-যুমার,গাফির,হা-মীম আস-সাজদাহ,আশ-শূরা,আয-যুখরুফ,আদ-দুখান,আল-জাসিয়া,আল-আহকাফ,মুহাম্মাদ,আল-ফাতহ,আল-হুজুরাত,কাফ,আয-যারিয়াত,আত-তূর,আন-নাজম,আল-কামার,আর-রাহমান,আল-ওয়াকিয়া,আল-হাদীদ,আল-মুজাদালা,আল-হাশর,আল-মুমতাহিনা,আস-সাফ,আল-জুমুআ,আল-মুনাফিকূন,আত-তাগাবুন,আত-তালাক,আত-তাহরীম,আল-মুলক,আল-কালাম,আল-হাক্কাহ,আল-মাআরিজ,নূহ,আল-জিন,আল-মুযযাম্মিল,আল-মুদ্দাসসির,আল-কিয়ামাহ,আদ-দাহর,আল-মুরসালাত,আন-নাবা,আন-নাযিআত,আবাসা,আত-তাকভীর,আল-ইনফিতার,আল-মুতাফফিফীন,আল-ইনশিকাক,আল-বুরূজ,আত-তারিক,আল-আ'লা,আল-গাশিয়া,আল-ফাজর,আল-বালাদ,আশ-শামস,আল-লাইল,আদ-দুহা,আল-ইনশিরাহ,আত-তীন,আল-আলাক,আল-কদর,আল-বাইয়্যিনাহ,আয-যিলযাল,আল-আদিয়াত,আল-কারিআ,আত-তাকাসুর,আল-আসর,আল-হুমাযাহ,আল-ফীল,কুরাইশ,আল-মাউন,আল-কাউসার,আল-কাফিরূন,আন-নাসর,আল-মাসাদ,আল-ইখলাস,আল-ফালাক,আন-নাস".split(",");
   var AR = "الفاتحة,البقرة,آل عمران,النساء,المائدة,الأنعام,الأعراف,الأنفال,التوبة,يونس,هود,يوسف,الرعد,إبراهيم,الحجر,النحل,الإسراء,الكهف,مريم,طه,الأنبياء,الحج,المؤمنون,النور,الفرقان,الشعراء,النمل,القصص,العنكبوت,الروم,لقمان,السجدة,الأحزاب,سبأ,فاطر,يس,الصافات,ص,الزمر,غافر,فصلت,الشورى,الزخرف,الدخان,الجاثية,الأحقاف,محمد,الفتح,الحجرات,ق,الذاريات,الطور,النجم,القمر,الرحمن,الواقعة,الحديد,المجادلة,الحشر,الممتحنة,الصف,الجمعة,المنافقون,التغابن,الطلاق,التحريم,الملك,القلم,الحاقة,المعارج,نوح,الجن,المزمل,المدثر,القيامة,الإنسان,المرسلات,النبأ,النازعات,عبس,التكوير,الانفطار,المطففين,الانشقاق,البروج,الطارق,الأعلى,الغاشية,الفجر,البلد,الشمس,الليل,الضحى,الشرح,التين,العلق,القدر,البينة,الزلزلة,العاديات,القارعة,التكاثر,العصر,الهمزة,الفيل,قريش,الماعون,الكوثر,الكافرون,النصر,المسد,الإخلاص,الفلق,الناس".split(",");
   var CNT = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
@@ -154,16 +170,16 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
     for (var i = 1; i <= 114; i++) s += '<li class="row" data-n="' + i + '" data-s="' + (i + ' ' + NAMES[i - 1] + ' ' + AR[i - 1]).toLowerCase() + '"><span class="no">' + bn(i) + '</span><button class="main" type="button" data-open="' + i + '"><div class="bn">' + NAMES[i - 1] + '</div><div class="mt">' + bn(CNT[i - 1]) + ' আয়াত</div></button><span class="ar">' + AR[i - 1] + '</span><button class="pbtn" type="button" data-play="' + i + '" aria-label="সূরা ' + NAMES[i - 1] + ' শুনুন">' + PLAY_SVG + '</button></li>';
     ul.innerHTML = s; mark();
     var ln = parseInt(ls('qlast') || '0', 10);
-    if (ln > 0 && mode === 'read') { var lb = $('lastBtn'); lb.style.display = 'block'; lb.textContent = 'শেষ পড়া: সূরা ' + NAMES[ln - 1] + ' থেকে চালিয়ে যান'; lb.onclick = function () { location.hash = '#s' + ln; }; }
+    if (ln > 0 && mode === 'read') { var lb = $('lastBtn'); lb.style.display = 'block'; lb.textContent = 'শেষ পড়া: সূরা ' + NAMES[ln - 1] + ' থেকে চালিয়ে যান'; lb.onclick = function () { nav('#s' + ln); }; }
     $('q').addEventListener('input', function () {
       var t = this.value.trim().toLowerCase().replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }), rows = ul.children;
       for (var k = 0; k < rows.length; k++) rows[k].style.display = !t || rows[k].dataset.s.indexOf(t) > -1 ? '' : 'none';
     });
-    app.querySelector('.tabs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) location.hash = b.dataset.m === 'audio' ? '#audio' : '#'; });
+    app.querySelector('.tabs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) nav(b.dataset.m === 'audio' ? '#audio' : '#'); });
     ul.addEventListener('click', function (e) {
       var p = e.target.closest('[data-play]'), o = e.target.closest('[data-open]');
       if (p) playSurah(+p.dataset.play);
-      else if (o) { if (mode === 'audio') playSurah(+o.dataset.open); else location.hash = '#s' + o.dataset.open; }
+      else if (o) { if (mode === 'audio') playSurah(+o.dataset.open); else nav('#s' + o.dataset.open); }
     });
   }
 
@@ -181,8 +197,8 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin
     function sz(d) { size = Math.max(22, Math.min(54, size + d)); ls('qsize', size); document.documentElement.style.setProperty('--ar-size', size + 'px'); }
     $('szP').onclick = function () { sz(4); }; $('szM').onclick = function () { sz(-4); };
     $('rdPlay').onclick = function () { playSurah(n); };
-    if ($('prevS')) $('prevS').onclick = function () { location.hash = '#s' + (n - 1); window.scrollTo(0, 0); };
-    if ($('nextS')) $('nextS').onclick = function () { location.hash = '#s' + (n + 1); window.scrollTo(0, 0); };
+    if ($('prevS')) $('prevS').onclick = function () { nav('#s' + (n - 1)); window.scrollTo(0, 0); };
+    if ($('nextS')) $('nextS').onclick = function () { nav('#s' + (n + 1)); window.scrollTo(0, 0); };
     function show(d) {
       var ar = d.data[0].ayahs, bnA = d.data[1] ? d.data[1].ayahs : [], h = '';
       if (n !== 1 && n !== 9) h += '<div class="bism">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';

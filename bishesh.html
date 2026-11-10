@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>কুরবানী, হজ্জ ও কাফন-দাফন — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&family=Amiri:wght@400;700&display=swap">
+<style>
+:root { --bg:#f3f7f4; --surface:#fff; --fg:#14281f; --muted:#55695f; --line:#d6e1d9; --accent:#16694e; --gold:#8f6a14; --hl:#e4f1ea; --on-accent:#fff; --warn:#8a4b00; --warn-bg:#fff3dc;
+  --font-display:"Tiro Bangla","Noto Serif Bengali",serif; --font-body:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif; --font-ar:"Amiri","Scheherazade New","Noto Naskh Arabic",serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0c1713; --surface:#13241d; --fg:#e6efe9; --muted:#9db3a7; --line:#244034; --accent:#55c79b; --gold:#dcb85c; --hl:#1a3329; --on-accent:#0c1713; --warn:#f0c987; --warn-bg:#3a2d10; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.7; padding-bottom:calc(36px + env(safe-area-inset-bottom)); }
+a { color: var(--accent); }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px max(16px, env(safe-area-inset-left)); }
+.bar a.back { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; text-decoration: none; font-weight: 600; font-size: 15px; background: var(--surface); white-space: nowrap; }
+.bar .tt { font-family: var(--font-display); font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)) 0; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin: 6px 0 4px; }
+.sub { color: var(--muted); font-size: 15px; margin: 0 0 12px; }
+.note { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--gold); border-radius: 12px; padding: 10px 14px; font-size: 15px; margin: 10px 0; }
+.note.ok { background: var(--hl); color: var(--fg); border-color: var(--line); }
+.books { display: grid; gap: 10px; margin-top: 12px; }
+.book { display: flex; align-items: center; gap: 14px; text-align: left; width: 100%; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 12px; padding: 12px 14px; cursor: pointer; }
+.book .n { flex: 1; min-width: 0; }
+.book .bn { font-weight: 700; font-size: 18px; line-height: 1.35; }
+.book .mt { color: var(--muted); font-size: 13.5px; }
+.book .ar { font-family: var(--font-ar); font-size: 24px; color: var(--accent); flex: none; direction: rtl; }
+.chip { display: inline-block; font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px; padding: 0 9px; margin-right: 4px; color: var(--muted); }
+.chip.on { border-color: var(--accent); color: var(--accent); }
+.ctl { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+.ctl .grow { flex: 1; min-width: 140px; }
+.ctl input, .ctl select { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; width: 100%; }
+.btn { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
+.btn.fill { background: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .45; cursor: default; }
+.sec { font-family: var(--font-display); font-size: 21px; text-align: center; margin: 14px 0 6px; line-height: 1.5; }
+.hd { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 10px; margin-bottom: 12px; }
+.hd .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.hd .no { font-weight: 700; color: var(--gold); font-size: 14.5px; }
+.hd .ar { font-family: var(--font-ar); font-size: var(--ar-size, 26px); line-height: 2.1; direction: rtl; text-align: right; margin: 4px 0; }
+.hd .t { margin: 8px 0 0; padding-top: 8px; border-top: 1px dashed var(--line); white-space: pre-line; }
+.hd .gr { display: inline-block; font-size: 13.5px; font-weight: 600; border-radius: 999px; padding: 1px 12px; border: 1px solid var(--line); margin: 8px 6px 0 0; }
+.gr.s { color: var(--accent); border-color: var(--accent); }
+.gr.h { color: var(--gold); border-color: var(--gold); }
+.gr.d, .gr.m { color: #b3261e; border-color: #b3261e; }
+.hd .src { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+.hd .act { display: flex; gap: 8px; margin-top: 8px; }
+.hd .act button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 3px 14px; font-size: 14px; cursor: pointer; color: var(--muted); }
+.msg { text-align: center; padding: 28px 12px; color: var(--muted); }
+.foot { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+.tools { display: flex; gap: 8px; justify-content: center; margin: 6px 0 10px; }
+.tools button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; cursor: pointer; font-weight: 600; }
+
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 16px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+summary{cursor:pointer;font-weight:700;padding:12px 14px;list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";margin-left:auto;color:var(--gold);font-size:20px}
+details[open] summary::after{content:"−"}
+details[open] summary{border-bottom:1px solid var(--line)}
+.body{padding:8px 14px 12px}
+.body p{margin:8px 0}.body ul,.body ol{padding-left:22px;margin:8px 0}.body li{margin:4px 0}
+.body ol.st{list-style:none;padding:0}
+.body ol.st li{position:relative;padding-left:42px;margin:10px 0;min-height:30px}
+.body ol.st li::before{counter-increment:s;content:attr(data-n);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.dua{background:var(--hl);border-radius:10px;padding:10px 12px;margin:10px 0}
+.dua .ar{font-family:var(--font-ar);font-size:24px;line-height:2.1;direction:rtl;text-align:right}
+.dua .tr{color:var(--fg);margin-top:2px}.dua .ti{color:var(--gold);font-weight:700;font-size:14px}
+.draft{background:var(--warn-bg);color:var(--warn);border:1px solid var(--gold);border-radius:12px;padding:10px 14px;font-size:15px;margin:6px 0 12px}
+.vok{background:var(--hl);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:15px;margin:6px 0 12px}
+b.k{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="bar"><a class="back" id="back" href="index.html">← হোম</a><span class="tt" id="barTitle"></span></div>
+<main class="wrap" id="app"></main>
+<script>
+(function(){
+
+  /* ফিরে যাওয়া: যেখান থেকে এসেছেন সেখানে ফেরা */
+  if (!history.state) { try { history.replaceState({ d: 0 }, ''); } catch (e) {} }
+  function stepD() { return (history.state && history.state.d) || 0; }
+  function nav(h) {
+    if (h === '#' ? !location.hash : h === location.hash) return;
+    try { history.pushState({ d: stepD() + 1 }, '', h === '#' ? location.pathname + location.search : h); } catch (e) { location.hash = h; return; }
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+  function goHome() {
+    var same = false;
+    try { same = !!document.referrer && new URL(document.referrer).origin === location.origin && !/\/(hadith|quran|bishesh)\.html/.test(document.referrer); } catch (e) {}
+    if (same) history.go(-(stepD() + 1)); else location.href = 'index.html';
+  }
+  (function () { var b = document.getElementById('back'); if (!b) return;
+    b.addEventListener('click', function (e) { e.preventDefault(); if (b.getAttribute('href') === '#') nav('#'); else goHome(); }); })();
+var VERIFIED=false; // ইমাম সাহেব যাচাই করলে true করুন; VERIFIER_NAME-এ নাম দিন
+var VERIFIER_NAME="";
+var BN='০১২৩৪৫৬৭৮৯';function bn(n){return String(n).replace(/\d/g,function(d){return BN[d]})}
+function D(ar,tr,ti){return {t:'dua',ar:ar,tr:tr,ti:ti}}
+var P=function(x){return {t:'p',x:x}},U=function(a){return {t:'ul',a:a}},S=function(a){return {t:'ol',a:a}};
+var DATA={
+qurbani:{title:'কুরবানী ও আকীকা',sub:'হানাফী মাযহাব অনুযায়ী সংক্ষিপ্ত মাসআলা',secs:[
+{h:'কুরবানী কার উপর ওয়াজিব',c:[U(['মুসলিম, মুকীম (সফরে নন), প্রাপ্তবয়স্ক ও সুস্থ বুদ্ধির অধিকারী।','যাকাতের নিসাব পরিমাণ সম্পদের মালিক। এখানে মূল্য ধরা হয় সাড়ে ৫২ তোলা রূপার সমান। প্রয়োজনীয় খরচ ও ঋণের অতিরিক্ত সম্পদ হিসাবে আসে।','এ ক্ষেত্রে সম্পদের উপর এক বছর পার হওয়া শর্ত নয়।','স্বামী-স্ত্রী প্রত্যেকের নিসাব থাকলে আলাদা আলাদা কুরবানী ওয়াজিব।'])]},
+{h:'সময়',c:[U(['১০, ১১ ও ১২ যিলহজ্জ—এই তিন দিন। উত্তম হলো ১০ তারিখ।','শহরে ঈদের নামাজের পর কুরবানী করতে হবে। যেখানে ঈদের নামাজ ওয়াজিব নয়, সেখানে ১০ তারিখ সুবহে সাদিকের পর থেকে জায়েয।','রাতেও যবাই করা জায়েয, তবে দিনে করা ভালো।','১২ তারিখ সূর্যাস্তের পর করলে আর কুরবানী হবে না।'])]},
+{h:'পশু ও বয়স',c:[U(['<b class="k">উট:</b> ৫ বছর পূর্ণ।','<b class="k">গরু, মহিষ:</b> ২ বছর পূর্ণ।','<b class="k">ছাগল, ভেড়া, দুম্বা:</b> ১ বছর পূর্ণ। ভেড়া বা দুম্বা ৬ মাসের হলেও চলে, যদি এতটা মোটাতাজা হয় যে ১ বছরের মতো দেখায়।','উট, গরু, মহিষে সর্বোচ্চ ৭ জন শরীক হতে পারে। ছাগল-ভেড়ায় একজন।','শরীকদের সবার নিয়ত সওয়াবের হতে হবে (কুরবানী বা আকীকা)। কারো নিয়ত শুধু গোশতের হলে কারো কুরবানী হবে না।'])]},
+{h:'যেসব দোষ থাকলে কুরবানী হয় না',c:[U(['স্পষ্ট অন্ধ বা কানা।','এতটা খোঁড়া যে নিজে হেঁটে যবাইয়ের জায়গায় যেতে পারে না।','এতটা রোগা যে হাড়ে মজ্জা নেই।','কান, লেজ বা চোখের আলো এক-তৃতীয়াংশের বেশি নষ্ট বা কাটা।','জন্ম থেকে কান নেই।','অধিকাংশ দাঁত পড়ে গেছে।']),P('ছোটখাটো দোষ বা সন্দেহ হলে ইমাম সাহেবের কাছে পশু দেখিয়ে জেনে নিন।')]},
+{h:'যবাইয়ের নিয়ম ও দোয়া',c:[S(['ধারালো ছুরি আগে থেকে তৈরি রাখুন। পশুর সামনে ছুরি ধার দেবেন না।','পশুকে কিবলামুখী করে বাম কাতে শোয়ান।','নিজ হাতে যবাই করা উত্তম। না পারলে অন্যকে দিয়ে করান, তবে নিজে পাশে থাকুন।','নিচের দোয়া পড়ুন, তারপর "বিসমিল্লাহি আল্লাহু আকবার" বলে যবাই করুন।','গলার খাদ্যনালী, শ্বাসনালী ও দুই পাশের রগ কেটে দিন।','প্রাণ বের হওয়ার আগে চামড়া ছাড়ানো বা কাটাকুটি করবেন না।']),
+D('إِنِّي وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَاوَاتِ وَالْأَرْضَ حَنِيفًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ، إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ، لَا شَرِيكَ لَهُ وَبِذَلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِينَ، اللَّهُمَّ مِنْكَ وَلَكَ','ইন্নী ওয়াজ্জাহতু ওয়াজহিয়া লিল্লাযী ফাতারাস সামাওয়াতি ওয়াল আরদা হানীফাঁও ওয়ামা আনা মিনাল মুশরিকীন। ইন্না সালাতী ওয়া নুসুকী ওয়া মাহইয়ায়া ওয়া মামাতী লিল্লাহি রাব্বিল আলামীন। লা শারীকা লাহু ওয়া বিযালিকা উমিরতু ওয়া আনা মিনাল মুসলিমীন। আল্লাহুম্মা মিনকা ওয়া লাকা।','যবাইয়ের আগের দোয়া'),
+P('অন্যের পক্ষ থেকে যবাই করলে শেষে বলুন: "মিন (নাম)" বা "আন (নাম)"।')]},
+{h:'গোশত, চামড়া ও মজুরি',c:[U(['গোশত তিন ভাগ করা মুস্তাহাব: নিজের পরিবার, আত্মীয়-প্রতিবেশী ও গরীব-মিসকীন। সবটা নিজে রাখাও জায়েয।','চামড়া গরীবকে দান করুন, বা বিক্রি করে সেই টাকা গরীবদের দিন। বিক্রির টাকা নিজে খরচ করা যাবে না।','কসাইয়ের মজুরি গোশত বা চামড়া দিয়ে দেওয়া যাবে না। আলাদা টাকা দিতে হবে।'])]},
+{h:'আকীকা',c:[U(['সন্তান জন্মের ৭ম দিনে করা উত্তম। এই দিন নাম রাখা এবং মাথা মুণ্ডন করা হয়। ৭ম দিনে না পারলে পরে যেকোনো সময় করা যায়।','হানাফী মাযহাবে আকীকা মুস্তাহাব (ফরয বা ওয়াজিব নয়)।','ছেলের জন্য ২টি ও মেয়ের জন্য ১টি ছাগল উত্তম। সামর্থ্য না থাকলে ছেলের জন্যও ১টি যথেষ্ট।','চুলের ওজনের সমান রূপা বা তার মূল্য সদকা করা মুস্তাহাব।','পশুর বয়স ও দোষের শর্ত কুরবানীর মতোই। গরুতে ৭ ভাগের একভাগ দেওয়া যায়।','গোশত রান্না করে আত্মীয়-স্বজন ও গরীবদের খাওয়ানো ভালো। নিজে এবং পিতা-মাতা খেতে পারেন।'])]}
+]},
+hajj:{title:'হজ্জ ও ওমরাহ',sub:'ধাপে ধাপে নিয়ম (হানাফী মাযহাব)',secs:[
+{h:'হজ্জ কার উপর ফরয',c:[U(['মুসলিম, প্রাপ্তবয়স্ক, সুস্থ বুদ্ধির অধিকারী।','শারীরিক ও আর্থিক সামর্থ্য: যাওয়া-আসার খরচ এবং ফিরে আসা পর্যন্ত পরিবারের খরচ।','রাস্তা নিরাপদ হওয়া।','মহিলার সাথে স্বামী বা মাহরাম থাকা। (মাহরাম ছাড়া যাওয়া জায়েয নয়, হানাফী মত অনুযায়ী)।']),P('সামর্থ্য থাকলে জীবনে একবার হজ্জ ফরয। দেরি না করে আদায় করা উচিত।')]},
+{h:'হজ্জের ফরয, ওয়াজিব ও সুন্নত',c:[P('<b class="k">ফরয (৩টি):</b> ইহরাম বাঁধা, আরাফায় অবস্থান (৯ যিলহজ্জ), তাওয়াফে যিয়ারত।'),P('<b class="k">ওয়াজিব:</b> মুযদালিফায় অবস্থান, সাফা-মারওয়া সাঈ, জামরায় কংকর নিক্ষেপ, তামাত্তু ও কিরানে হাদী (কুরবানী), মাথা মুণ্ডন বা চুল ছাঁটা, বিদায়ী তাওয়াফ (মক্কার বাইরের হাজীদের জন্য)।'),P('ওয়াজিব ছুটে গেলে দম (পশু কুরবানী) দিতে হয়। ফরয ছুটলে হজ্জই হয় না। তাই সব সময় অভিজ্ঞ আলেম বা মুয়াল্লিমের সাথে থাকুন।')]},
+{h:'ইহরামের নিষিদ্ধ কাজ',c:[U(['পুরুষের সেলাই করা কাপড় ও মাথা ঢাকা। মহিলার মুখে কাপড় লাগানো।','সুগন্ধি লাগানো (গায়ে, কাপড়ে, সাবান-তেলে)।','নখ, চুল বা লোম কাটা।','স্থলের শিকার করা বা শিকারে সাহায্য করা।','স্বামী-স্ত্রীর মিলন বা তার সূচনামূলক কাজ।','ঝগড়া, গালিগালাজ ও গুনাহের কাজ।','গাছ বা ঘাস কাটা।']),P('এগুলোর কোনোটা হয়ে গেলে কী দিতে হবে (দম বা সদকা) তা অবস্থা অনুযায়ী ভিন্ন। আলেমের কাছে জানুন।')]},
+{h:'ওমরাহ: ধাপে ধাপে',c:[S(['<b class="k">ইহরাম:</b> মীকাতে (বা তার আগে) গোসল বা ওযু করুন। পুরুষ দুই টুকরা সাদা চাদর (লুঙ্গি ও গায়ের চাদর) পরুন। ২ রাকাত নামাজ পড়ে ওমরার নিয়ত করুন এবং তালবিয়া পড়া শুরু করুন।','<b class="k">মক্কায় প্রবেশ:</b> মসজিদুল হারামে ডান পা দিয়ে ঢুকুন। কাবা দেখে দোয়া করুন।','<b class="k">তাওয়াফ:</b> হাজরে আসওয়াদ থেকে শুরু করে কাবাকে বামে রেখে ৭ চক্কর দিন। পুরুষরা প্রথম ৩ চক্করে দ্রুত হাঁটবেন (রমল) এবং ডান কাঁধ খোলা রাখবেন (ইযতিবা)। প্রতি চক্কর হাজরে আসওয়াদে ইশারা করে শুরু করুন।','<b class="k">দুই রাকাত নামাজ:</b> মাকামে ইবরাহীমের কাছে বা মসজিদের যেকোনো জায়গায় তাওয়াফের ২ রাকাত পড়ুন। যমযমের পানি পান করুন।','<b class="k">সাঈ:</b> সাফা থেকে শুরু করে মারওয়া পর্যন্ত ৭ বার হাঁটুন (সাফা→মারওয়া = ১, মারওয়া→সাফা = ২, শেষ চক্কর মারওয়ায়)। সবুজ বাতির মাঝে পুরুষরা একটু দ্রুত চলবেন।','<b class="k">হালাল হওয়া:</b> পুরুষ মাথা মুণ্ডন করবেন (উত্তম) বা সব চুল ছোট করবেন। মহিলারা চুলের আগা থেকে আঙুলের এক গিঁট পরিমাণ কাটবেন। এরপর ইহরাম শেষ, ওমরাহ পূর্ণ।']),
+D('لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ','লাব্বাইক, আল্লাহুম্মা লাব্বাইক। লাব্বাইকা লা শারীকা লাকা লাব্বাইক। ইন্নাল হামদা ওয়ান নি‘মাতা লাকা ওয়াল মুলক, লা শারীকা লাক।','তালবিয়া (ইহরামের পর বারবার)'),
+D('رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ','রাব্বানা আতিনা ফিদ দুনইয়া হাসানাতাঁও ওয়া ফিল আখিরাতি হাসানাতাঁও ওয়াকিনা আযাবান নার।','তাওয়াফে রুকনে ইয়ামানী থেকে হাজরে আসওয়াদ পর্যন্ত')]},
+{h:'হজ্জ: দিন অনুযায়ী ধাপ (তামাত্তু)',c:[P('এটি সবচেয়ে প্রচলিত ধরন। প্রথমে ওমরাহ করে হালাল হন, তারপর ৮ যিলহজ্জ হজ্জের ইহরাম বাঁধেন।'),S(['<b class="k">৮ যিলহজ্জ:</b> মক্কায় থেকে হজ্জের ইহরাম বাঁধুন, নিয়ত ও তালবিয়া পড়ুন। মিনায় যান। সেখানে যোহর, আসর, মাগরিব, এশা ও পরদিন ফজর পড়ুন।','<b class="k">৯ যিলহজ্জ (আরাফা):</b> সূর্য ঢলার পর থেকে সূর্যাস্ত পর্যন্ত আরাফার ময়দানে অবস্থান করুন। এটিই হজ্জের প্রধান ফরয। দোয়া, তালবিয়া ও যিকিরে কাটান। যোহর-আসর একত্রে পড়ার বিশেষ শর্ত আছে, মুয়াল্লিমের কাছে জেনে নিন। সূর্যাস্তের পর মুযদালিফায় রওনা দিন।','<b class="k">৯ রাতে মুযদালিফা:</b> মাগরিব ও এশা এশার সময় একত্রে পড়ুন। রাত কাটান। জামরার জন্য কংকর কুড়িয়ে নিন (প্রায় ৭০টি)। ফজরের পর সুবহে সাদিক থেকে সূর্যোদয়ের আগ পর্যন্ত অবস্থান (ওয়াজিব)।','<b class="k">১০ যিলহজ্জ:</b> মিনায় ফিরে বড় জামরায় ৭টি কংকর মারুন (প্রতিটিতে "বিসমিল্লাহি আল্লাহু আকবার")। তারপর হাদী (কুরবানী) করুন। এরপর মাথা মুণ্ডন বা চুল ছাঁটুন। এতে ইহরাম থেকে প্রায় হালাল হয়ে যান (স্বামী-স্ত্রীর মিলন ছাড়া)।','<b class="k">তাওয়াফে যিয়ারত:</b> ১০ থেকে ১২ যিলহজ্জের মধ্যে মক্কায় গিয়ে করুন। ৭ চক্কর, ২ রাকাত নামাজ, তারপর সাঈ (তামাত্তুতে হজ্জের সাঈ)। এই তাওয়াফের পর সম্পূর্ণ হালাল।','<b class="k">১১ ও ১২ যিলহজ্জ:</b> যাওয়ালের পর তিন জামরায় ক্রমানুযায়ী ৭টি করে কংকর মারুন: ছোট, মধ্যম, বড়। ১২ তারিখ সূর্যাস্তের আগে মিনা ত্যাগ করতে পারলে ১৩ তারিখ থাকতে হবে না।','<b class="k">বিদায়ী তাওয়াফ:</b> মক্কা ছাড়ার আগে শেষ তাওয়াফ করুন (বাইরের হাজীদের জন্য ওয়াজিব)।']),P('কিরান (এক ইহরামে ওমরা ও হজ্জ) ও ইফরাদ (শুধু হজ্জ) এর নিয়ম কিছুটা আলাদা। কোন ধরনে যাচ্ছেন তা আপনার হজ্জ গাইডের কাছে জেনে নিন।')]},
+{h:'যাওয়ার আগে করণীয়',c:[U(['খাঁটি নিয়তে তাওবা করুন, ঋণ ও আমানত পরিশোধ করুন বা বুঝিয়ে দিন।','পরিবার ও আত্মীয়দের কাছ থেকে ক্ষমা চেয়ে নিন। ওসিয়ত লিখুন।','হালাল টাকায় যান।','হজ্জ গাইড বা ইমাম সাহেবের কাছ থেকে হাতে-কলমে প্রশিক্ষণ নিন।','টিকা, পাসপোর্ট, প্রয়োজনীয় ওষুধ ও কাগজপত্র ঠিক রাখুন।'])]}
+]},
+kafon:{title:'মৃত্যু ও কাফন-দাফন',sub:'ধাপে ধাপে জানাযার নিয়ম (হানাফী মাযহাব)',secs:[
+{h:'মৃত্যুর আগে ও পরে',c:[U(['মুমূর্ষু ব্যক্তির পাশে বসে কালেমা পড়ুন, যাতে সে শুনতে পায়। জোর করে পড়াবেন না। সূরা ইয়াসীন পড়া ভালো।','মৃত্যুর পর চোখ বন্ধ করে দিন, চোয়াল বেঁধে দিন, হাত-পা সোজা করে চাদর দিয়ে ঢেকে দিন।','"ইন্না লিল্লাহি ওয়া ইন্না ইলাইহি রাজিউন" পড়ুন এবং ধৈর্য ধরুন। উচ্চস্বরে বিলাপ করা নিষেধ।','যত দ্রুত সম্ভব গোসল, কাফন ও দাফনের ব্যবস্থা করুন।','মৃতের ঋণ থাকলে দ্রুত পরিশোধ বা দায়িত্ব নেওয়ার ব্যবস্থা করুন। ওসিয়ত থাকলে পালন করুন।'])]},
+{h:'গোসল',c:[S(['পুরুষকে পুরুষ ও মহিলাকে মহিলা গোসল দেবেন। ছোট শিশুদের ক্ষেত্রে এর ব্যতিক্রম আছে।','গোসলের তক্তা সুগন্ধি (আগরবাতি বা লোবান) দিয়ে ধোঁয়া দিন। মৃতকে শুইয়ে নাভি থেকে হাঁটু পর্যন্ত কাপড়ে ঢেকে দিন।','হাতে কাপড় জড়িয়ে ইস্তিঞ্জা করান।','নামাজের মতো ওযু করান (কুলি ও নাকে পানি ছাড়া মুখ, হাত, মাথা মাসেহ ও পা)।','মাথা ও দাড়ি সাবান বা বরই পাতার পানিতে ধোন।','বাম কাতে শুইয়ে ডান পাশে পানি ঢালুন, তারপর ডান কাতে শুইয়ে বাম পাশে পানি ঢালুন। এভাবে তিনবার।','শেষ বারে পানিতে কর্পূর মেশান। পরিষ্কার কাপড়ে শরীর মুছে নিন।']),P('স্বামী-স্ত্রীর একে অপরকে গোসল দেওয়ার বিধানে মতভেদ আছে। হানাফী মত অনুযায়ী স্ত্রী স্বামীকে গোসল দিতে পারেন, স্বামী স্ত্রীকে নয়। এ বিষয়ে ইমাম সাহেবকে জিজ্ঞাসা করুন।')]},
+{h:'কাফন',c:[U(['সাদা, পরিষ্কার, সাধারণ মানের সুতি কাপড়।','<b class="k">পুরুষ (৩ কাপড়):</b> ইযার (মাথা থেকে পা পর্যন্ত), কামীস (গলা থেকে পা পর্যন্ত জামা, হাতা ও কলি ছাড়া), লিফাফা (মাথা ও পায়ের বাড়তি অংশ বাঁধার জন্য বড়)।','<b class="k">মহিলা (৫ কাপড়):</b> ইযার, কামীস, লিফাফা, ওড়না (মাথা ঢাকার জন্য) ও সীনাবন্দ (বুক বাঁধার জন্য)।','কাফনে আতর বা কর্পূর লাগানো মুস্তাহাব।','মৃতকে ডান পাশে ইযার, তারপর বাম পাশে জড়িয়ে লিফাফা পেঁচিয়ে মাথা ও পায়ের কাছে গিঁট দিন।'])]},
+{h:'জানাযার নামাজ',c:[P('ফরযে কিফায়া। কিছু লোক পড়লে সবার পক্ষ থেকে আদায় হয়। পড়তে হয় দাঁড়িয়ে, রুকু-সিজদা নেই। শর্ত: ওযু, কিবলামুখী, পবিত্র কাপড় ও জায়গা। মৃতকে কিবলার দিকে সামনে রাখুন (ইমাম পুরুষের মাথা বরাবর ও মহিলার কোমর/বুক বরাবর দাঁড়াবেন)।'),S(['নিয়ত করুন: "আমি আল্লাহর জন্য এই জানাযার ৪ তাকবীর ও দোয়া সহ নামাজ আদায় করছি।"','<b class="k">১ম তাকবীর:</b> দুই হাত কান পর্যন্ত তুলে "আল্লাহু আকবার" বলুন, হাত নাভির নিচে বাঁধুন, সানা পড়ুন।','<b class="k">২য় তাকবীর:</b> হাত না তুলে "আল্লাহু আকবার", দরূদে ইবরাহীম পড়ুন।','<b class="k">৩য় তাকবীর:</b> হাত না তুলে "আল্লাহু আকবার", মৃতের জন্য দোয়া পড়ুন।','<b class="k">৪র্থ তাকবীর:</b> হাত না তুলে "আল্লাহু আকবার" বলে হাত ছেড়ে দিন, ডানে-বামে সালাম ফিরান।']),
+D('سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَجَلَّ ثَنَاؤُكَ وَلَا إِلَهَ غَيْرُكَ','সুবহানাকাল্লাহুম্মা ওয়া বিহামদিকা ওয়া তাবারাকাসমুকা ওয়া তা‘আলা জাদ্দুকা ওয়া জাল্লা সানাউকা ওয়া লা ইলাহা গাইরুক।','১ম তাকবীরের পর সানা'),
+P('<b class="k">২য় তাকবীরের পর:</b> নামাজের শেষ বৈঠকের দরূদে ইবরাহীম (আল্লাহুম্মা সাল্লি আলা মুহাম্মাদিন...) পড়ুন।'),
+D('اللَّهُمَّ اغْفِرْ لِحَيِّنَا وَمَيِّتِنَا وَشَاهِدِنَا وَغَائِبِنَا وَصَغِيرِنَا وَكَبِيرِنَا وَذَكَرِنَا وَأُنْثَانَا، اللَّهُمَّ مَنْ أَحْيَيْتَهُ مِنَّا فَأَحْيِهِ عَلَى الْإِسْلَامِ وَمَنْ تَوَفَّيْتَهُ مِنَّا فَتَوَفَّهُ عَلَى الْإِيمَانِ','আল্লাহুম্মাগফির লিহাইয়িনা ওয়া মাইয়িতিনা ওয়া শাহিদিনা ওয়া গায়িবিনা ওয়া সগীরিনা ওয়া কাবীরিনা ওয়া যাকারিনা ওয়া উনসানা। আল্লাহুম্মা মান আহইয়াইতাহু মিন্না ফাআহয়িহি আলাল ইসলাম, ওয়া মান তাওয়াফফাইতাহু মিন্না ফাতাওয়াফফাহু আলাল ঈমান।','৩য় তাকবীরের পর: প্রাপ্তবয়স্কের জন্য দোয়া'),
+D('اللَّهُمَّ اجْعَلْهُ لَنَا فَرَطًا وَاجْعَلْهُ لَنَا أَجْرًا وَذُخْرًا وَاجْعَلْهُ لَنَا شَافِعًا وَمُشَفَّعًا','আল্লাহুম্মাজ‘আলহু লানা ফারাতাঁও ওয়াজ‘আলহু লানা আজরাঁও ওয়া যুখরাঁও ওয়াজ‘আলহু লানা শাফিআঁও ওয়া মুশাফফাআ।','নাবালেগ ছেলের জন্য (মেয়ে হলে "আল্লাহুম্মাজ‘আলহা... শাফিআতাঁও ওয়া মুশাফফা‘আহ" বলা হয়)')]},
+{h:'দাফন',c:[S(['জানাযার পর দ্রুত দাফন করুন। খাটিয়া কাঁধে নিয়ে হেঁটে যাওয়া সওয়াবের কাজ।','কবর হবে কিবলার দিকে লম্বা, লাহদ (পাশে খোঁড়া) কবর উত্তম। কবরের গভীরতা সাধারণত মানুষের অর্ধেক উচ্চতা বা বুক পর্যন্ত।','কবরে নামানোর সময় বলুন: "বিসমিল্লাহি ওয়া আলা মিল্লাতি রাসূলিল্লাহ" (বা "...সুন্নাতি রাসূলিল্লাহ")।','মৃতকে ডান কাতে কিবলামুখী করে শোয়ান। কাফনের বাঁধন খুলে দিন।','কাঁচা ইট বা বাঁশের চাটাই দিয়ে লাহদ বন্ধ করুন।','উপস্থিতরা তিন মুঠো মাটি দেবেন। প্রথম মুঠোয় "মিনহা খালাকনাকুম", দ্বিতীয়তে "ওয়া ফীহা নুঈদুকুম", তৃতীয়তে "ওয়া মিনহা নুখরিজুকুম তারাতান উখরা" বলুন।','কবর এক বিঘত পরিমাণ উঁচু করুন (উটের কুঁজের মতো)। পানি ছিটিয়ে দিন।','দাফন শেষে কিছুক্ষণ দাঁড়িয়ে মৃতের মাগফিরাত ও কবরে প্রশ্নোত্তর সহজ হওয়ার জন্য দোয়া করুন।']),
+D('مِنْهَا خَلَقْنَاكُمْ وَفِيهَا نُعِيدُكُمْ وَمِنْهَا نُخْرِجُكُمْ تَارَةً أُخْرَى','মিনহা খালাকনাকুম ওয়া ফীহা নুঈদুকুম ওয়া মিনহা নুখরিজুকুম তারাতান উখরা।','কবরে মাটি দেওয়ার সময় (সূরা ত্বহা, আয়াত ৫৫)')]},
+{h:'যা করা নিষেধ ও পরের করণীয়',c:[U(['কবর পাকা করা, কবরের উপর বসা, জুতা পায়ে কবরস্থানে হাঁটা ঠিক নয়।','মৃতের জন্য উচ্চস্বরে কান্না, বুক চাপড়ানো, কাপড় ছেঁড়া নিষেধ।','শোক সাধারণত ৩ দিন (স্বামীর জন্য স্ত্রী ৪ মাস ১০ দিন ইদ্দত পালন করবেন)।','প্রতিবেশীরা শোকাহত পরিবারের জন্য খাবার পাঠানো সুন্নত।','মৃতের জন্য দোয়া, সদকা ও কুরআন তিলাওয়াত করে সওয়াব পাঠানো যায়।'])]}
+]}
+};
+var ORDER=['qurbani','hajj','kafon'];
+var app=document.getElementById('app'),cur=ORDER[0];
+function esc(s){return String(s)}
+function item(x){
+ if(x.t==='p')return '<p>'+x.x+'</p>';
+ if(x.t==='ul')return '<ul>'+x.a.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ul>';
+ if(x.t==='ol')return '<ol class="st">'+x.a.map(function(i,n){return '<li data-n="'+bn(n+1)+'">'+i+'</li>'}).join('')+'</ol>';
+ if(x.t==='dua')return '<div class="dua"><div class="ti">'+x.ti+'</div><div class="ar" lang="ar">'+x.ar+'</div><div class="tr">'+x.tr+'</div></div>';
+ return '';
+}
+function render(){
+ var id=(location.hash||'').replace('#','');cur=DATA[id]?id:ORDER[0];
+ var d=DATA[cur];document.title=d.title+' — ফাদিলমুন্সী বাড়ি জামে মসজিদ';
+ document.getElementById('barTitle').textContent=d.title;
+ var note=VERIFIED?'<div class="vok">ইমাম সাহেব কর্তৃক যাচাইকৃত'+(VERIFIER_NAME?': '+VERIFIER_NAME:'')+'।</div>':'<div class="draft"><b>খসড়া:</b> এই মাসআলাগুলো এখনো ইমাম সাহেব যাচাই করেননি। আমল করার আগে নির্ভরযোগ্য আলেমের কাছে জেনে নিন।</div>';
+ app.innerHTML='<div class="tabs" role="tablist">'+ORDER.map(function(k){return '<button role="tab" aria-selected="'+(k===cur)+'" data-k="'+k+'">'+DATA[k].title+'</button>'}).join('')+'</div><h1>'+d.title+'</h1><p class="sub">'+d.sub+'</p>'+note+
+ d.secs.map(function(s,i){return '<details'+(i===0?' open':'')+'><summary>'+s.h+'</summary><div class="body">'+s.c.map(item).join('')+'</div></details>'}).join('')+
+ '<div class="foot">এটি সংক্ষিপ্ত সহায়িকা, ফাতওয়া নয়। বিস্তারিত ও বিশেষ পরিস্থিতির জন্য ইমাম সাহেব বা মুফতী সাহেবের শরণাপন্ন হোন।</div>';
+ window.scrollTo(0,0);
+}
+app.addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b)nav('#'+b.dataset.k)});
+window.addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>

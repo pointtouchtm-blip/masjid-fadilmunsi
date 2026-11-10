@@ -526,9 +526,9 @@ body.has-fab { padding-bottom: 76px; }
     <a class="tile soon" href="#names"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-seal"/></svg></span><span>আল্লাহর ৯৯ নাম</span><em class="bd">শীঘ্রই</em></a>
   </div></div>
   <div class="grp" style="--c: var(--accent)"><h2>বিশেষ বিষয়</h2><div class="tiles">
-    <a class="tile soon" href="#qurbani"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-gift"/></svg></span><span>কুরবানী ও আকীকা</span><em class="bd">শীঘ্রই</em></a>
-    <a class="tile soon" href="#hajj"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-kaaba"/></svg></span><span>হজ্জ ও ওমরাহ</span><em class="bd">শীঘ্রই</em></a>
-    <a class="tile soon" href="#kafon"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-leaf"/></svg></span><span>মৃত্যু ও কাফন-দাফন</span><em class="bd">শীঘ্রই</em></a>
+    <a class="tile" href="bishesh.html#qurbani"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-gift"/></svg></span><span>কুরবানী ও আকীকা</span></a>
+    <a class="tile" href="bishesh.html#hajj"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-kaaba"/></svg></span><span>হজ্জ ও ওমরাহ</span></a>
+    <a class="tile" href="bishesh.html#kafon"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-leaf"/></svg></span><span>মৃত্যু ও কাফন-দাফন</span></a>
   </div></div>
   <div class="grp" style="--c: var(--gold)"><h2>মসজিদ</h2><div class="tiles">
     <a class="tile" href="#notices"><span class="ib"><svg class="ti" aria-hidden="true"><use href="#t-bell"/></svg></span><span>ঘোষণা</span></a>
@@ -1390,5 +1390,20 @@ body.has-fab { padding-bottom: 76px; }
 </script>
 <script src="features.js"></script>
 <script src="learn.js"></script>
+<script>
+/* আলাদা পেজ (কুরআন, হাদিস, মাসআলা) থেকে ফিরলে হোমে আগের জায়গায় ফেরা */
+(function () {
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (/^[a-z0-9_-]+\.html(#.*)?$/i.test(h)) { try { sessionStorage.setItem('homeY', String(window.pageYOffset || 0)); } catch (x) {} }
+  }, true);
+  window.addEventListener('load', function () {
+    var y = 0; try { y = parseInt(sessionStorage.getItem('homeY') || '0', 10); sessionStorage.removeItem('homeY'); } catch (e) {}
+    if (y > 0 && !location.hash) setTimeout(function () { window.scrollTo(0, y); }, 150);
+  });
+})();
+</script>
 </body>
 </html>
