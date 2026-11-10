@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>কাযা নামাজ — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<meta name="description" content="কাযা নামাজের নিয়ম, নিয়ত এবং কাযা ট্র্যাকার: কত ওয়াক্ত বাকি, আদায় করলে কমবে (হানাফি মাযহাব)">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
+<link rel="stylesheet" href="edu.css">
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">← হোম</a><span class="tt">কাযা নামাজ</span></div>
+<main class="wrap">
+  <div class="intro">
+    <h1>কাযা নামাজ</h1>
+    <p>ছুটে যাওয়া নামাজের হিসাব রাখুন, আদায় করলে সংখ্যা কমান। হিসাব শুধু আপনার এই ফোনেই সেভ থাকে।</p>
+  </div>
+
+  <div class="list">
+    <section class="card sum" aria-live="polite">
+      <div class="small">মোট কাযা বাকি</div>
+      <div class="big" id="tot">০</div>
+      <div class="bar" id="bar" role="progressbar" aria-label="আদায়ের অগ্রগতি" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barI"></i></div>
+      <p class="small" id="msg"></p>
+    </section>
+
+    <section class="card" aria-label="ওয়াক্ত অনুযায়ী কাযা">
+      <div id="rows"></div>
+    </section>
+
+    <section class="card">
+      <button class="btn" id="allBtn" type="button">একদিনের সব ওয়াক্ত আদায় করলাম</button>
+      <p class="small" style="margin-top:8px">ফজর, যোহর, আসর, মাগরিব, এশা ও বিতর, প্রতিটি থেকে ১ করে কমবে।</p>
+    </section>
+
+    <details class="acc" id="setup">
+      <summary><span class="sum-t">হিসাব শুরু করুন বা বদলান</span></summary>
+      <div class="body frm">
+        <p class="small" style="margin:0">কত দিনের নামাজ ছুটেছে আন্দাজ করে দিন, অথবা নিচের ঘরগুলোতে সরাসরি সংখ্যা বসান।</p>
+        <div class="two">
+          <div class="frm"><label for="iy">বছর</label><input id="iy" type="text" inputmode="numeric" placeholder="০"></div>
+          <div class="frm"><label for="im">মাস</label><input id="im" type="text" inputmode="numeric" placeholder="০"></div>
+        </div>
+        <div class="two">
+          <div class="frm"><label for="id">দিন</label><input id="id" type="text" inputmode="numeric" placeholder="০"></div>
+          <div class="frm"><label for="ix">বাদ যাবে এমন দিন</label><input id="ix" type="text" inputmode="numeric" placeholder="০"></div>
+        </div>
+        <label class="chk"><input id="iw" type="checkbox" checked> বিতরও (ওয়াজিব) ধরা হবে</label>
+        <p class="small" style="margin:0">১ বছর ৩৬০ দিন এবং ১ মাস ৩০ দিন ধরে হিসাব হয়। মহিলারা হায়েয-নিফাসের দিনগুলো “বাদ যাবে এমন দিন” ঘরে দিন।</p>
+        <button class="btn line" id="calcBtn" type="button">দিন থেকে হিসাব করে নিচের ঘরগুলোতে বসান</button>
+        <div class="lb">প্রতি ওয়াক্তের কাযা সংখ্যা (নিজেও বদলাতে পারবেন)</div>
+        <div class="two" id="qs"></div>
+        <button class="btn" id="startBtn" type="button">এই সংখ্যায় শুরু করুন</button>
+        <button class="btn dng" id="resetBtn" type="button">সব হিসাব মুছে ফেলুন</button>
+        <p class="small" id="stMsg" role="status" style="margin:0"></p>
+      </div>
+    </details>
+
+    <section class="card">
+      <h3>কাযার নিয়ত</h3>
+      <p class="small">মনে মনে নিয়ত করাই আসল। মুখে বলা ভালো। যার অনেক কাযা আছে, তিনি প্রতিবার “সর্বপ্রথম ছুটে যাওয়া” ওয়াক্তের নিয়ত করবেন। এক ওয়াক্ত পড়ে নিলে পরের ছুটে যাওয়াটিই তখন প্রথম।</p>
+      <div id="niy"></div>
+    </section>
+
+    <h2 style="margin-top:6px">কাযার নিয়ম</h2>
+    <details class="acc"><summary><span class="sum-t">কোন নামাজের কাযা করতে হয়?</span></summary><div class="body">
+      <p style="margin:0">পাঁচ ওয়াক্ত ফরজ এবং বিতর (ওয়াজিব) ছুটে গেলে কাযা পড়তে হয়। সুন্নত ও নফলের কাযা সাধারণত নেই। তবে ফজরের ফরজের সাথে সুন্নতও ছুটে গেলে এবং দুপুরের আগে (সূর্য ঢলার আগে) কাযা পড়লে সুন্নতও পড়ার কথা ফিকহে আছে। ইমাম সাহেবের কাছে জেনে নিন।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">কখন কাযা পড়বেন?</span></summary><div class="body">
+      <p style="margin:0">সুযোগ পাওয়ামাত্র দেরি না করে পড়া উচিত। নিষিদ্ধ তিন সময় (সূর্য ওঠার সময়, ঠিক দুপুরে, সূর্য ডোবার সময়) ছাড়া যেকোনো সময় কাযা পড়া যায়। প্রতিদিন নিয়ম করে কিছু কিছু পড়লে ধীরে ধীরে সব আদায় হয়ে যাবে।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">কীভাবে হিসাব করবেন?</span></summary><div class="body">
+      <p style="margin:0">বালেগ হওয়ার পর থেকে নামাজ ফরজ। সাধারণত ছেলে-মেয়েরা ১২ থেকে ১৫ বছর বয়সের মধ্যে বালেগ হয়। কোনো লক্ষণ প্রকাশ না পেলে ১৫ চান্দ্র বছর পূর্ণ হলে বালেগ ধরা হয়। বালেগ হওয়ার পর কত দিনের নামাজ ছুটেছে, তা প্রবল ধারণায় আন্দাজ করবেন। সন্দেহ থাকলে একটু বেশি ধরে নেওয়া সতর্কতা।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">মহিলাদের হায়েয-নিফাসের দিন</span></summary><div class="body">
+      <p style="margin:0">হায়েয ও নিফাসের দিনের নামাজের কাযা নেই। হিসাব করার সময় ওই দিনগুলো বাদ দিন।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">ক্রম (তারতীব) রাখা কি জরুরি?</span></summary><div class="body">
+      <p style="margin:0">যার ছুটে যাওয়া নামাজ ছয় ওয়াক্তের কম, তার জন্য ক্রম রক্ষা করা এবং ওয়াক্তিয়া নামাজের আগে কাযা পড়া জরুরি। যার ছুটে যাওয়া নামাজ অনেক বেশি, তার জন্য এই ক্রমের বাধ্যবাধকতা থাকে না। বিস্তারিত অবস্থা বুঝে ইমাম সাহেব বা আলেমের কাছে জানুন।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">ইচ্ছা করে ছেড়ে দিয়ে থাকলে</span></summary><div class="body">
+      <p style="margin:0">ইচ্ছা করে নামাজ ছাড়া গুনাহ। আল্লাহর কাছে খালিস তাওবা করুন এবং ছুটে যাওয়া সব নামাজ কাযা আদায় করুন। আল্লাহ তাওবাকারীকে ভালোবাসেন।</p>
+    </div></details>
+  </div>
+
+  <footer class="ef">এই লেখা হানাফি মাযহাবের সাধারণ নিয়ম অনুযায়ী। নির্দিষ্ট পরিস্থিতিতে ইমাম সাহেবকে জিজ্ঞাসা করুন।</footer>
+</main>
+<script src="edu.js"></script>
+<script>
+(function () {
+  var h = EDU.h, bn = EDU.bn;
+  var KEY = 'kaza_v1';
+  var K = [
+    { id: 'f', n: 'ফজর', r: 2, ph: 'ফজরের ২ রাকাত ফরজ' },
+    { id: 'z', n: 'যোহর', r: 4, ph: 'যোহরের ৪ রাকাত ফরজ' },
+    { id: 'a', n: 'আসর', r: 4, ph: 'আসরের ৪ রাকাত ফরজ' },
+    { id: 'm', n: 'মাগরিব', r: 3, ph: 'মাগরিবের ৩ রাকাত ফরজ' },
+    { id: 'i', n: 'এশা', r: 4, ph: 'এশার ৪ রাকাত ফরজ' },
+    { id: 'w', n: 'বিতর', r: 3, ph: 'এশার ৩ রাকাত বিতরের ওয়াজিব', w: 1 }
+  ];
+
+  function num(v) {
+    var n = parseInt(EDU.toLatin(String(v == null ? '' : v).trim()), 10);
+    return (isNaN(n) || n < 0) ? 0 : Math.min(n, 999999);
+  }
+  function blank() { var o = { init: {}, left: {} }; K.forEach(function (k) { o.init[k.id] = 0; o.left[k.id] = 0; }); return o; }
+  function load() {
+    var s = blank();
+    try {
+      var j = JSON.parse(EDU.get(KEY, ''));
+      if (j && j.init && j.left) K.forEach(function (k) { s.init[k.id] = num(j.init[k.id]); s.left[k.id] = Math.min(num(j.left[k.id]), s.init[k.id]); });
+    } catch (e) {}
+    return s;
+  }
+  var st = load();
+  function save() { EDU.set(KEY, JSON.stringify(st)); }
+  function sum(o) { var t = 0; K.forEach(function (k) { t += o[k.id]; }); return t; }
+
+  var canStore = (function () { try { localStorage.setItem('_t', '1'); localStorage.removeItem('_t'); return true; } catch (e) { return false; } })();
+
+  var rowsEl = document.getElementById('rows'), refs = {};
+  K.forEach(function (k) {
+    var row = h('div', 'krow');
+    var l = h('div');
+    l.appendChild(h('div', 'kn', k.n));
+    l.appendChild(h('div', 'small', bn(k.r) + ' রাকাত · ' + (k.w ? 'ওয়াজিব' : 'ফরজ')));
+    var c = h('div', 'kc', '০');
+    var kb = h('div', 'kb');
+    var dec = h('button', 'btn', k.n + ' আদায় করলাম (−১)');
+    dec.type = 'button';
+    var inc = h('button', 'btn line', '+১ যোগ');
+    inc.type = 'button';
+    inc.setAttribute('aria-label', k.n + ' ১ ওয়াক্ত যোগ করুন');
+    dec.addEventListener('click', function () { if (st.left[k.id] > 0) { st.left[k.id]--; save(); render(); } });
+    inc.addEventListener('click', function () { st.left[k.id]++; st.init[k.id]++; save(); render(); });
+    kb.appendChild(dec); kb.appendChild(inc);
+    row.appendChild(l); row.appendChild(c); row.appendChild(kb);
+    rowsEl.appendChild(row);
+    refs[k.id] = { c: c, dec: dec };
+  });
+
+  var totEl = document.getElementById('tot'), barI = document.getElementById('barI'), bar = document.getElementById('bar'), msg = document.getElementById('msg');
+  function render() {
+    var left = sum(st.left), init = sum(st.init);
+    totEl.textContent = bn(left);
+    K.forEach(function (k) {
+      refs[k.id].c.textContent = bn(st.left[k.id]);
+      refs[k.id].dec.disabled = st.left[k.id] === 0;
+    });
+    var pct = init > 0 ? Math.round((init - left) / init * 100) : 0;
+    barI.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', String(pct));
+    if (!init) msg.textContent = 'এখনো হিসাব দেওয়া হয়নি। নিচে “হিসাব শুরু করুন” অংশ থেকে শুরু করুন।';
+    else if (!left) msg.textContent = 'আলহামদুলিল্লাহ, সব কাযা আদায় হয়েছে। আল্লাহ কবুল করুন।';
+    else msg.textContent = bn(init - left) + ' ওয়াক্ত আদায় হয়েছে, মোট ' + bn(init) + ' ওয়াক্তের মধ্যে (' + bn(pct) + '%)।';
+    document.getElementById('allBtn').disabled = left === 0;
+    if (!canStore) document.getElementById('stMsg').textContent = 'এই ব্রাউজারে হিসাব সেভ হচ্ছে না। পেজ বন্ধ করলে হিসাব মুছে যাবে।';
+  }
+
+  document.getElementById('allBtn').addEventListener('click', function () {
+    K.forEach(function (k) { if (st.left[k.id] > 0) st.left[k.id]--; });
+    save(); render();
+  });
+
+  /* হিসাব শুরুর ফর্ম */
+  var qs = document.getElementById('qs'), qi = {};
+  K.forEach(function (k) {
+    var w = h('div', 'frm');
+    var lb = h('label', '', k.n); lb.setAttribute('for', 'q_' + k.id);
+    var inp = h('input'); inp.type = 'text'; inp.id = 'q_' + k.id; inp.setAttribute('inputmode', 'numeric'); inp.placeholder = '০';
+    w.appendChild(lb); w.appendChild(inp); qs.appendChild(w);
+    qi[k.id] = inp;
+  });
+  function fill() {
+    K.forEach(function (k) { qi[k.id].value = st.init[k.id] ? String(st.left[k.id]) : ''; });
+  }
+  fill();
+  var stMsg = document.getElementById('stMsg');
+  document.getElementById('calcBtn').addEventListener('click', function () {
+    var days = Math.max(0, num(document.getElementById('iy').value) * 360 + num(document.getElementById('im').value) * 30 + num(document.getElementById('id').value) - num(document.getElementById('ix').value));
+    var wit = document.getElementById('iw').checked;
+    K.forEach(function (k) { qi[k.id].value = (k.w && !wit) ? '0' : String(days); });
+    stMsg.textContent = bn(days) + ' দিনের হিসাব বসানো হয়েছে। দরকার হলে ঘরগুলো বদলে “এই সংখ্যায় শুরু করুন” চাপুন।';
+  });
+  document.getElementById('startBtn').addEventListener('click', function () {
+    var vals = {}, t = 0;
+    K.forEach(function (k) { vals[k.id] = num(qi[k.id].value); t += vals[k.id]; });
+    if (!t) { stMsg.textContent = 'কমপক্ষে একটি ওয়াক্তের সংখ্যা দিন।'; return; }
+    if (sum(st.init) > 0 && !window.confirm('আগের হিসাব মুছে এই নতুন হিসাব বসবে। ঠিক আছে?')) return;
+    K.forEach(function (k) { st.init[k.id] = vals[k.id]; st.left[k.id] = vals[k.id]; });
+    save(); render();
+    stMsg.textContent = 'হিসাব শুরু হয়েছে। মোট ' + bn(t) + ' ওয়াক্ত।';
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    if (!window.confirm('সব হিসাব মুছে যাবে। নিশ্চিত?')) return;
+    st = blank(); save(); render(); fill();
+    ['iy', 'im', 'id', 'ix'].forEach(function (x) { document.getElementById(x).value = ''; });
+    stMsg.textContent = 'হিসাব মুছে ফেলা হয়েছে।';
+  });
+  if (!sum(st.init)) document.getElementById('setup').open = true;
+
+  /* নিয়ত */
+  var niy = document.getElementById('niy');
+  K.forEach(function (k) {
+    var t = 'আমি কিবলামুখী হয়ে আল্লাহর জন্য আমার জিম্মায় থাকা সর্বপ্রথম ছুটে যাওয়া ' + k.ph + ' কাযা নামাজ আদায়ের নিয়ত করছি, আল্লাহু আকবার।';
+    var d = h('div', 'vt');
+    d.appendChild(h('div', 'lb', k.n));
+    d.appendChild(h('p', '', t));
+    d.appendChild(EDU.copyBtn(t));
+    niy.appendChild(d);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

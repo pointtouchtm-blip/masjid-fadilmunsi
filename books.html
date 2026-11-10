@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ইসলামিক বই — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<meta name="description" content="ফিকহ, হাদিস, সীরাত ও দোয়ার নির্ভরযোগ্য ইসলামিক বইয়ের তালিকা">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
+<link rel="stylesheet" href="edu.css">
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">← হোম</a><span class="tt">ইসলামিক বই</span></div>
+<main class="wrap">
+  <div class="intro">
+    <h1>ইসলামিক বই</h1>
+    <p>দৈনন্দিন জীবনে কাজে লাগে এমন নির্ভরযোগ্য বইয়ের তালিকা। বিষয় বেছে নিন বা খুঁজুন।</p>
+  </div>
+  <!--
+    বই যোগ করতে একই ফোল্ডারে books.json ফাইলে নিচের মতো লিখুন (t = বইয়ের নাম, a = লেখক, c = বিষয়, d = সংক্ষিপ্ত বিবরণ, u = পড়ার/ডাউনলোডের লিংক, না থাকলে বাদ দিন):
+    [ { "t": "বইয়ের নাম", "a": "লেখক", "c": "ফিকহ ও মাসআলা", "d": "সংক্ষিপ্ত বিবরণ", "u": "books/boi.pdf" } ]
+    PDF ফাইল books ফোল্ডারে রেখে u-তে "books/ফাইলের-নাম.pdf" লিখলেই চলবে।
+  -->
+  <div class="stick">
+    <input class="search" id="q" type="search" placeholder="বই বা লেখকের নাম খুঁজুন" aria-label="বই খুঁজুন">
+    <div class="chips" id="chips" role="tablist" aria-label="বিষয়"></div>
+  </div>
+  <p class="small" id="cnt"></p>
+  <div class="list" id="out" aria-live="polite"></div>
+  <footer class="ef">কোন বই পড়বেন বুঝতে না পারলে ইমাম সাহেবের পরামর্শ নিন।</footer>
+</main>
+<script src="edu.js"></script>
+<script>
+(function () {
+  var h = EDU.h, bn = EDU.bn;
+  var B = [
+    { t: 'বেহেশতি জেওর', a: 'আশরাফ আলী থানভী (রহ.)', c: 'ফিকহ ও মাসআলা', d: 'আকীদা, পবিত্রতা, নামাজ, রোজা, যাকাতসহ দৈনন্দিন মাসআলার বিখ্যাত হানাফি গ্রন্থ।' },
+    { t: 'তালীমুল ইসলাম', a: 'মুফতি কেফায়েতুল্লাহ দেহলভী (রহ.)', c: 'ফিকহ ও মাসআলা', d: 'প্রশ্নোত্তরে ঈমান, নামাজ ও ইবাদতের প্রাথমিক শিক্ষা। শিশু ও নতুনদের জন্য সহজ।' },
+    { t: 'রিয়াযুস সালিহীন', a: 'ইমাম নববী (রহ.)', c: 'হাদিস', d: 'আদব-আখলাক, ইবাদত ও সৎকর্ম বিষয়ক সহীহ হাদিসের জনপ্রিয় সংকলন।' },
+    { t: 'ফাযায়েলে আমাল', a: 'মাওলানা মুহাম্মদ যাকারিয়া (রহ.)', c: 'ঈমান ও আমল', d: 'নামাজ, কুরআন তিলাওয়াত ও যিকিরসহ বিভিন্ন আমলের ফযীলত।' },
+    { t: 'হিসনুল মুসলিম', a: 'সাঈদ ইবনে আলী আল-কাহতানী', c: 'দোয়া ও আমল', d: 'কুরআন ও সুন্নাহ থেকে দৈনন্দিন দোয়া ও যিকিরের সংকলন।' },
+    { t: 'আর-রাহীকুল মাখতূম', a: 'সফিউর রহমান মুবারকপুরী (রহ.)', c: 'সীরাত', d: 'নবী (সা.)-এর জীবনীর পূর্ণাঙ্গ ও পুরস্কারপ্রাপ্ত গ্রন্থ।' }
+  ];
+
+  var out = document.getElementById('out'), qEl = document.getElementById('q'), cnt = document.getElementById('cnt');
+  var cur = 'সব';
+
+  function safeUrl(u) {
+    return typeof u === 'string' && /^(https?:\/\/|[A-Za-z0-9_\-\/.%]+\.(pdf|html))/i.test(u.trim()) ? u.trim() : '';
+  }
+
+  function show() {
+    var q = qEl.value.trim().toLowerCase(), n = 0;
+    out.textContent = '';
+    B.forEach(function (b) {
+      if (!q && cur !== 'সব' && b.c !== cur) return;
+      if (q && (b.t + ' ' + b.a + ' ' + b.c + ' ' + (b.d || '')).toLowerCase().indexOf(q) < 0) return;
+      var c = h('article', 'card book');
+      c.appendChild(h('span', 'tag', b.c));
+      c.appendChild(h('h3', '', b.t));
+      c.appendChild(h('div', 'au', b.a));
+      if (b.d) c.appendChild(h('p', '', b.d));
+      var u = safeUrl(b.u);
+      var acts = h('div', 'acts');
+      if (u) {
+        var a = h('a', 'btn', 'পড়ুন / ডাউনলোড');
+        a.href = u; a.target = '_blank'; a.rel = 'noopener';
+        acts.appendChild(a);
+      } else {
+        acts.appendChild(h('span', 'pend', 'পড়ার লিংক শীঘ্রই যোগ হবে'));
+      }
+      c.appendChild(acts);
+      out.appendChild(c); n++;
+    });
+    cnt.textContent = n ? bn(n) + 'টি বই' : '';
+    if (!n) out.appendChild(h('p', 'empty', 'কোনো বই পাওয়া যায়নি। অন্য শব্দে খুঁজুন।'));
+  }
+
+  function draw() {
+    var seen = {}, list = [{ id: 'সব', n: 'সব' }];
+    B.forEach(function (b) { if (!seen[b.c]) { seen[b.c] = 1; list.push({ id: b.c, n: b.c }); } });
+    if (!list.some(function (x) { return x.id === cur; })) cur = 'সব';
+    EDU.chips(document.getElementById('chips'), list, function (id) { cur = id; show(); }, cur);
+  }
+  draw();
+  qEl.addEventListener('input', show);
+
+  /* books.json থেকে নতুন বই যোগ হয় (ফাইল না থাকলে বা ভুল হলে কিছু হয় না) */
+  try {
+    fetch('books.json?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('no file'); return r.json(); })
+      .then(function (j) {
+        if (!Array.isArray(j)) return;
+        var add = j.filter(function (x) { return x && typeof x.t === 'string' && x.t.trim(); }).map(function (x) {
+          return { t: x.t.trim(), a: typeof x.a === 'string' ? x.a.trim() : '', c: (typeof x.c === 'string' && x.c.trim()) ? x.c.trim() : 'অন্যান্য', d: typeof x.d === 'string' ? x.d.trim() : '', u: x.u };
+        });
+        if (!add.length) return;
+        B = B.concat(add);
+        draw();
+      })
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

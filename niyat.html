@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>নামাজের নিয়ত — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<meta name="description" content="ফজর থেকে এশা, জুমুআ, তারাবীহ, ঈদ ও জানাজার নামাজের নিয়ত (হানাফি মাযহাব)">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
+<link rel="stylesheet" href="edu.css">
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">← হোম</a><span class="tt">নামাজের নিয়ত</span></div>
+<main class="wrap">
+  <div class="intro">
+    <h1>নামাজের নিয়ত</h1>
+    <p>হানাফি মাযহাব অনুযায়ী। ওয়াক্ত বেছে নিন।</p>
+  </div>
+  <p class="note">নিয়ত মানে মনের ইচ্ছা। মনে মনে ঠিক করাই আসল, মুখে বলা জরুরি নয়। তবে মুখে বলা ভালো। নিয়ত করবেন তাকবীরে তাহরীমার (প্রথম আল্লাহু আকবার) সময়।</p>
+  <div class="stick"><div class="chips" id="chips" role="tablist" aria-label="নামাজের ওয়াক্ত"></div></div>
+  <div class="list" id="out" aria-live="polite"></div>
+</main>
+<script src="edu.js"></script>
+<script>
+(function () {
+  var h = EDU.h, bn = EDU.bn;
+  /* r = রাকাত, ph = নিয়তে যে নামে বলা হবে, k = ধরন, sub = উপধরন, jam = জামাতে ইমামের পিছনের নিয়তও দেখাবে */
+  function it(r, ph, k, sub, jam) { return { r: r, ph: ph, k: k, sub: sub || '', jam: !!jam }; }
+  var MU = 'সুন্নতে মুয়াক্কাদা', GM = 'সুন্নতে গায়রে মুয়াক্কাদা';
+
+  var P = [
+    { id: 'fajr', n: 'ফজর', note: 'ফজরের দুই রাকাত সুন্নত অনেক গুরুত্বপূর্ণ। আগে সুন্নত, তারপর ফরজ।',
+      list: [ it(2, 'ফজরের সুন্নত', 'সুন্নত', MU), it(2, 'ফজরের ফরজ', 'ফরজ', '', 1) ] },
+    { id: 'zuhr', n: 'যোহর', note: 'ক্রম: ৪ সুন্নত, ৪ ফরজ, ২ সুন্নত, ২ নফল।',
+      list: [ it(4, 'যোহরের সুন্নত', 'সুন্নত', MU), it(4, 'যোহরের ফরজ', 'ফরজ', '', 1), it(2, 'যোহরের সুন্নত', 'সুন্নত', MU), it(2, 'নফল', 'নফল') ] },
+    { id: 'asr', n: 'আসর', note: 'আসরের আগের ৪ রাকাত সুন্নত পড়া ভালো, তবে না পড়লে গুনাহ নেই।',
+      list: [ it(4, 'আসরের সুন্নত', 'সুন্নত', GM), it(4, 'আসরের ফরজ', 'ফরজ', '', 1) ] },
+    { id: 'maghrib', n: 'মাগরিব', note: 'মাগরিবের ফরজ ৩ রাকাত। আগে ফরজ, তারপর সুন্নত ও নফল।',
+      list: [ it(3, 'মাগরিবের ফরজ', 'ফরজ', '', 1), it(2, 'মাগরিবের সুন্নত', 'সুন্নত', MU), it(2, 'নফল', 'নফল') ] },
+    { id: 'isha', n: 'এশা', note: 'ক্রম: ৪ সুন্নত, ৪ ফরজ, ২ সুন্নত, ২ নফল, ৩ বিতর (ওয়াজিব), তারপর চাইলে ২ নফল।',
+      list: [ it(4, 'এশার সুন্নত', 'সুন্নত', GM), it(4, 'এশার ফরজ', 'ফরজ', '', 1), it(2, 'এশার সুন্নত', 'সুন্নত', MU), it(2, 'নফল', 'নফল'),
+              it(3, 'এশার বিতরের ওয়াজিব', 'ওয়াজিব', 'বিতর', 1), it(2, 'নফল', 'নফল', 'ইচ্ছা হলে') ] },
+    { id: 'jumuah', n: 'জুমুআ', note: 'ক্রম: ৪ সুন্নত, খুতবা শুনে ২ ফরজ, ৪ সুন্নত, ২ সুন্নত, ২ নফল। খুতবার সময় কথা বলা ও নামাজ পড়া নিষেধ।',
+      list: [ it(4, 'জুমুআর আগের সুন্নত', 'সুন্নত', MU), it(2, 'জুমুআর ফরজ', 'ফরজ', '', 1), it(4, 'জুমুআর পরের সুন্নত', 'সুন্নত', MU), it(2, 'সুন্নাতুল ওয়াক্ত', 'সুন্নত'), it(2, 'নফল', 'নফল') ] },
+    { id: 'witr', n: 'বিতর', note: 'বিতর ৩ রাকাত ওয়াজিব। এশার পরে, ফজরের আগে পড়তে হয়। তৃতীয় রাকাতে সূরার পর হাত তুলে তাকবীর বলে হাত বেঁধে দোয়া কুনূত পড়তে হয়।',
+      list: [ it(3, 'এশার বিতরের ওয়াজিব', 'ওয়াজিব', '', 1) ] },
+    { id: 'tarawih', n: 'তারাবীহ', note: 'তারাবীহ শুধু রমযানে, এশার ফরজ ও সুন্নতের পর এবং বিতরের আগে। মোট ২০ রাকাত, প্রতি ২ রাকাতে সালাম ফিরিয়ে ১০ সালামে। পুরুষ-মহিলা সবার জন্য সুন্নতে মুয়াক্কাদা।',
+      list: [ it(2, 'তারাবীহের সুন্নত', 'সুন্নত', MU + ' · মোট ২০ রাকাত', 1) ] },
+    { id: 'eid', n: 'ঈদ', note: 'ঈদের নামাজ ওয়াজিব। ২ রাকাত, ৬টি অতিরিক্ত তাকবীরসহ। আযান ও ইকামত নেই। খুতবা নামাজের পরে হয়।',
+      list: [
+        { r: 2, ph: 'ঈদুল ফিতর', k: 'ওয়াজিব', sub: '', t: [['ইমামের পিছনে', 'আমি কিবলামুখী হয়ে আল্লাহর জন্য ২ রাকাত ঈদুল ফিতরের ওয়াজিব নামাজ ছয় অতিরিক্ত তাকবীরসহ এই ইমামের পিছনে আদায়ের নিয়ত করছি, আল্লাহু আকবার।']] },
+        { r: 2, ph: 'ঈদুল আযহা', k: 'ওয়াজিব', sub: '', t: [['ইমামের পিছনে', 'আমি কিবলামুখী হয়ে আল্লাহর জন্য ২ রাকাত ঈদুল আযহার ওয়াজিব নামাজ ছয় অতিরিক্ত তাকবীরসহ এই ইমামের পিছনে আদায়ের নিয়ত করছি, আল্লাহু আকবার।']] }
+      ] },
+    { id: 'janaza', n: 'জানাজা', note: 'জানাজার নামাজ ফরজে কিফায়া। এতে রুকু-সিজদা নেই; দাঁড়িয়ে ৪ তাকবীর। ১ম তাকবীরের পর সানা, ২য়র পর দরূদ, ৩য়র পর মৃত ব্যক্তির জন্য দোয়া, ৪র্থর পর সালাম। দোয়া ও সানা “দোয়া” পেজে পাবেন।',
+      list: [ { r: 0, ph: 'জানাজার নামাজ', k: 'ফরজে কিফায়া', sub: '', t: [['নিয়ত', 'আমি কিবলামুখী হয়ে আল্লাহর জন্য এই জানাজার নামাজ আদায়ের নিয়ত করছি। এটি আল্লাহর প্রশংসা, নবী (সা.)-এর উপর দরূদ ও এই মৃত ব্যক্তির জন্য দোয়া। এই ইমামের পিছনে, আল্লাহু আকবার।']] } ] }
+  ];
+
+  var out = document.getElementById('out');
+
+  function tagCls(k) { return k === 'ফরজ' ? 'tag f' : (k === 'ওয়াজিব' ? 'tag w' : 'tag'); }
+  function variant(label, text) {
+    var d = h('div', 'vt');
+    d.appendChild(h('div', 'lb', label));
+    d.appendChild(h('p', '', text));
+    d.appendChild(EDU.copyBtn(text));
+    return d;
+  }
+
+  function render(id) {
+    var p = P.filter(function (x) { return x.id === id; })[0];
+    out.textContent = '';
+    if (p.note) out.appendChild(h('p', 'note', p.note));
+    p.list.forEach(function (x, i) {
+      var c = h('article', 'card ni');
+      var head = h('div', 'nh');
+      head.appendChild(h('span', 'no', bn(i + 1)));
+      head.appendChild(h('b', '', x.r ? bn(x.r) + ' রাকাত ' + x.ph : x.ph));
+      head.appendChild(h('span', tagCls(x.k), x.k));
+      c.appendChild(head);
+      if (x.sub) c.appendChild(h('p', 'small', x.sub));
+      if (x.t) {
+        x.t.forEach(function (v) { c.appendChild(variant(v[0], v[1])); });
+      } else {
+        var base = 'আমি কিবলামুখী হয়ে আল্লাহর জন্য ' + bn(x.r) + ' রাকাত ' + x.ph + ' নামাজ';
+        if (x.jam) {
+          c.appendChild(variant('একা পড়লে বা ইমাম হলে', base + ' আদায়ের নিয়ত করছি, আল্লাহু আকবার।'));
+          c.appendChild(variant('ইমামের পিছনে (মুক্তাদি)', base + ' এই ইমামের পিছনে আদায়ের নিয়ত করছি, আল্লাহু আকবার।'));
+        } else {
+          c.appendChild(variant('নিয়ত', base + ' আদায়ের নিয়ত করছি, আল্লাহু আকবার।'));
+        }
+      }
+      out.appendChild(c);
+    });
+    if (id === 'isha' || id === 'witr') {
+      out.appendChild(h('p', 'small', 'তাহাজ্জুদ, চাশত, ইশরাক ইত্যাদি নফল নামাজের নিয়ম “নফল নামাজ” পেজে আছে।'));
+    }
+  }
+
+  EDU.chips(document.getElementById('chips'), P.map(function (x) { return { id: x.id, n: x.n }; }), render, 'fajr');
+})();
+</script>
+</body>
+</html>
