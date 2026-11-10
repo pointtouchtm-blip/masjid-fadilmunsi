@@ -1331,7 +1331,7 @@ body.has-fab { padding-bottom: 76px; }
 })();
 </script>
 <script>
-/* হোমের ছবির স্লাইড (১.৫ সেকেন্ড)। নতুন ছবি দিলে নিচের তালিকায় এক লাইন যোগ করুন। */
+/* হোমের ছবির স্লাইড (২ সেকেন্ড)। নতুন ছবি দিলে নিচের তালিকায় এক লাইন যোগ করুন। */
 (function () {
   var P = [['masjid-01', 'মসজিদের সামনের দৃশ্য'], ['masjid-02', 'নামাজের সময়সূচী বোর্ড'], ['masjid-03', 'মসজিদের ভেতরে জামাত'], ['masjid-04', 'মিহরাব ও মুসল্লিগণ']];
   var box = document.getElementById('gsBox'), cap = document.getElementById('gsCap'), dots = document.getElementById('gsDots');
@@ -1347,7 +1347,7 @@ body.has-fab { padding-bottom: 76px; }
   paint();
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .4 }).observe(box); else visible = true;
-  if (!reduce) setInterval(function () { if (!visible || document.hidden) return; cur = (cur + 1) % P.length; paint(); }, 1500);
+  if (!reduce) setInterval(function () { if (!visible || document.hidden) return; cur = (cur + 1) % P.length; paint(); }, 2000);
 })();
 </script>
 <script>
