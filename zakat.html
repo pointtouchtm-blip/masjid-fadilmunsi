@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>যাকাত হিসাব — ফাদিলমুন্সী বাড়ি জামে মসজিদ</title>
+<meta name="theme-color" content="#025054">
+<meta name="description" content="যাকাতের নিসাব ও পরিমাণ হিসাব করুন: নগদ, সোনা, রুপা, ব্যবসার মাল ও ঋণসহ (হানাফি মাযহাব)">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap">
+<link rel="stylesheet" href="edu.css">
+<style>
+.res{border-top:4px solid var(--gold)}
+.res .big{font-size:44px;font-weight:700;line-height:1.15;color:var(--accent);font-variant-numeric:tabular-nums}
+.res .st{display:inline-block;font-weight:700;border-radius:999px;padding:2px 14px;font-size:15px;margin-bottom:6px}
+.res .st.y{background:var(--accent);color:var(--bg)}
+.res .st.n{background:var(--hl);color:var(--fg);border:1px solid var(--line)}
+.rw{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-top:1px dashed var(--line);font-size:16px}
+.rw:first-of-type{border-top:0}
+.rw b{font-variant-numeric:tabular-nums;text-align:right}
+.hint{font-size:13.5px;color:var(--muted);margin:0}
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0}
+.opt input{width:20px;height:20px;margin-top:3px;flex:none}
+.opt label{font-weight:500;color:var(--fg);font-size:16px}
+</style>
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">← হোম</a><span class="tt">যাকাত হিসাব</span></div>
+<main class="wrap">
+  <div class="intro">
+    <h1>যাকাত হিসাব</h1>
+    <p>আপনার সম্পদ লিখুন, নিসাব হলে যাকাতের পরিমাণ নিচে দেখাবে। হিসাব শুধু আপনার ফোনেই থাকে।</p>
+  </div>
+  <p class="note">হানাফি মাযহাব অনুযায়ী: নগদ টাকা, সোনা, রুপা ও ব্যবসার মাল মিলিয়ে নিসাব ধরা হয়। যাকাতের হার ২.৫%। নিসাবের সম্পদ এক চান্দ্র বছর আপনার কাছে থাকলে যাকাত ফরয।</p>
+
+  <div class="list">
+    <section class="card frm" aria-label="নিসাবের মান">
+      <h3>১. সোনা ও রুপার আজকের দাম</h3>
+      <p class="hint" id="pdate"></p>
+      <div class="pr">
+        <div class="frm"><label for="pS">রুপা (প্রতি ভরি, টাকা)</label><input id="pS" type="text" inputmode="decimal" placeholder="যেমন ২৫০০" autocomplete="off"></div>
+        <div class="frm"><label for="pG">সোনা (প্রতি ভরি, টাকা)</label><input id="pG" type="text" inputmode="decimal" placeholder="যেমন ১৫০০০০" autocomplete="off"></div>
+      </div>
+      <p class="hint">দাম স্থানীয় স্বর্ণকারের কাছ থেকে বা বাজুস-এর আজকের দাম থেকে জেনে বসান।</p>
+      <div class="opt"><input type="radio" name="nb" id="nbS" value="S" checked><label for="nbS">রুপার নিসাব ধরুন (৫২.৫ ভরি)<span class="hint" style="display:block">বেশির ভাগ আলেম নগদ টাকা ও ব্যবসার মালে এটি ধরতে বলেন। এতে বেশি মানুষ যাকাতের আওতায় আসেন, গরিবের জন্য সুবিধা।</span></label></div>
+      <div class="opt"><input type="radio" name="nb" id="nbG" value="G"><label for="nbG">সোনার নিসাব ধরুন (৭.৫ ভরি)<span class="hint" style="display:block">শুধু সোনার অলংকার থাকলে বা আপনার এলাকার আলেম এটি বললে।</span></label></div>
+    </section>
+
+    <section class="card frm" aria-label="সম্পদ">
+      <h3>২. আপনার সম্পদ</h3>
+      <div class="frm"><label for="aC">হাতে নগদ টাকা</label><input id="aC" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      <div class="frm"><label for="aB">ব্যাংক, মোবাইল ব্যাংকিং (বিকাশ, নগদ), ডিপিএস ও সঞ্চয়পত্র</label><input id="aB" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      <div class="pr">
+        <div class="frm"><label for="aGo">সোনা (ভরি)</label><input id="aGo" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+        <div class="frm"><label for="aSi">রুপা (ভরি)</label><input id="aSi" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      </div>
+      <p class="hint">অলংকারসহ সব সোনা-রুপা ধরুন (ব্যবহারের হলেও)। ওজন ভরিতে লিখুন। ১ ভরি = ১১.৬৬ গ্রাম।</p>
+      <div class="frm"><label for="aT">ব্যবসার মালের বর্তমান বিক্রয় মূল্য</label><input id="aT" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      <div class="frm"><label for="aR">অন্যের কাছে পাওনা (যা ফেরত পাওয়ার আশা আছে)</label><input id="aR" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      <div class="frm"><label for="aI">ব্যবসার শেয়ার, বিনিয়োগ বা অন্য যাকাতযোগ্য সম্পদ</label><input id="aI" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+    </section>
+
+    <section class="card frm" aria-label="ঋণ">
+      <h3>৩. আপনার ঋণ</h3>
+      <div class="frm"><label for="dB">এখন পরিশোধযোগ্য ঋণ (ব্যাংক, ধার, বাকি বিল)</label><input id="dB" type="text" inputmode="decimal" placeholder="০" autocomplete="off"></div>
+      <p class="hint">যে ঋণ এখন শোধ করতে হবে তা বাদ যাবে। দীর্ঘমেয়াদি ঋণের (যেমন বাড়ির কিস্তি) চলতি কিস্তির টাকা বাদ দিন।</p>
+    </section>
+
+    <section class="card res" id="res" aria-live="polite"></section>
+
+    <section class="card">
+      <button class="btn line" id="copyBtn" type="button">হিসাবটি কপি করুন</button>
+      <button class="btn dng" id="clrBtn" type="button" style="margin-left:6px">সব মুছুন</button>
+    </section>
+
+    <h2 style="margin-top:6px">জেনে রাখুন</h2>
+    <details class="acc"><summary><span class="sum-t">যাকাত কাদের দেওয়া যায়?</span></summary><div class="body">
+      <p style="margin:0">ফকির, মিসকিন, ঋণগ্রস্ত, মুসাফির, যাকাত আদায়কারী কর্মী ও আল্লাহর পথে (দ্বীনি কাজ)। নিজের মা-বাবা, সন্তান, স্বামী-স্ত্রী এবং সাইয়্যেদ বংশের লোকদের দেওয়া যায় না। মসজিদ নির্মাণ বা ইমামের বেতনে যাকাত দেওয়া জায়েয নয়। বিস্তারিত "মাসআলা" পেজে দেখুন।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">কখন যাকাত দিতে হয়?</span></summary><div class="body">
+      <p style="margin:0">নিসাব পরিমাণ সম্পদ এক চান্দ্র বছর (হিজরি বছর) আপনার কাছে থাকলে। নিসাবের তারিখ ধরে বছর শেষে সেদিনের সম্পদ হিসাব করবেন। অনেকে রমযানে একসাথে দেন। এতে সুবিধা, তবে বছর পূর্ণ হওয়ার পরে দেরি না করে দেওয়া ভালো।</p>
+    </div></details>
+    <details class="acc"><summary><span class="sum-t">কোন সম্পদে যাকাত নেই?</span></summary><div class="body">
+      <p style="margin:0">নিজের বসবাসের ঘর, ব্যবহারের গাড়ি, আসবাবপত্র, কাপড়, পরিবারের ব্যবহারের জিনিস (সোনা-রুপা ছাড়া) ও পেশার যন্ত্রপাতিতে যাকাত নেই। বিক্রির উদ্দেশ্যে কেনা জমি বা ফ্ল্যাট ব্যবসার মাল, তাই তাতে যাকাত আছে।</p>
+    </div></details>
+  </div>
+
+  <footer class="ef">এই হিসাব সাধারণ নিয়ম অনুযায়ী আন্দাজ। জটিল অবস্থায় (ব্যবসা, শেয়ার, মেয়াদি ঋণ) ইমাম সাহেব বা মুফতী সাহেবের পরামর্শ নিন।</footer>
+</main>
+<script src="edu.js"></script>
+<script>
+(function () {
+  var bn = EDU.bn, KEY = 'zakat_v1';
+  var IDS = ['pS', 'pG', 'aC', 'aB', 'aGo', 'aSi', 'aT', 'aR', 'aI', 'dB'];
+  var el = {}; IDS.forEach(function (i) { el[i] = document.getElementById(i); });
+  var res = document.getElementById('res');
+  var BHORI_NISAB_S = 52.5, BHORI_NISAB_G = 7.5, RATE = 0.025;
+
+  function num(v) {
+    var s = EDU.toLatin(String(v == null ? '' : v)).replace(/,/g, '').replace(/[^0-9.]/g, '');
+    var n = parseFloat(s);
+    return (isNaN(n) || n < 0) ? 0 : Math.min(n, 1e12);
+  }
+  function fmt(n) { return bn(Math.round(n).toLocaleString('en-IN')); }
+  function basis() { return document.getElementById('nbG').checked ? 'G' : 'S'; }
+
+  function save() {
+    var o = { nb: basis() }; IDS.forEach(function (i) { if (i !== 'pS' && i !== 'pG') o[i] = el[i].value; else o['u_' + i] = el[i].value; });
+    EDU.set(KEY, JSON.stringify(o));
+  }
+  function load() {
+    try {
+      var o = JSON.parse(EDU.get(KEY, '')); if (!o) return;
+      IDS.forEach(function (i) { var v = (i === 'pS' || i === 'pG') ? o['u_' + i] : o[i]; if (v != null) el[i].value = v; });
+      if (o.nb === 'G') document.getElementById('nbG').checked = true;
+    } catch (e) {}
+  }
+
+  var last = '';
+  function calc() {
+    var pS = num(el.pS.value), pG = num(el.pG.value), b = basis();
+    var cash = num(el.aC.value) + num(el.aB.value) + num(el.aT.value) + num(el.aR.value) + num(el.aI.value);
+    var gold = num(el.aGo.value) * pG, silver = num(el.aSi.value) * pS;
+    var gross = cash + gold + silver, debt = num(el.dB.value), net = Math.max(0, gross - debt);
+    var price = b === 'S' ? pS : pG, bh = b === 'S' ? BHORI_NISAB_S : BHORI_NISAB_G;
+    var nisab = price * bh;
+    var need = [];
+    if (!price) need.push(b === 'S' ? 'রুপার দাম' : 'সোনার দাম');
+    if ((num(el.aGo.value) > 0 && !pG)) need.push('সোনার দাম');
+    if ((num(el.aSi.value) > 0 && !pS)) need.push('রুপার দাম');
+    need = need.filter(function (x, i) { return need.indexOf(x) === i; });
+
+    var h = '';
+    if (need.length) {
+      h = '<span class="st n">দাম দরকার</span><p style="margin:6px 0 0">হিসাব করতে ' + need.join(' ও ') + ' (প্রতি ভরি) উপরের ঘরে বসান।</p>';
+      last = '';
+    } else {
+      var ok = net >= nisab && net > 0, zk = ok ? net * RATE : 0;
+      h = '<span class="st ' + (ok ? 'y' : 'n') + '">' + (ok ? 'নিসাব পূর্ণ হয়েছে, যাকাত ফরয' : (net > 0 ? 'নিসাব পূর্ণ হয়নি' : (gross > 0 ? 'ঋণ বাদ দিলে যাকাতযোগ্য সম্পদ নেই' : 'সম্পদ লিখুন'))) + '</span>' +
+        '<div class="small">আপনার যাকাত</div><div class="big">৳ ' + fmt(zk) + '</div>' +
+        '<div style="margin-top:10px">' +
+        '<div class="rw"><span>মোট সম্পদ</span><b>৳ ' + fmt(gross) + '</b></div>' +
+        '<div class="rw"><span>ঋণ বাদ</span><b>− ৳ ' + fmt(Math.min(debt, gross)) + '</b></div>' +
+        '<div class="rw"><span>যাকাতযোগ্য সম্পদ</span><b>৳ ' + fmt(net) + '</b></div>' +
+        '<div class="rw"><span>নিসাব (' + (b === 'S' ? 'রুপা' : 'সোনা') + ' ' + bn(bh) + ' ভরি)</span><b>৳ ' + fmt(nisab) + '</b></div></div>' +
+        (ok ? '<p class="hint" style="margin-top:8px">যাকাত = ' + fmt(net) + ' টাকার ২.৫%</p>' : '<p class="hint" style="margin-top:8px">যাকাতযোগ্য সম্পদ নিসাবের কম, তাই এখন যাকাত ফরয নয়। তবে নফল সদকা দিতে পারেন।</p>');
+      last = 'যাকাত হিসাব\nমোট সম্পদ: ৳ ' + fmt(gross) + '\nঋণ: ৳ ' + fmt(Math.min(debt, gross)) + '\nযাকাতযোগ্য সম্পদ: ৳ ' + fmt(net) + '\nনিসাব: ৳ ' + fmt(nisab) + '\n' + (ok ? 'আপনার যাকাত (২.৫%): ৳ ' + fmt(zk) : 'নিসাব পূর্ণ হয়নি, যাকাত ফরয নয়');
+    }
+    res.innerHTML = h;
+  }
+  function onInput() { save(); calc(); }
+  IDS.forEach(function (i) { el[i].addEventListener('input', onInput); });
+  document.getElementById('nbS').addEventListener('change', onInput);
+  document.getElementById('nbG').addEventListener('change', onInput);
+  document.getElementById('copyBtn').addEventListener('click', function () { if (last) EDU.copy(last, this); });
+  document.getElementById('clrBtn').addEventListener('click', function () {
+    if (!window.confirm('সব হিসাব মুছে যাবে। নিশ্চিত?')) return;
+    IDS.forEach(function (i) { if (i !== 'pS' && i !== 'pG') el[i].value = ''; });
+    save(); calc();
+  });
+
+  load(); calc();
+
+  /* zakat.json থেকে মসজিদের দেওয়া আজকের দাম (ব্যবহারকারী নিজে দাম বসালে সেটিই থাকে) */
+  try {
+    fetch('zakat.json?v=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+      if (!j) return;
+      var pd = document.getElementById('pdate');
+      if (j.silver > 0 && !el.pS.value) el.pS.value = j.silver;
+      if (j.gold > 0 && !el.pG.value) el.pG.value = j.gold;
+      if ((j.silver > 0 || j.gold > 0) && j.date) pd.textContent = 'মসজিদ কমিটির দেওয়া দাম, তারিখ: ' + j.date + '। চাইলে বদলাতে পারেন।';
+      calc();
+    }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
