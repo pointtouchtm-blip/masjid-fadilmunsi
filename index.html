@@ -856,13 +856,6 @@ body.has-fab { padding-bottom: 76px; }
           </div>
         </div>
       </details>
-      <details class="card acc2">
-        <summary>বাটন কাজ না করলে (হাতে ইনস্টল)</summary>
-        <h3>অ্যান্ড্রয়েড (Chrome)</h3>
-        <ol><li>উপরে ডানে তিন ডট (⋮) চাপুন।</li><li><b>"Install app"</b> বা <b>"Add to Home screen"</b> চাপুন।</li><li><b>Install</b> চাপুন।</li></ol>
-        <h3>আইফোন (Safari)</h3>
-        <ol><li>নিচের <b>Share</b> বোতাম চাপুন।</li><li><b>"Add to Home Screen"</b> চাপুন, তারপর <b>Add</b>।</li></ol>
-      </details>
     </div>
   </section>
 
@@ -1413,22 +1406,28 @@ body.has-fab { padding-bottom: 76px; }
   function sync() {
     var off = standalone || (location.hash || '') === '#install';
     fab.hidden = off; document.body.classList.toggle('has-fab', !off);
-    if (ib) ib.hidden = standalone; if (done) done.hidden = !standalone;
+    if (ib) ib.hidden = false; if (done) done.hidden = !standalone;
   }
+  var KEY = 'mosque_installed';
+  function wasInstalled() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+  function markInstalled() { try { localStorage.setItem(KEY, '1'); } catch (e) {} }
+  function say(h) { if (!help) return; help.innerHTML = h; help.hidden = false; try { help.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }
   function showHelp() {
-    if (!help) return; var h = '';
-    if (inApp && isAnd) h = '<b>এই ব্রাউজারে ইনস্টল হয় না।</b> নিচের বোতামে চাপলে Chrome-এ খুলবে, সেখানে আবার "অ্যাপ ইনস্টল করুন" চাপুন।<br><a class="btn" href="intent://' + location.host + location.pathname + '#Intent;scheme=https;package=com.android.chrome;end">Chrome-এ খুলুন</a>';
-    else if (inApp) h = '<b>এই ব্রাউজারে ইনস্টল হয় না।</b> উপরে বা নিচে তিন ডট (⋯) বা Share চেপে <b>"Safari-তে খুলুন"</b> চাপুন। তারপর আবার এখানে আসুন।';
-    else if (isIOS) h = '<b>আইফোনে দুই ধাপ:</b><ol><li>নিচে <b>Share</b> (⬆︎) বোতাম চাপুন।</li><li><b>"Add to Home Screen"</b> চেপে <b>Add</b> চাপুন।</li></ol>';
-    else h = '<b>ফোনের ব্রাউজারের মেনু থেকে:</b><ol><li>উপরে ডানে তিন ডট (⋮) চাপুন।</li><li><b>"Install app"</b> বা <b>"Add to Home screen"</b> চাপুন।</li><li><b>Install</b> চাপুন।</li></ol>';
-    help.innerHTML = h; help.hidden = false;
-    try { help.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
+    if (inApp && isAnd) say('<b>এখানে ইনস্টল হয় না।</b> নিচের বোতামে চাপুন, Chrome খুলবে। সেখানে আবার "অ্যাপ ইনস্টল করুন" চাপুন।<br><a class="btn" href="intent://' + location.host + location.pathname + '#Intent;scheme=https;package=com.android.chrome;end">Chrome-এ খুলুন</a>');
+    else if (inApp) say('<b>এখানে ইনস্টল হয় না।</b> এই লিংকটি Safari-তে খুলুন।');
+    else if (isIOS) say('<b>আইফোনে:</b> নিচের <b>Share (⬆︎)</b> চাপুন, তারপর <b>"Add to Home Screen"</b> চাপুন।');
+    else if (isAnd || wasInstalled()) { markInstalled(); say('✓ <b>অ্যাপ আগে থেকেই ইনস্টল করা আছে।</b> ফোনের হোম স্ক্রিনে মসজিদের আইকন খুঁজুন।'); }
+    else say('এই ব্রাউজারে ইনস্টল হয় না। ফোনের <b>Chrome</b>-এ সাইটটি খুলুন।');
   }
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); dp = e; });
-  window.addEventListener('appinstalled', function () { standalone = true; dp = null; sync(); if (help) help.hidden = true; });
+  window.addEventListener('appinstalled', function () { standalone = true; dp = null; markInstalled(); sync(); if (help) help.hidden = true; });
+  function go() {
+    if (standalone || wasInstalled() && !dp) { markInstalled(); say('✓ <b>অ্যাপ আগে থেকেই ইনস্টল করা আছে।</b>'); return; }
+    if (dp) { dp.prompt(); dp.userChoice.then(function (r) { if (r && r.outcome === 'accepted') markInstalled(); dp = null; }); return; }
+    showHelp();
+  }
   function doInstall() {
-    if (dp) { dp.prompt(); dp.userChoice.then(function () { dp = null; }); return; }
-    if ((location.hash || '') !== '#install') { location.hash = '#install'; setTimeout(showHelp, 200); } else showHelp();
+    if ((location.hash || '') !== '#install') { location.hash = '#install'; setTimeout(go, 250); } else go();
   }
   fab.addEventListener('click', doInstall);
   if (ib) ib.addEventListener('click', doInstall);
