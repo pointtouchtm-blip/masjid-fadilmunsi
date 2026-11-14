@@ -321,6 +321,21 @@ details.paybox .pay { margin-top: 12px; }
 @keyframes ifp { 0% { box-shadow: 0 6px 18px rgba(0,0,0,.3), 0 0 0 0 rgba(220,184,92,.75); } 100% { box-shadow: 0 6px 18px rgba(0,0,0,.3), 0 0 0 16px rgba(220,184,92,0); } }
 @media (prefers-reduced-motion: reduce) { .ifab.pulse { animation: none; } }
 body.has-fab { padding-bottom: 76px; }
+.lg { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 58px; height: 42px; border-radius: 10px; color: #fff; font-style: normal; font-weight: 800; font-size: 15px; line-height: 1; letter-spacing: 0; }
+.lg-bk { background: #e2136e; font-size: 16px; } .lg-ng { background: #f6921e; }
+.lgi { height: 56px; width: auto; flex: none; background: #fff; border-radius: 10px; padding: 4px; border: 1px solid var(--line); }
+.pay-row .who { display: flex; align-items: center; gap: 12px; }
+.mchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mchips button { font: inherit; font-size: 15.5px; font-weight: 600; color: var(--fg); background: var(--bg); border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.mchips button[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.mchips button[aria-pressed="true"]::before { content: "✓ "; }
+.wafab { position: fixed; z-index: 50; left: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: #fff;
+  border: 2px solid #fff; border-radius: 999px; padding: 9px 16px 9px 12px; font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+.wafab svg { width: 24px; height: 24px; fill: currentColor; flex: none; }
+.btn.wa { background: #25d366; border-color: #25d366; color: #fff; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.btn.wa svg { width: 22px; height: 22px; fill: currentColor; }
+@media (min-width: 760px) { .wafab { left: 22px; bottom: 22px; } }
+
 .inst { display: grid; gap: 14px; }
 .inst .ibig { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 .inst .iico { border-radius: 20px; border: 2px solid var(--gold); }
@@ -711,6 +726,7 @@ body.has-fab { padding-bottom: 76px; }
 
   <section class="view" id="contact">
     <div class="sec-head"><h2>ঠিকানা ও যোগাযোগ</h2><span class="label">Location &amp; Contact</span></div>
+    <p style="margin:10px 0"><a class="btn wa" href="https://wa.me/6581730582?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A5%A4" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.27-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15.03l-.3-.18-3.13.82.84-3.05-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.7c-.17 0-.45.06-.69.32-.24.26-.9.88-.9 2.15s.92 2.5 1.05 2.67c.13.17 1.8 2.86 4.46 3.9 2.2.87 2.65.7 3.13.65.48-.04 1.55-.63 1.77-1.24.22-.6.22-1.13.15-1.24-.07-.1-.24-.17-.5-.3-.26-.13-1.55-.77-1.79-.85-.24-.09-.41-.13-.59.13-.17.26-.68.85-.83 1.02-.15.18-.3.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.3-1.55-1.45-1.8-.15-.27-.02-.4.11-.53.12-.12.26-.3.4-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.07-.13-.58-1.4-.8-1.92-.2-.5-.42-.43-.58-.44h-.5z"/></svg>হোয়াটসঅ্যাপে মেসেজ দিন</a></p>
     <div class="grid two">
       <div class="card">
         <h3>মসজিদের লোকেশন</h3>
@@ -875,6 +891,7 @@ body.has-fab { padding-bottom: 76px; }
   </footer>
 </div>
 
+<a class="wafab" id="wafab" href="https://wa.me/6581730582?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A5%A4" target="_blank" rel="noopener" aria-label="হোয়াটসঅ্যাপে যোগাযোগ করুন"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.27-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15.03l-.3-.18-3.13.82.84-3.05-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.7c-.17 0-.45.06-.69.32-.24.26-.9.88-.9 2.15s.92 2.5 1.05 2.67c.13.17 1.8 2.86 4.46 3.9 2.2.87 2.65.7 3.13.65.48-.04 1.55-.63 1.77-1.24.22-.6.22-1.13.15-1.24-.07-.1-.24-.17-.5-.3-.26-.13-1.55-.77-1.79-.85-.24-.09-.41-.13-.59.13-.17.26-.68.85-.83 1.02-.15.18-.3.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.3-1.55-1.45-1.8-.15-.27-.02-.4.11-.53.12-.12.26-.3.4-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.07-.13-.58-1.4-.8-1.92-.2-.5-.42-.43-.58-.44h-.5z"/></svg><span>হোয়াটসঅ্যাপ</span></a>
 <button class="ifab pulse" id="ifab" type="button" aria-label="মসজিদের অ্যাপ ইনস্টল করুন"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#t-install"/></svg><span>অ্যাপ ইনস্টল</span></button>
 
 <script>
@@ -1141,7 +1158,7 @@ body.has-fab { padding-bottom: 76px; }
   }
 
   function drawReceipt(canvas, rec, saved) {
-    var W = 900, H = 1340, ctx = canvas.getContext('2d');
+    var W = 900, H = rec.months ? 1410 : 1340, ctx = canvas.getContext('2d');
     canvas.width = W; canvas.height = H;
     var fonts = Promise.race([
       Promise.all([document.fonts.load("600 30px 'Hind Siliguri'"), document.fonts.load("400 30px 'Tiro Bangla'")]),
@@ -1166,10 +1183,13 @@ body.has-fab { padding-bottom: 76px; }
       var rows = [['রিসিপ্ট নং', rec.no], ['তারিখ ও সময়', rec.when], ['নাম', rec.name], ['মোবাইল', rec.phone], ['মাধ্যম', rec.method]];
       if (rec.trx) rows.push(['ট্রানজ্যাকশন আইডি', rec.trx]);
       rows.push(['খাত', rec.kind === 'salary' ? 'বেতন' : 'অনুদান']);
+      if (rec.months) rows.push(['কোন মাসের', rec.months]);
       var y = 330;
       rows.forEach(function (row) {
         ctx.textAlign = 'left'; ctx.fillStyle = '#55695f'; ctx.font = '500 26px ' + BODY; ctx.fillText(row[0], 60, y);
-        ctx.textAlign = 'right'; ctx.fillStyle = '#14281f'; ctx.font = '600 28px ' + BODY; ctx.fillText(fit(ctx, row[1], 520), 840, y);
+        ctx.textAlign = 'right'; ctx.fillStyle = '#14281f'; ctx.font = '600 28px ' + BODY;
+        if (row[0] === 'কোন মাসের') { var fs = 28; while (fs > 19 && ctx.measureText(row[1]).width > 560) { fs -= 1; ctx.font = '600 ' + fs + 'px ' + BODY; } ctx.fillText(fit(ctx, row[1], 560), 840, y); }
+        else ctx.fillText(fit(ctx, row[1], 520), 840, y);
         ctx.strokeStyle = '#d6e1d9'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(60, y + 22); ctx.lineTo(840, y + 22); ctx.stroke();
         y += 64;
       });
@@ -1201,8 +1221,8 @@ body.has-fab { padding-bottom: 76px; }
     el.innerHTML =
       '<h4 class="step">১. টাকা পাঠান</h4>' +
       '<div class="pay">' +
-        '<div class="pay-row"><div><b>বিকাশ</b><div class="num" id="' + p + 'bk" data-bk="bkash">01639-608279</div></div><button class="btn" type="button" data-bkcopy="bkash" data-copy="01639608279" data-for="' + p + 'bk">কপি করুন</button></div>' +
-        '<div class="pay-row"><div><b>নগদ</b><div class="num" id="' + p + 'ng" data-bk="nagad">01639-608279</div></div><button class="btn" type="button" data-bkcopy="nagad" data-copy="01639608279" data-for="' + p + 'ng">কপি করুন</button></div>' +
+        '<div class="pay-row"><div class="who"><img class="lgi" src="bkash.png" alt="বিকাশ" width="96" height="72"><div><b>বিকাশ</b><div class="num" id="' + p + 'bk" data-bk="bkash">01639-608279</div></div></div><button class="btn" type="button" data-bkcopy="bkash" data-copy="01639608279" data-for="' + p + 'bk">কপি করুন</button></div>' +
+        '<div class="pay-row"><div class="who"><img class="lgi" src="nagad.png" alt="নগদ" width="72" height="72"><div><b>নগদ</b><div class="num" id="' + p + 'ng" data-bk="nagad">01639-608279</div></div></div><button class="btn" type="button" data-bkcopy="nagad" data-copy="01639608279" data-for="' + p + 'ng">কপি করুন</button></div>' +
         '<div class="pay-row bank"><div><b>ব্যাংক</b>' +
           '<div class="t"><span data-bk="name">ব্যাংকের নাম</span>, <span data-bk="branch">শাখার নাম</span></div>' +
           '<div class="t">হিসাবের নাম: <span data-bk="accountName">হিসাবের নাম</span></div>' +
@@ -1214,6 +1234,7 @@ body.has-fab { padding-bottom: 76px; }
         '<label for="' + p + 'name">আপনার নাম</label><input id="' + p + 'name" type="text" maxlength="80" autocomplete="name" required>' +
         '<label for="' + p + 'phone">মোবাইল নম্বর</label><input id="' + p + 'phone" type="tel" inputmode="numeric" maxlength="14" autocomplete="tel" placeholder="01XXXXXXXXX" required>' +
         '<label for="' + p + 'amount">টাকার পরিমাণ</label><input id="' + p + 'amount" type="text" inputmode="numeric" maxlength="9" placeholder="যেমন ১০০০" required>' +
+        (isSal ? '<label>কোন কোন মাসের বেতন? (এক বা একাধিক চাপুন)</label><div class="mchips" id="' + p + 'mc"></div><select id="' + p + 'yr" aria-label="সাল"></select>' : '') +
         '<label for="' + p + 'method">কোন মাধ্যমে পাঠিয়েছেন</label><select id="' + p + 'method"><option>বিকাশ</option><option>নগদ</option><option>ব্যাংক</option><option>সরাসরি হাতে</option></select>' +
         '<input id="' + p + 'web" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<p class="perr" id="' + p + 'err" role="alert" hidden></p>' +
@@ -1227,7 +1248,21 @@ body.has-fab { padding-bottom: 76px; }
         '<p class="small">ডাউনলোড না হলে রিসিপ্টের ছবি চেপে ধরে সেভ করুন।</p>' +
       '</div>';
 
-    var $ = function (s) { return document.getElementById(p + s); }, last = null;
+    var $ = function (s) { return document.getElementById(p + s); }, last = null, picked = [];
+    if (isSal) {
+      var MN = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'], cy = new Date().getFullYear();
+      [cy - 1, cy, cy + 1].forEach(function (y) { var o = document.createElement('option'); o.value = y; o.textContent = bn(y) + ' সাল'; if (y === cy) o.selected = true; $('yr').appendChild(o); });
+      MN.forEach(function (m, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = m; b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () { var k = picked.indexOf(i); if (k < 0) picked.push(i); else picked.splice(k, 1); b.setAttribute('aria-pressed', k < 0 ? 'true' : 'false'); });
+        $('mc').appendChild(b);
+      });
+    }
+    function monthText() {
+      var a = picked.slice().sort(function (x, y) { return x - y; }), out = [], i = 0, yr = bn($('yr').value);
+      while (i < a.length) { var j = i; while (j + 1 < a.length && a[j + 1] === a[j] + 1) j++; out.push(j - i >= 2 ? MN[a[i]] + ' – ' + MN[a[j]] : a.slice(i, j + 1).map(function (k) { return MN[k]; }).join(', ')); i = j + 1; }
+      return out.join(', ') + ' ' + yr;
+    }
     $('form').addEventListener('submit', function (ev) {
       ev.preventDefault();
       var err = $('err'); err.hidden = true;
@@ -1236,17 +1271,19 @@ body.has-fab { padding-bottom: 76px; }
       function bad(m) { err.textContent = m; err.hidden = false; }
       if (!name) return bad('আপনার নাম লিখুন।');
       if (!/^01[3-9]\d{8}$/.test(phone)) return bad('মোবাইল নম্বর ১১ সংখ্যার হতে হবে, যেমন 01712345678।');
+      if (isSal && !picked.length) return bad('কোন মাসের বেতন দিচ্ছেন, মাস চাপুন।');
       if (!(amt >= 1 && amt <= 500000)) return bad('টাকার পরিমাণ ১ থেকে ৫,০০,০০০ এর মধ্যে লিখুন।');
       var now = new Date(), pad = function (x) { return (x < 10 ? '0' : '') + x; };
       var no = 'FM-' + String(now.getFullYear()).slice(2) + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000);
       var when = '';
       try { when = new Intl.DateTimeFormat('bn-BD', { timeZone: 'Asia/Dhaka', dateStyle: 'long', timeStyle: 'short' }).format(now); } catch (e) { when = now.toLocaleString(); }
       var rec = { kind: kind, name: name, phone: phone, amount: amt, method: $('method').value, trx: '', receipt: no };
+      if (isSal) rec.months = monthText();
       var go = $('go'); go.disabled = true; go.textContent = 'জমা হচ্ছে…';
       var send = SCRIPT ? fetch(SCRIPT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(rec) })
         .then(function (r) { return r.json(); }).then(function (j) { return j && j.ok; }).catch(function () { return false; }) : Promise.resolve(false);
       send.then(function (ok) {
-        last = { kind: kind, no: no, when: when, name: name, phone: bn(phone), method: rec.method, trx: rec.trx, money: money(amt) };
+        last = { kind: kind, no: no, when: when, name: name, phone: bn(phone), method: rec.method, trx: rec.trx, money: money(amt), months: isSal ? monthText() : '' };
         return drawReceipt($('cv'), last, ok).then(function () {
           $('form').hidden = true; $('rcv').hidden = false;
           $('st').textContent = ok ? 'আপনার তথ্য মসজিদ কমিটির হিসাবে জমা হয়েছে। জাযাকাল্লাহু খাইরান।' : 'তথ্য অনলাইনে জমা হয়নি। রিসিপ্ট ডাউনলোড করে কোষাধ্যক্ষকে পাঠিয়ে দিন।';
